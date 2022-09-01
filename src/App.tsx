@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import { tracks } from './assets/tracks'
+import SongList from './components/SongList'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -9,10 +10,7 @@ function App() {
   return (
     <div className="App">
       <div>
-      <h1 className="text-3xl">
-        <h1>
-        </h1>
-      </h1>
+        <SongList props={tracks}/>
       </div>
     </div>
   )
