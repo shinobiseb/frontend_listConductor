@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --blue: #D3FFF3;
+    --light-purple: #AFBBF2;
+    --purple: #9649CB;
+    --dark-green: #1C3738;
+    --black-green: #000F08
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+* {
+    background-color: var(--blue);
+}
