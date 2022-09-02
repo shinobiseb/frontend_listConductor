@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <div>
-        <SongList props={tracks}/>
+        <SongList className="songList"/>
       </div>
     </div>
   )

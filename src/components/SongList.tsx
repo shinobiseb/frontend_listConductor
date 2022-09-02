@@ -1,4 +1,5 @@
 import React from 'react'
+import { tracks } from '../assets/tracks'
 import Song from './Song'
 
 
