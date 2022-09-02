@@ -1,12 +1,14 @@
 import React from 'react'
-import { tracks } from '../assets/tracks'
+import { Track, tracks } from '../assets/tracks'
 import Song from './Song'
 
 
-export default function SongList(props : any) {
+export default function SongList(props : Track[]) {
   return (
     <div>
-        <Song props={props[0]}/>
+        <Song 
+        track={props[0]}
+        />
     </div>
   )
 }
