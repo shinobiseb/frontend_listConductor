@@ -1,9 +1,12 @@
 import React from 'react'
-import { Track, tracks } from '../assets/tracks'
+import { Track } from '../assets/tracks'
 
-export default function Song(props : Track) {
+
+
+export default function Song(props : any) {
   return (
     <div className='song-info'>
+
         <h1> {props.title} </h1>
         <h2> {props.artist} </h2>
         <h1> {props.duration} </h1>

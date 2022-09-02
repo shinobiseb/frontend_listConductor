@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
 import { tracks } from './assets/tracks'
 import SongList from './components/SongList'
 

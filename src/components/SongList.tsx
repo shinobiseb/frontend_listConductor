@@ -1,11 +1,11 @@
 import React from 'react'
 import Song from './Song'
-import { tracks } from '../assets/tracks'
 
-export default function SongList(props : Array) {
+
+export default function SongList(props : any) {
   return (
     <div>
-        <Song props={tracks[0]}/>
+        <Song props={props[0]}/>
     </div>
   )
 }
