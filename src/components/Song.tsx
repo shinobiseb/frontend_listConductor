@@ -2,10 +2,10 @@ import React from 'react'
 import { Track } from '../assets/tracks'
 
 type SongProps = {
-  track : Track
+  track : Track;
 }
 
-export default function Song({track} : SongProps) : Element{
+export default function Song({ track } : SongProps){
 
   return (
     <div className='song-info'>
