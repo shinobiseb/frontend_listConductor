@@ -8,7 +8,9 @@ function App() {
   return (
     <div className="App flex flex-column w-full h-full">
         <SongList playList={tracks} />
+        <h1>test</h1>
     </div>
+    
   )
 }
 
