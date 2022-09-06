@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import { tracks } from './assets/tracks'
 import SongList from './components/SongList'
+import Header from './components/Header'
 
 function App() {
 
 
   return (
-    <div className="App flex flex-column w-full h-full">
+    <div className="App font-sans bg-light-purple flex flex-col w-full h-screen items-center">
+        <Header/>
         <SongList playList={tracks} />
-        <h1>test</h1>
     </div>
     
   )

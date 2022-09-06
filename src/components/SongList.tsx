@@ -8,7 +8,7 @@ type PlayListProps = {
 
 export default function SongList({ playList } : PlayListProps) {
   return (
-    <div className='playlist-container flex flex-column items-center w-3/4'>
+    <div className='playlist-container flex flex-col items-left w-1/2'>
         <Song 
         track={playList[0]}
         />

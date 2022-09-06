@@ -8,8 +8,8 @@ type SongProps = {
 export default function Song({ track } : SongProps){
 
   return (
-    <div className='song-container flex flex-column'>
-        <h1> {track.title} </h1>
+    <div className='song-container flex flex-col mt-4 bg-light-blue rounded-md p-2'>
+        <h1 className='text-lg'> {track.title} </h1>
         <h2> {track.artist} </h2>
         <h1> {track.duration} </h1>
         <h1> {track.link} </h1>
