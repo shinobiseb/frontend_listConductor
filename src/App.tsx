@@ -6,10 +6,8 @@ function App() {
 
 
   return (
-    <div className="App">
-      <div>
+    <div className="App flex flex-column w-full h-full">
         <SongList playList={tracks} />
-      </div>
     </div>
   )
 }

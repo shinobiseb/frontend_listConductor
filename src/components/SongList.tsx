@@ -8,9 +8,18 @@ type PlayListProps = {
 
 export default function SongList({ playList } : PlayListProps) {
   return (
-    <div>
+    <div className='playlist-container flex flex-column items-center w-3/4'>
         <Song 
         track={playList[0]}
+        />
+        <Song 
+        track={playList[1]}
+        />
+        <Song 
+        track={playList[2]}
+        />
+        <Song 
+        track={playList[3]}
         />
     </div>
   )
