@@ -17,7 +17,7 @@ const trackMapper = (playlist : Track[]) => {
 
 export default function SongList({ playList } : PlayListProps) {
   return (
-    <div className='playlist-container flex flex-col items-left w-1/2'>
+    <div className='playlist-container flex flex-col items-left w-1/2 max-w-md'>
       {trackMapper( playList )}
     </div>
   )
