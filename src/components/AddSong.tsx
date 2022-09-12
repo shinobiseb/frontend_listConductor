@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef} from 'react'
 
 export default function AddSong() {
 
@@ -6,10 +6,11 @@ export default function AddSong() {
 
     const [artist, setArtist] = useState("")
 
-    const handleSubmit = (event : any) => {
-    event.preventDefault()
-    console.log(`Title: ${title} Artist: ${artist}`)
-}
+    const titleInput = useRef(null)
+
+    const submitTitle = () => {
+      console.log(titleInput.current.value)
+    }
 
   return (
     <div className='flex flex-row w-3/4 justify-between'>
@@ -20,9 +21,9 @@ export default function AddSong() {
         value={title}
         onChange={event => {
             setTitle(event.target.value)
-            console.log(title)
             }
         }
+        ref={titleInput}
         />
 
         <input 
@@ -38,6 +39,7 @@ export default function AddSong() {
         />
         <button 
         className='button rounded-lg bg-light-blue p-2 hover:ease-in duration-250'
+        onClick={submitTitle}
         > 
         Add New Song 
         </button>
