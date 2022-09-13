@@ -2,15 +2,28 @@ import React, { useState, useRef} from 'react'
 
 export default function AddSong() {
 
-    const [title, setTitle] = useState("")
+  const [title, setTitle] = useState("")
 
-    const [artist, setArtist] = useState("")
+  const [artist, setArtist] = useState("")
 
-    const titleInput = useRef(null)
+  const titleInput = useRef(null)
 
-    const submitTitle = () => {
-      console.log(titleInput.current.value)
+  const artistInput = useRef(null)
+
+  const isInput = (ele : any) => {
+    if(!ele.current) {
+      console.warn(`Missing ${ele} element!`);
+      return;
     }
+    const Element: any = ele.current
+    if (Element instanceof HTMLInputElement === false) {
+      console.warn(`Got the wrong Element for ${ele}!`)
+      return
+    } else {
+      console.log(ele.current.value)
+    }
+  }
+
 
   return (
     <div className='flex flex-row w-3/4 justify-between'>
@@ -33,15 +46,18 @@ export default function AddSong() {
         value={artist}
         onChange={event => {
             setArtist(event.target.value)
-            console.log(artist)
             }
         }
+        ref={artistInput}
         />
         <button 
         className='button rounded-lg bg-light-blue p-2 hover:ease-in duration-250'
-        onClick={submitTitle}
+        onClick={() => {
+          isInput(titleInput)
+          isInput(artistInput)
+        }}
         > 
-        Add New Song 
+        Add New Song
         </button>
     </div>
   )
