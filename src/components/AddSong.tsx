@@ -1,13 +1,21 @@
 import React, { useState, useRef} from 'react'
+import {Track, Metrics, VoteData} from "../assets/tracks"
 
 export default function AddSong() {
 
-  const [currentSong, setSong] = useState({
+  const [currentSong, setSong] = useState <Track | null>({
       artist: "",
       title: "",
       duration: 0,
       link: "",
-      info: "",
+      info: {
+        scoreData: {
+          likes: 0,
+          dislikes: 0,
+        },
+        views: 0,
+        uploadedOn: new Date(1999),
+      },
       isAgeRestricted: false,
   })
 
@@ -47,7 +55,7 @@ export default function AddSong() {
         ref={artistInput}
         />
 
-        <input
+        <input 
         className="rounded-lg p-2"
         type="number"  
         placeholder='duration'
@@ -67,6 +75,7 @@ export default function AddSong() {
           isInput(titleInput)
           isInput(artistInput)
           isInput(durationInput)
+          isInput(linkInput)
         }}
         > 
         Add New Song
