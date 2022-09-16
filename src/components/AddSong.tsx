@@ -61,55 +61,55 @@ export default function AddSong() {
         />
 
         <input 
-        className="rounded-lg p-2"
+        className="rounded-lg p-2 mt-1"
         type="text"  
         placeholder='Artist'
         ref={artistInput}
         />
 
         <input 
-        className="rounded-lg p-2"
+        className="rounded-lg p-2 mt-1"
         type="number"  
         placeholder='duration'
         ref={durationInput}
         />
 
         <input 
-        className="rounded-lg p-2"
+        className="rounded-lg p-2 mt-1"
         type="url"  
         placeholder="https://youtube.com/example"
         ref={linkInput}
         />
 
         <input 
-        className="rounded-lg p-2"
+        className="rounded-lg p-2 mt-1"
         type="number"  
         placeholder='likes'
         ref={likesInput}
         />
 
         <input 
-        className="rounded-lg p-2"
+        className="rounded-lg p-2 mt-1"
         type="number"  
         placeholder='dislikes'
         ref={dislikesInput}
         />
 
         <input 
-        className="rounded-lg p-2"
+        className="rounded-lg p-2 mt-1"
         type="number"  
         placeholder='views'
         ref={viewsInput}
         />
 
         <input 
-        className="rounded-lg p-2"
+        className="rounded-lg p-2 mt-1"
         type="date"  
         placeholder='upload Dated'
         ref={uploadedInput}
         />
         
-        <div>
+        <div className='mt-1 p-2'>
           <label> Age Restricted?</label>
           <select 
           name="ageRestricted" 
@@ -135,7 +135,8 @@ export default function AddSong() {
           isInput(likesInput)
           isInput(dislikesInput)
           isInput(viewsInput)
-          console.log(viewsInput)
+
+
         }}
         > 
         Add New Song
