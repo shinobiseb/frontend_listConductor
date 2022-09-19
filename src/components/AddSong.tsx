@@ -38,6 +38,8 @@ export default function AddSong() {
 
 
   //type narrowing => catch html element errors
+
+  //returns nothing when used no matter what -> create an else statement for returning string?
   const isInput = (ele : any) => {
     if(!ele.current) {
       console.warn(`Missing ${ele} element!`);
@@ -136,7 +138,9 @@ export default function AddSong() {
           isInput(dislikesInput)
           isInput(viewsInput)
 
-
+          setSong({
+            artist: isInput(titleInput) 
+          })
         }}
         > 
         Add New Song
