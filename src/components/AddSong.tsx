@@ -32,23 +32,35 @@ export default function AddSong() {
 
   const [age, setAge] = useState("false")
 
+  const booleanHelper = (bool : string) => {
+    if (bool === "false") {
+      return false
+    } else {
+      return true
+    }
+  }
+
   const handleChange = (event : any) => {
     setAge(event.target.value)
   }
 
 
   //type narrowing => catch html element errors
-
-  //returns nothing when used no matter what -> create an else statement for returning string?
   const isInput = (ele : any) => {
-    if(!ele.current) {
-      console.warn(`Missing ${ele} element!`);
-      return;
+    const checker = (ele : any) => {
+      if(!ele.current) {
+        console.warn(`Missing ${ele} element!`);
+        return;
+      }
+      const Element: any = ele.current
+      if (Element instanceof HTMLInputElement === false) {
+        console.warn(`Got the wrong Element for ${ele}!`)
+        return
+      }
     }
-    const Element: any = ele.current
-    if (Element instanceof HTMLInputElement === false) {
-      console.warn(`Got the wrong Element for ${ele}!`)
-      return
+
+    if (checker === null || false) {
+      return ele.current.value
     }
   }
 
@@ -130,18 +142,25 @@ export default function AddSong() {
         <button 
         className='button rounded-lg bg-light-blue p-2 hover:ease-in duration-250'
         onClick={() => {
-          isInput(titleInput)
-          isInput(artistInput)
-          isInput(durationInput)
-          isInput(linkInput)
-          isInput(likesInput)
-          isInput(dislikesInput)
-          isInput(viewsInput)
-
           setSong({
-            artist: isInput(titleInput) 
-          })
-        }}
+            artist: isInput(artistInput),
+            title: isInput(titleInput),
+            duration: isInput(durationInput),
+            link: isInput(linkInput),
+            info: {
+              scoreData: {
+                likes: isInput(likesInput),
+                dislikes: isInput(dislikesInput),
+              },
+              views: isInput(viewsInput),
+              uploadedOn: isInput(uploadedInput),
+            },
+            isAgeRestricted: booleanHelper(age),
+                })
+
+          console.log(currentSong)
+          }
+        }
         > 
         Add New Song
         </button>
