@@ -47,21 +47,22 @@ export default function AddSong() {
 
   //type narrowing => catch html element errors
   const isInput = (ele : any) => {
-    const checker = (ele : any) => {
-      if(!ele.current) {
-        console.warn(`Missing ${ele} element!`);
-        return;
-      }
-      const Element: any = ele.current
-      if (Element instanceof HTMLInputElement === false) {
-        console.warn(`Got the wrong Element for ${ele}!`)
-        return
-      }
+  
+    const returnValue = (ele : any) => {
+      console.log(ele.current.value)
     }
 
-    if (checker === null || false) {
-      return ele.current.value
+    if(!ele.current) {
+      console.warn(`Missing ${ele} element!`);
+      return;
     }
+    const Element: any = ele.current
+    if(Element instanceof HTMLInputElement === false) {
+      console.warn(`Got the wrong Element for ${ele}!`)
+      return
+    }
+
+    return ele.current.value
   }
 
 
