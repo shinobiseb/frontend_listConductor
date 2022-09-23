@@ -1,9 +1,11 @@
 import React, { useState, useRef} from 'react'
 import { Track, Metrics, VoteData, tracks } from "../assets/tracks"
 
-export default function AddSong() {
 
-  const [currentSong, setSong] = useState <Track | null>({
+
+export default function AddSong( setPlaylist : any) {
+
+  const [currentSong, setSong] = useState <Track>({
       artist: "",
       title: "",
       duration: 0,
@@ -18,6 +20,8 @@ export default function AddSong() {
       },
       isAgeRestricted: false,
   })
+
+  console.log(currentSong)
 
   //Input Checkers
   const titleInput = useRef(null)
@@ -82,64 +86,64 @@ export default function AddSong() {
   }
 
   return (
-    <div className='flex flex-col w-3/4 justify-between'>
+    <div className='flex flex-col w-3/4 justify-between items-center'>
         <input 
-        id="text-box-handle" className="rounded-lg p-2" 
+        id="text-box-handle" className="rounded-lg p-2 w-3/4" 
         type="text" 
         placeholder='Title'
         ref={titleInput}
         />
 
         <input 
-        className="rounded-lg p-2 mt-1"
+        className="rounded-lg p-2 mt-1 w-3/4"
         type="text"  
         placeholder='Artist'
         ref={artistInput}
         />
 
         <input 
-        className="rounded-lg p-2 mt-1"
+        className="rounded-lg p-2 mt-1 w-3/4"
         type="number"  
         placeholder='duration'
         ref={durationInput}
         />
 
         <input 
-        className="rounded-lg p-2 mt-1"
+        className="rounded-lg p-2 mt-1 w-3/4"
         type="url"  
         placeholder="https://youtube.com/example"
         ref={linkInput}
         />
 
         <input 
-        className="rounded-lg p-2 mt-1"
+        className="rounded-lg p-2 mt-1 w-3/4"
         type="number"  
         placeholder='likes'
         ref={likesInput}
         />
 
         <input 
-        className="rounded-lg p-2 mt-1"
+        className="rounded-lg p-2 mt-1 w-3/4"
         type="number"  
         placeholder='dislikes'
         ref={dislikesInput}
         />
 
         <input 
-        className="rounded-lg p-2 mt-1"
+        className="rounded-lg p-2 mt-1 w-3/4"
         type="number"  
         placeholder='views'
         ref={viewsInput}
         />
 
         <input 
-        className="rounded-lg p-2 mt-1"
+        className="rounded-lg p-2 mt-1 w-3/4"
         type="date"  
         placeholder='upload Dated'
         ref={uploadedInput}
         />
         
-        <div className='mt-1 p-2'>
+        <div className='mt-1 p-2 w-3/4'>
           <label> Age Restricted?</label>
           <select 
           name="ageRestricted" 
@@ -156,12 +160,10 @@ export default function AddSong() {
         </div>
 
         <button 
-        className='button rounded-lg bg-light-blue p-2 hover:ease-in duration-250'
+        className='button rounded-lg bg- p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
         onClick={() => {
           newSong()
-          setTimeout(() => {
-  console.log(currentSong)
-}, 3000);
+          tracks.push(currentSong)
           }
         }
         > 
