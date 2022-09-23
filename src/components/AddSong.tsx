@@ -1,5 +1,5 @@
 import React, { useState, useRef} from 'react'
-import {Track, Metrics, VoteData} from "../assets/tracks"
+import { Track, Metrics, VoteData, tracks } from "../assets/tracks"
 
 export default function AddSong() {
 
@@ -44,14 +44,27 @@ export default function AddSong() {
     setAge(event.target.value)
   }
 
+  function newSong() {
+    setSong({
+            artist: isInput(artistInput),
+            title: isInput(titleInput),
+            duration: isInput(durationInput),
+            link: isInput(linkInput),
+            info: {
+              scoreData: {
+                likes: isInput(likesInput),
+                dislikes: isInput(dislikesInput),
+              },
+              views: isInput(viewsInput),
+              uploadedOn: isInput(uploadedInput),
+            },
+            isAgeRestricted: booleanHelper(age),
+          })
+  }
+
 
   //type narrowing => catch html element errors
   const isInput = (ele : any) => {
-  
-    const returnValue = (ele : any) => {
-      console.log(ele.current.value)
-    }
-
     if(!ele.current) {
       console.warn(`Missing ${ele} element!`);
       return;
@@ -61,10 +74,12 @@ export default function AddSong() {
       console.warn(`Got the wrong Element for ${ele}!`)
       return
     }
+    if(ele.current.value === "") {
+      return `Value not given`
+    }
 
     return ele.current.value
   }
-
 
   return (
     <div className='flex flex-col w-3/4 justify-between'>
@@ -143,23 +158,10 @@ export default function AddSong() {
         <button 
         className='button rounded-lg bg-light-blue p-2 hover:ease-in duration-250'
         onClick={() => {
-          setSong({
-            artist: isInput(artistInput),
-            title: isInput(titleInput),
-            duration: isInput(durationInput),
-            link: isInput(linkInput),
-            info: {
-              scoreData: {
-                likes: isInput(likesInput),
-                dislikes: isInput(dislikesInput),
-              },
-              views: isInput(viewsInput),
-              uploadedOn: isInput(uploadedInput),
-            },
-            isAgeRestricted: booleanHelper(age),
-                })
-
-          console.log(currentSong)
+          newSong()
+          setTimeout(() => {
+  console.log(currentSong)
+}, 3000);
           }
         }
         > 
