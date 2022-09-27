@@ -1,9 +1,11 @@
 import React, { useState, useRef} from 'react'
 import { Track, Metrics, VoteData, tracks } from "../assets/tracks"
 
+type changePlaylistProps = {
+  changePlaylist : Function
+}
 
-
-export default function AddSong( setPlaylist : any) {
+export default function AddSong( changePlaylist : changePlaylistProps ) {
 
   const [currentSong, setSong] = useState <Track>({
       artist: "",
@@ -21,7 +23,7 @@ export default function AddSong( setPlaylist : any) {
       isAgeRestricted: false,
   })
 
-  console.log(currentSong)
+  console.log(changePlaylist)
 
   //Input Checkers
   const titleInput = useRef(null)
