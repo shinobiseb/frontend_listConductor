@@ -7,6 +7,8 @@ type changePlaylistProps = {
 
 export default function AddSong( changePlaylist : changePlaylistProps ) {
 
+  let newSongs : any = []
+
   const [currentSong, setSong] = useState <Track>({
       artist: "",
       title: "",
@@ -50,24 +52,6 @@ export default function AddSong( changePlaylist : changePlaylistProps ) {
     setAge(event.target.value)
   }
 
-  function newSong() {
-    setSong({
-            artist: isInput(artistInput),
-            title: isInput(titleInput),
-            duration: isInput(durationInput),
-            link: isInput(linkInput),
-            info: {
-              scoreData: {
-                likes: isInput(likesInput),
-                dislikes: isInput(dislikesInput),
-              },
-              views: isInput(viewsInput),
-              uploadedOn: isInput(uploadedInput),
-            },
-            isAgeRestricted: booleanHelper(age),
-          })
-  }
-
 
   //type narrowing => catch html element errors
   const isInput = (ele : any) => {
@@ -85,6 +69,25 @@ export default function AddSong( changePlaylist : changePlaylistProps ) {
     }
 
     return ele.current.value
+  }
+
+
+  function newSong() {
+    setSong({
+            artist: isInput(artistInput),
+            title: isInput(titleInput),
+            duration: isInput(durationInput),
+            link: isInput(linkInput),
+            info: {
+              scoreData: {
+                likes: isInput(likesInput),
+                dislikes: isInput(dislikesInput),
+              },
+              views: isInput(viewsInput),
+              uploadedOn: isInput(uploadedInput),
+            },
+            isAgeRestricted: booleanHelper(age),
+          })
   }
 
   return (
@@ -165,7 +168,8 @@ export default function AddSong( changePlaylist : changePlaylistProps ) {
         className='button rounded-lg bg- p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
         onClick={() => {
           newSong()
-          tracks.push(currentSong)
+          newSongs.push(currentSong)
+          console.log(newSongs)
           }
         }
         > 

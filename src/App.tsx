@@ -11,11 +11,13 @@ function App() {
 
   const [playlist, setPlaylist] = useState(tracks)
 
+  let testPlaylist : any = []
+
   return (
     <div className="App font-sans bg-light-purple flex flex-col w-full h-screen items-center">
         <Header/>
         <AddSong changePlaylist={setPlaylist} />
-        <SongList playList={playlist} />
+        <SongList playList={playlist}/>
         <Footer/>
     </div>
     
