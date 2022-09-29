@@ -1,20 +1,19 @@
-import React, { useState, useRef} from 'react'
+import React, { useState, useRef, Dispatch, SetStateAction} from 'react'
 import { Track, Metrics, VoteData, tracks, Tracklist } from "../assets/tracks"
 
-type changePlaylistProps = {
-  changePlaylist : Function
-}
 
 type testSongs = {
   songs : any
 }
 
-export default function AddSong( 
-  changePlaylist : changePlaylistProps,  
-  songs : testSongs
-  ) {
 
-    console.log( songs.songs)
+type AddSongProps = {
+  changePlaylist: Dispatch<SetStateAction<Tracklist>>;
+  songs: any;
+};
+
+
+export default function AddSong({ changePlaylist, songs }: AddSongProps) {
 
   const [currentSong, setSong] = useState <Track>({
       artist: "",
