@@ -18,7 +18,7 @@ function App() {
         <Header/>
         <AddSong 
         changePlaylist={setPlaylist} 
-        songs={testPlaylist}
+        songs={playlist}
         />
         <SongList playList={playlist}/>
         <Footer/>

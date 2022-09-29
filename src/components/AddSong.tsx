@@ -172,7 +172,7 @@ export default function AddSong({ changePlaylist, songs }: AddSongProps) {
         className='button rounded-lg bg- p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
         onClick={() => {
           newSong()
-          songs.songs.push(currentSong)
+          songs.push(currentSong)
           }
         }
         > 
