@@ -8,15 +8,18 @@ import Footer from './components/Footer'
 
 
 function App() {
-
+  
   const [playlist, setPlaylist] = useState(tracks)
 
-  let testPlaylist : any = []
+  let testPlaylist : Object = []
 
   return (
     <div className="App font-sans bg-light-purple flex flex-col w-full h-screen items-center">
         <Header/>
-        <AddSong changePlaylist={setPlaylist} />
+        <AddSong 
+        changePlaylist={setPlaylist} 
+        songs={testPlaylist}
+        />
         <SongList playList={playlist}/>
         <Footer/>
     </div>

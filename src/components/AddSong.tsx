@@ -1,13 +1,20 @@
 import React, { useState, useRef} from 'react'
-import { Track, Metrics, VoteData, tracks } from "../assets/tracks"
+import { Track, Metrics, VoteData, tracks, Tracklist } from "../assets/tracks"
 
 type changePlaylistProps = {
   changePlaylist : Function
 }
 
-export default function AddSong( changePlaylist : changePlaylistProps ) {
+type testSongs = {
+  songs : any
+}
 
-  let newSongs : any = []
+export default function AddSong( 
+  changePlaylist : changePlaylistProps,  
+  songs : testSongs
+  ) {
+
+    console.log( songs.songs)
 
   const [currentSong, setSong] = useState <Track>({
       artist: "",
@@ -24,8 +31,6 @@ export default function AddSong( changePlaylist : changePlaylistProps ) {
       },
       isAgeRestricted: false,
   })
-
-  console.log(changePlaylist)
 
   //Input Checkers
   const titleInput = useRef(null)
@@ -168,8 +173,7 @@ export default function AddSong( changePlaylist : changePlaylistProps ) {
         className='button rounded-lg bg- p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
         onClick={() => {
           newSong()
-          newSongs.push(currentSong)
-          console.log(newSongs)
+          songs.songs.push(currentSong)
           }
         }
         > 
