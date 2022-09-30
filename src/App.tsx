@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { tracks } from './assets/tracks'
+import { tracks , Track } from './assets/tracks'
 import SongList from './components/SongList'
 import Header from './components/Header'
 import AddSong from './components/AddSong'
@@ -11,15 +11,14 @@ function App() {
   
   const [playlist, setPlaylist] = useState(tracks)
 
-  let testPlaylist : Object = []
+  const onPlaylistChange = (newSong: Track) => {
+    setPlaylist(current => [...current, newSong]);
+  };
 
   return (
     <div className="App font-sans bg-light-purple flex flex-col w-full h-screen items-center">
         <Header/>
-        <AddSong 
-        changePlaylist={setPlaylist} 
-        songs={playlist}
-        />
+        <AddSong changePlaylist={onPlaylistChange} songs={playlist} />
         <SongList playList={playlist}/>
         <Footer/>
     </div>

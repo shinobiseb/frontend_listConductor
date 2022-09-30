@@ -2,18 +2,13 @@ import React, { useState, useRef, Dispatch, SetStateAction} from 'react'
 import { Track, Metrics, VoteData, tracks, Tracklist } from "../assets/tracks"
 
 
-type testSongs = {
-  songs : any
-}
-
-
 type AddSongProps = {
-  changePlaylist: Dispatch<SetStateAction<Tracklist>>;
+  changePlaylist: (newSong: Track) => void;
   songs: any;
 };
 
-
 export default function AddSong({ changePlaylist, songs }: AddSongProps) {
+  
 
   const [currentSong, setSong] = useState <Track>({
       artist: "",
@@ -94,6 +89,25 @@ export default function AddSong({ changePlaylist, songs }: AddSongProps) {
           })
   }
 
+  function getNewSong() {
+    return {
+      artist: isInput(artistInput),
+      title: isInput(titleInput),
+      duration: isInput(durationInput),
+      link: isInput(linkInput),
+      info: {
+        scoreData: {
+          likes: isInput(likesInput),
+          dislikes: isInput(dislikesInput),
+        },
+        views: isInput(viewsInput),
+        uploadedOn: isInput(uploadedInput),
+      },
+      isAgeRestricted: booleanHelper(age),
+    };
+  }
+
+
   return (
     <div className='flex flex-col w-3/4 justify-between items-center'>
         <input 
@@ -171,10 +185,9 @@ export default function AddSong({ changePlaylist, songs }: AddSongProps) {
         <button 
         className='button rounded-lg bg- p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
         onClick={() => {
-          newSong()
-          songs.push(currentSong)
-          }
-        }
+          const theNewSong = getNewSong();
+          changePlaylist(theNewSong);
+        }}
         > 
         Add New Song
         </button>
