@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { tracks , Track } from './assets/tracks'
+import { tracks , Track, Tracklist } from './assets/tracks'
 import SongList from './components/SongList'
 import Header from './components/Header'
 import AddSong from './components/AddSong'
@@ -10,7 +10,7 @@ import PlaylistList from './components/PlaylistList'
 
 function App() {
 
-  let playArr : [] = []
+  let playArr : Tracklist = []
 
   //playlists as a whole
   const [playlists, setPlaylists] = useState(playArr)
