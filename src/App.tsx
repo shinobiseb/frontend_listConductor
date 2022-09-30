@@ -10,18 +10,18 @@ import PlaylistList from './components/PlaylistList'
 
 function App() {
   
-  const [playlist, setPlaylist] = useState(tracks)
+  const [songs, setSongs] = useState(tracks)
 
   const onPlaylistChange = (newSong: Track) => {
-    setPlaylist(current => [...current, newSong]);
+    setSongs(current => [...current, newSong]);
   };
 
   return (
     <div className="App font-sans bg-light-purple flex flex-col w-full h-screen items-center">
         <Header/>
         <PlaylistList/>
-        {/* <AddSong changePlaylist={onPlaylistChange} songs={playlist} />
-        <SongList playList={playlist}/> */}
+        <AddSong changePlaylist={onPlaylistChange} songs={songs} />
+        <SongList playList={songs}/>
         <Footer/>
     </div>
     
