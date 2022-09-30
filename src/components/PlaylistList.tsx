@@ -1,9 +1,13 @@
 import React from 'react'
 
-export default function PlaylistList() {
+type playlistListProps = {
+    playlistList : []
+}
+
+export default function PlaylistList( playlistListProps : []) {
   return (
     <div>
-        PlayList List
+        
     </div>
   )
 }

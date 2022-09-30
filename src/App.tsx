@@ -9,7 +9,13 @@ import PlaylistList from './components/PlaylistList'
 
 
 function App() {
-  
+
+  let playArr : [] = []
+
+  //playlists as a whole
+  const [playlists, setPlaylists] = useState(playArr)
+
+  //individual songs
   const [songs, setSongs] = useState(tracks)
 
   const onPlaylistChange = (newSong: Track) => {
@@ -19,8 +25,11 @@ function App() {
   return (
     <div className="App font-sans bg-light-purple flex flex-col w-full h-screen items-center">
         <Header/>
-        <PlaylistList/>
-        <AddSong changePlaylist={onPlaylistChange} songs={songs} />
+        <PlaylistList playlistList={playArr}/>
+        <AddSong 
+        changePlaylist={onPlaylistChange} 
+        songs={songs}
+        />
         <SongList playList={songs}/>
         <Footer/>
     </div>
