@@ -5,8 +5,12 @@ type playlistListProps = {
     playlistList : Tracklist
 }
 
-export default function Playlist() {
+export default function Playlist( playlistList : playlistListProps ) {
   return (
-    <div>Playlist</div>
+    <div>
+      <h1>
+        
+      </h1>
+    </div>
   )
 }

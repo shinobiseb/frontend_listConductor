@@ -70,25 +70,6 @@ export default function AddSong({ changePlaylist, songs }: AddSongProps) {
     return ele.current.value
   }
 
-
-  function newSong() {
-    setSong({
-            artist: isInput(artistInput),
-            title: isInput(titleInput),
-            duration: isInput(durationInput),
-            link: isInput(linkInput),
-            info: {
-              scoreData: {
-                likes: isInput(likesInput),
-                dislikes: isInput(dislikesInput),
-              },
-              views: isInput(viewsInput),
-              uploadedOn: isInput(uploadedInput),
-            },
-            isAgeRestricted: booleanHelper(age),
-          })
-  }
-
   function getNewSong() {
     return {
       artist: isInput(artistInput),
