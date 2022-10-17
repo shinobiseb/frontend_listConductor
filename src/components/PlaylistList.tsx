@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tracklist } from "../assets/tracks"
 import Playlist from './Playlist';
-import AddPlaylist from './AddPlaylist';
+
 
 
 type playlistListProps = {
@@ -20,11 +20,9 @@ const trackMapper = ({ playlistList }: playlistListProps) => {
 
 export default function PlaylistList({ playlistList, setPlay }: playlistListProps) {
 
-  console.log (playlistList)
-
   return (
     <div>
-      <AddPlaylist setPlaylist={setPlay} />
+
     </div>
 
     

@@ -5,6 +5,7 @@ import Header from './components/Header'
 import AddSong from './components/AddSong'
 import Footer from './components/Footer'
 import PlaylistList from './components/PlaylistList'
+import AddPlaylist from './components/AddPlaylist'
 
 
 
@@ -14,6 +15,10 @@ function App() {
 
   //playlists as a whole
   const [playlists, setPlaylists] = useState(playArr)
+
+  const updatePlaylist = (newPlaylist: Tracklist) => {
+    setPlaylists(current => [...current, newPlaylist]);
+  };
 
   //individual songs
   const [songs, setSongs] = useState(tracks)
@@ -25,7 +30,12 @@ function App() {
   return (
     <div className="App font-sans bg-light-purple flex flex-col w-full h-screen items-center">
         <Header/>
-        <PlaylistList setPlay={setPlaylists} playlistList={playArr}/>
+        <AddPlaylist 
+        setPlaylist={updatePlaylist}
+        />
+        <PlaylistList 
+        setPlay={setPlaylists} 
+        playlistList={playArr}/>
         <AddSong 
         changePlaylist={onPlaylistChange} 
         songs={songs}

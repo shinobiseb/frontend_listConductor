@@ -8,23 +8,6 @@ type AddSongProps = {
 };
 
 export default function AddSong({ changePlaylist, songs }: AddSongProps) {
-  
-
-  const [currentSong, setSong] = useState <Track>({
-      artist: "",
-      title: "",
-      duration: 0,
-      link: "",
-      info: {
-        scoreData: {
-          likes: 0,
-          dislikes: 0,
-        },
-        views: 0,
-        uploadedOn: new Date(1999),
-      },
-      isAgeRestricted: false,
-  })
 
   //Input Checkers
   const titleInput = useRef(null)
