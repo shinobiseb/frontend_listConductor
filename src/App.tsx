@@ -11,7 +11,7 @@ import AddPlaylist from './components/AddPlaylist'
 
 function App() {
 
-  let playArr : Tracklist = []
+  let playArr : Tracklist[] = []
 
   //playlists as a whole
   const [playlists, setPlaylists] = useState(playArr)

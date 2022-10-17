@@ -5,8 +5,8 @@ import Playlist from './Playlist';
 
 
 type playlistListProps = {
-    playlistList : Tracklist
-    setPlay: (newPlay: Tracklist) => void;
+    playlistList : Tracklist[]
+    setPlay: (newPlay: Tracklist[]) => void;
 }
 
 const trackMapper = ({ playlistList }: playlistListProps) => {

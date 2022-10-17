@@ -3,7 +3,7 @@ import { Tracklist } from '../assets/tracks'
 
 type addPlayProps = {
     setPlaylist: (newPlay: Tracklist) => void;
-    playlists : Tracklist
+    playlists : Tracklist[]
 }
 
 function newPlaylist(setPlaylist : addPlayProps) {
