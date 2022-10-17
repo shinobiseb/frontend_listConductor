@@ -32,6 +32,7 @@ function App() {
         <Header/>
         <AddPlaylist 
         setPlaylist={updatePlaylist}
+        playlists={playlists}
         />
         <PlaylistList 
         setPlay={setPlaylists} 

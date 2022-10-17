@@ -3,13 +3,14 @@ import { Tracklist } from '../assets/tracks'
 
 type addPlayProps = {
     setPlaylist: (newPlay: Tracklist) => void;
+    playlists : Tracklist
 }
 
 function newPlaylist(setPlaylist : addPlayProps) {
   setPlaylist
 }
 
-export default function AddPlaylist( { setPlaylist } : addPlayProps) {
+export default function AddPlaylist( { setPlaylist, playlists } : addPlayProps) {
   return (
     <div>
         <button 
