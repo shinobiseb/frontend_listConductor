@@ -9,9 +9,9 @@ type playlistListProps = {
     setPlay: (newPlay: Tracklist) => void;
 }
 
-const trackMapper = ({ playlistList }: playlistListProps) => {
+const playMapper = ({ playlistList }: playlistListProps) => {
   let num = -1;
-  const forE = playlistList.map((playlist) => {
+  const forE = playlistList.playlist.map((playlist) => {
     num = num + 1;
     // return <Playlist key={num} playlist={playlist} />;
   });

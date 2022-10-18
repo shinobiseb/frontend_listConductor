@@ -23,9 +23,17 @@ export type Track = {
 };
 
 // List of tracks is just an array of them!
-export type Tracklist = Track[];
+// export type Tracklist = Track[];
 
-export const tracks: Tracklist = [
+export type Tracklist = {
+  title: string,
+  playlist: Track[]
+}
+
+export const tracks: Tracklist = 
+{
+  title: "tracks",
+  playlist: [
   {
     artist: 'Death Grips',
     title: 'Guillotine',
@@ -176,4 +184,5 @@ export const tracks: Tracklist = [
     },
     isAgeRestricted: false,
   },
-];
+],
+}

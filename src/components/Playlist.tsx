@@ -2,7 +2,7 @@ import React from 'react'
 import { Tracklist } from '../assets/tracks'
 
 type playlistListProps = {
-    playlistList : Tracklist
+    playlistList : Tracklist[]
 }
 
 export default function Playlist( playlistList : playlistListProps ) {

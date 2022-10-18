@@ -14,7 +14,7 @@ function App() {
   let playArr : Tracklist = []
 
   //playlists as a whole
-  const [playlists, setPlaylists] = useState(playArr)
+  const [playlists, setPlaylists] = useState(tracks)
 
   const updatePlaylist = (newPlaylist: Tracklist) => {
     setPlaylists(current => [...current, newPlaylist]);
@@ -24,8 +24,9 @@ function App() {
   const [songs, setSongs] = useState(tracks)
 
   const onPlaylistChange = (newSong: Track) => {
-    setSongs(current => [...current, newSong]);
-  };
+    setSongs(
+      current => { current.playlist[...current, newSong]}
+    )
 
   return (
     <div className="App font-sans bg-light-purple flex flex-col w-full h-screen items-center">

@@ -6,7 +6,7 @@ type addPlayProps = {
     playlists : Tracklist
 }
 
-function newPlaylist(setPlaylist : addPlayProps) {
+function newPlaylist({setPlaylist, playlists } : addPlayProps) {
   setPlaylist
 }
 
