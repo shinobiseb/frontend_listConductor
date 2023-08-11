@@ -29,6 +29,7 @@ export default function Song({ track } : SongProps){
       <div className="song-info">
         <h1 className='text-lg'> {track.title} </h1>
         <h2 className='italic text-sm'> {track.artist} </h2>
+        <a target='_blank' className='text-sm italic' href={track.link}>Youtube Link</a>
       </div>
       {/* Song Stats and Numbers */}
       <div className="song-stats flex items-center">

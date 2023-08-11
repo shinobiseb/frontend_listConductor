@@ -16,6 +16,7 @@ function App() {
   //playlists as a whole
   const [playlists, setPlaylists] = useState(playArr)
 
+  //update playlist array
   const updatePlaylist = (newPlaylist: Tracklist) => {
     setPlaylists(current => [...current, newPlaylist]);
   };
@@ -23,6 +24,7 @@ function App() {
   //individual songs
   const [songs, setSongs] = useState(tracks)
 
+  //update playlist with new song 
   const onPlaylistChange = (newSong: Track) => {
     setSongs(current => [...current, newSong]);
   };
@@ -36,7 +38,8 @@ function App() {
         />
         <PlaylistList 
         setPlay={setPlaylists} 
-        playlistList={playArr}/>
+        playlistList={playlists} 
+        />
         <AddSong 
         changePlaylist={onPlaylistChange} 
         songs={songs}
