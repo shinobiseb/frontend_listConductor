@@ -6,11 +6,15 @@ import AddSong from './components/AddSong';
 import Footer from './components/Footer';
 import PlaylistList from './components/PlaylistList';
 import AddPlaylist from './components/AddPlaylist';
+import OpenAddSong from './components/OpenAddSong';
 
 function App() {
   const initialPlaylistCollection: PlaylistType[] = [
     { name: 'Default', tracks: defaultTracks }
   ];
+
+  // OpenAddSong Button
+  const [open, setOpen] = useState(false)
 
   // Playlist Collection
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(initialPlaylistCollection);
@@ -38,9 +42,14 @@ function App() {
         setPlaylistCollection={setPlaylistCollection} 
         playlistCollection={playlistCollection} 
       /> */}
+      <OpenAddSong 
+      setOpen={setOpen}
+      openState={open}
+      />
       <AddSong 
         addSongToPlaylist={onPlaylistChange} 
         songs={songs}
+        openBool={open}
       />
       <SongList playList={songs}/>
       <Footer/>

@@ -5,9 +5,10 @@ import { Track, defaultTracks, Tracklist } from "../assets/tracks"
 type AddSongProps = {
   addSongToPlaylist: (newSong: Track) => void;
   songs: any;
+  openBool : boolean
 };
 
-export default function AddSong({ addSongToPlaylist, songs }: AddSongProps) {
+export default function AddSong({ addSongToPlaylist, songs, openBool }: AddSongProps) {
 
   //Input Checkers
   const titleInput = useRef(null)
@@ -66,90 +67,92 @@ export default function AddSong({ addSongToPlaylist, songs }: AddSongProps) {
     };
   }
 
+  if(!openBool) {
+    return null
+  }
+      return (
+        <div className='flex flex-col w-3/4 justify-center items-center'>
+            <input 
+            id="text-box-handle" className="rounded-lg p-2 w-3/4" 
+            type="text" 
+            placeholder='Title'
+            ref={titleInput}
+            />
 
-  return (
-    <div className='flex flex-col w-3/4 justify-between items-center'>
-        <input 
-        id="text-box-handle" className="rounded-lg p-2 w-3/4" 
-        type="text" 
-        placeholder='Title'
-        ref={titleInput}
-        />
+            <input 
+            className="rounded-lg p-2 mt-1 w-3/4"
+            type="text"  
+            placeholder='Artist'
+            ref={artistInput}
+            />
 
-        <input 
-        className="rounded-lg p-2 mt-1 w-3/4"
-        type="text"  
-        placeholder='Artist'
-        ref={artistInput}
-        />
+            <input 
+            className="rounded-lg p-2 mt-1 w-3/4"
+            type="number"  
+            placeholder='duration'
+            ref={durationInput}
+            />
 
-        <input 
-        className="rounded-lg p-2 mt-1 w-3/4"
-        type="number"  
-        placeholder='duration'
-        ref={durationInput}
-        />
+            <input 
+            className="rounded-lg p-2 mt-1 w-3/4"
+            type="url"  
+            placeholder="https://youtube.com/example"
+            ref={linkInput}
+            />
 
-        <input 
-        className="rounded-lg p-2 mt-1 w-3/4"
-        type="url"  
-        placeholder="https://youtube.com/example"
-        ref={linkInput}
-        />
+            <input 
+            className="rounded-lg p-2 mt-1 w-3/4"
+            type="number"  
+            placeholder='likes'
+            ref={likesInput}
+            />
 
-        <input 
-        className="rounded-lg p-2 mt-1 w-3/4"
-        type="number"  
-        placeholder='likes'
-        ref={likesInput}
-        />
+            <input 
+            className="rounded-lg p-2 mt-1 w-3/4"
+            type="number"  
+            placeholder='dislikes'
+            ref={dislikesInput}
+            />
 
-        <input 
-        className="rounded-lg p-2 mt-1 w-3/4"
-        type="number"  
-        placeholder='dislikes'
-        ref={dislikesInput}
-        />
+            <input 
+            className="rounded-lg p-2 mt-1 w-3/4"
+            type="number"  
+            placeholder='views'
+            ref={viewsInput}
+            />
 
-        <input 
-        className="rounded-lg p-2 mt-1 w-3/4"
-        type="number"  
-        placeholder='views'
-        ref={viewsInput}
-        />
+            <input 
+            className="rounded-lg p-2 mt-1 w-3/4"
+            type="date"  
+            placeholder='upload Dated'
+            ref={uploadedInput}
+            />
 
-        <input 
-        className="rounded-lg p-2 mt-1 w-3/4"
-        type="date"  
-        placeholder='upload Dated'
-        ref={uploadedInput}
-        />
-        
-        <div className='mt-1 p-2 w-3/4'>
-          <label> Age Restricted?</label>
-          <select 
-          name="ageRestricted" 
-          id="ageRestricted" 
-          required 
-          value={age} 
-          onChange={handleChange} 
-          ref={ageInput}
-          className="rounded-md ml-2"
-          >
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
+            <div className='mt-1 p-2 w-3/4'>
+              <label> Age Restricted?</label>
+              <select 
+              name="ageRestricted" 
+              id="ageRestricted" 
+              required 
+              value={age} 
+              onChange={handleChange} 
+              ref={ageInput}
+              className="rounded-md ml-2"
+              >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+
+            <button 
+            className='button rounded-lg bg- p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
+            onClick={() => {
+              let theNewSong = getNewSong();
+              addSongToPlaylist(theNewSong);
+            }}
+            > 
+            Add New Song
+            </button>
         </div>
-
-        <button 
-        className='button rounded-lg bg- p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
-        onClick={() => {
-          let theNewSong = getNewSong();
-          addSongToPlaylist(theNewSong);
-        }}
-        > 
-        Add New Song
-        </button>
-    </div>
-  )
-}
+      )
+    }
