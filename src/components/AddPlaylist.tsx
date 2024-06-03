@@ -1,26 +1,17 @@
-import { Tracklist } from '../assets/tracks'
+import { PlaylistType, Tracklist } from '../assets/tracks'
 
-type addPlayProps = {
-    setPlaylist: (newPlay: Tracklist) => void;
-    playlists : Tracklist[]
+type AddPlayProps = {
+    setPlaylist: (newPlaylist: PlaylistType) => void;
 }
 
-
-export default function AddPlaylist( { setPlaylist, playlists } : addPlayProps) {
-  
-  function setPlay(list : Tracklist[]) {
-    setPlaylist(list)
-  }
+export default function AddPlaylist({ setPlaylist }: AddPlayProps) {
 
   return (
     <div>
         <button 
-        className="addPlay flex button rounded-lg p-2 hover:ease-in duration-250 bg-white-white mb-2"
-        onClick={() => {
-          setPlay(playlists)
-        }}
+        className="addPlay flex button rounded-lg p-2 hover:ease-in duration-250 bg-white mb-2"
         >
-            Add playlist
+            Add Playlist
         </button>
     </div>
   )

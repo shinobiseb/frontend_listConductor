@@ -1,54 +1,51 @@
-import { useState } from 'react'
-import { tracks , Track, Tracklist } from './assets/tracks'
-import SongList from './components/SongList'
-import Header from './components/Header'
-import AddSong from './components/AddSong'
-import Footer from './components/Footer'
-import PlaylistList from './components/PlaylistList'
-import AddPlaylist from './components/AddPlaylist'
-
-
+import React, { useState } from 'react';
+import { tracks, Track, Tracklist, PlaylistType } from './assets/tracks';
+import SongList from './components/SongList';
+import Header from './components/Header';
+import AddSong from './components/AddSong';
+import Footer from './components/Footer';
+import PlaylistList from './components/PlaylistList';
+import AddPlaylist from './components/AddPlaylist';
 
 function App() {
+  const initialPlaylistCollection: PlaylistType[] = [
+    { name: 'Default', tracks: tracks }
+  ];
 
-  let playArr : Tracklist[] = []
+  // Playlist Collection
+  const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(initialPlaylistCollection);
 
-  //playlists as a whole
-  const [playlists, setPlaylists] = useState(playArr)
-
-  //update playlist array
-  const updatePlaylist = (newPlaylist: Tracklist) => {
-    setPlaylists(current => [...current, newPlaylist]);
+  // Update playlist array
+  const updatePlaylistCollection = (newPlaylist: PlaylistType) => {
+    setPlaylistCollection(current => [...current, newPlaylist]);
   };
 
-  //individual songs
-  const [songs, setSongs] = useState(tracks)
+  // Individual songs
+  const [songs, setSongs] = useState<Track[]>(tracks);
 
-  //update playlist with new song 
+  // Update playlist with new song 
   const onPlaylistChange = (newSong: Track) => {
     setSongs(current => [...current, newSong]);
   };
 
   return (
     <div className="App font-sans bg-light-purple flex flex-col w-full h-screen items-center">
-        <Header/>
-        <AddPlaylist 
-        setPlaylist={updatePlaylist}
-        playlists={playlists}
-        />
-        <PlaylistList 
-        setPlay={setPlaylists} 
-        playlistList={playlists} 
-        />
-        <AddSong 
+      <Header />
+      <AddPlaylist 
+        setPlaylist={updatePlaylistCollection}
+      />
+      <PlaylistList 
+        setPlaylistCollection={setPlaylistCollection} 
+        playlistCollection={playlistCollection} 
+      />
+      <AddSong 
         changePlaylist={onPlaylistChange} 
         songs={songs}
-        />
-        <SongList playList={songs}/>
-        <Footer/>
+      />
+      <SongList playList={songs}/>
+      <Footer/>
     </div>
-    
-  )
+  );
 }
 
-export default App
+export default App;

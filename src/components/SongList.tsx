@@ -7,12 +7,7 @@ type PlayListProps = {
 }
 
 const trackMapper = (playlist: Track[]) => {
-  let num = -1;
-  const forE = playlist.map((track) => {
-    num = num + 1;
-    return <Song key={num} track={track} />;
-  });
-  return forE;
+  return playlist.map((track, index) => <Song key={index} track={track} />);
 };
 
 export default function SongList({ playList } : PlayListProps) {

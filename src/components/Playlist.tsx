@@ -1,16 +1,15 @@
 import React from 'react'
-import { Tracklist } from '../assets/tracks'
+import { PlaylistType, Tracklist } from '../assets/tracks'
 
-type playlistListProps = {
-    playlist : Tracklist
+type playlistProps = {
+    playlist : PlaylistType
 }
 
-export default function Playlist( playlistList : playlistListProps ) {
+export default function Playlist( playlistCollection : playlistProps ) {
+  
   return (
     <div>
-      <h1>
-        
-      </h1>
+      <h1>{playlistCollection.playlist.name}</h1>
     </div>
   )
 }

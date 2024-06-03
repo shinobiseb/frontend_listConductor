@@ -1,30 +1,22 @@
 import React from 'react'
-import { Tracklist } from "../assets/tracks"
+import { PlaylistType } from "../assets/tracks"
 import Playlist from './Playlist';
 
-
-
-type playlistListProps = {
-    playlistList : Tracklist[];
-    setPlay: (newPlay: Tracklist[]) => void;
+type PlaylistCollectionProps = {
+    playlistCollection: PlaylistType[];
+    setPlaylistCollection: (newPlaylistCollection: PlaylistType[]) => void;
 }
 
-const trackMapper = ({ playlistList }: playlistListProps) => {
-  let num = -1;
-  const forE = playlistList.map((playlist) => {
-    num = num + 1;
-    return <Playlist key={num} playlist={playlist} />;
-  });
-  return forE;
+const playlistMapper = (playlistCollection: PlaylistType[]) => {
+  return playlistCollection.map((playlist, index) => (
+    <Playlist key={index} playlist={playlist} />
+  ));
 };
 
-export default function PlaylistList({ playlistList, setPlay }: playlistListProps) {
-
+export default function PlaylistCollection({ playlistCollection }: PlaylistCollectionProps) {
   return (
-    <div>
-
+    <div className='h-full w-full border border-white'>
+      {playlistMapper(playlistCollection)}
     </div>
-
-    
-  )
+  );
 }
