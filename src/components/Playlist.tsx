@@ -8,7 +8,7 @@ type playlistProps = {
 export default function Playlist( playlistCollection : playlistProps ) {
   
   return (
-    <div>
+    <div className='playlist'>
       <h1>{playlistCollection.playlist.name}</h1>
     </div>
   )

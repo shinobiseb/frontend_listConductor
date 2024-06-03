@@ -1,13 +1,13 @@
 import React, { useState, useRef, Dispatch, SetStateAction} from 'react'
-import { Track, Metrics, VoteData, tracks, Tracklist } from "../assets/tracks"
+import { Track, defaultTracks, Tracklist } from "../assets/tracks"
 
 
 type AddSongProps = {
-  changePlaylist: (newSong: Track) => void;
+  addSongToPlaylist: (newSong: Track) => void;
   songs: any;
 };
 
-export default function AddSong({ changePlaylist, songs }: AddSongProps) {
+export default function AddSong({ addSongToPlaylist, songs }: AddSongProps) {
 
   //Input Checkers
   const titleInput = useRef(null)
@@ -22,13 +22,8 @@ export default function AddSong({ changePlaylist, songs }: AddSongProps) {
 
   const [age, setAge] = useState("false")
 
-  const booleanHelper = (bool : string) => {
-    if (bool === "false") {
-      return false
-    } else {
-      return true
-    }
-  }
+  const booleanHelper = (bool : string) => bool === "false" ? false : true;
+
 
   const handleChange = (event : any) => {
     setAge(event.target.value)
@@ -49,9 +44,9 @@ export default function AddSong({ changePlaylist, songs }: AddSongProps) {
     if(ele.current.value === "") {
       return `Value not given`
     }
-
     return ele.current.value
   }
+
 
   function getNewSong() {
     return {
@@ -149,8 +144,8 @@ export default function AddSong({ changePlaylist, songs }: AddSongProps) {
         <button 
         className='button rounded-lg bg- p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
         onClick={() => {
-          const theNewSong = getNewSong();
-          changePlaylist(theNewSong);
+          let theNewSong = getNewSong();
+          addSongToPlaylist(theNewSong);
         }}
         > 
         Add New Song

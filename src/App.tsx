@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { tracks, Track, Tracklist, PlaylistType } from './assets/tracks';
+import { defaultTracks, Track, Tracklist, PlaylistType } from './assets/tracks';
 import SongList from './components/SongList';
 import Header from './components/Header';
 import AddSong from './components/AddSong';
@@ -9,7 +9,7 @@ import AddPlaylist from './components/AddPlaylist';
 
 function App() {
   const initialPlaylistCollection: PlaylistType[] = [
-    { name: 'Default', tracks: tracks }
+    { name: 'Default', tracks: defaultTracks }
   ];
 
   // Playlist Collection
@@ -21,7 +21,7 @@ function App() {
   };
 
   // Individual songs
-  const [songs, setSongs] = useState<Track[]>(tracks);
+  const [songs, setSongs] = useState<Track[]>(defaultTracks);
 
   // Update playlist with new song 
   const onPlaylistChange = (newSong: Track) => {
@@ -31,15 +31,15 @@ function App() {
   return (
     <div className="App font-sans bg-light-purple flex flex-col w-full h-screen items-center">
       <Header />
-      <AddPlaylist 
+      {/* <AddPlaylist 
         setPlaylist={updatePlaylistCollection}
       />
       <PlaylistList 
         setPlaylistCollection={setPlaylistCollection} 
         playlistCollection={playlistCollection} 
-      />
+      /> */}
       <AddSong 
-        changePlaylist={onPlaylistChange} 
+        addSongToPlaylist={onPlaylistChange} 
         songs={songs}
       />
       <SongList playList={songs}/>

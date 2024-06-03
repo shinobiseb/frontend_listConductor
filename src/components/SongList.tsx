@@ -1,5 +1,5 @@
 import React from 'react'
-import { Track, tracks } from '../assets/tracks'
+import { Track, defaultTracks } from '../assets/tracks'
 import Song from './Song'
 
 type PlayListProps = {
