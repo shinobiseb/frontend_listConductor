@@ -22,17 +22,21 @@ const secCalc= (duration : number) => {
 export default function Song({ track } : SongProps){
 
   return (
-    <div className='song-container flex flex-row justify-between mt-1 bg-light-blue rounded-md p-2'>
-      {/* Song Title and Artist */}
-      <div className="song-info">
-        <h1 className='text-lg'> {track.title} </h1>
-        <h2 className='italic text-sm'> {track.artist} </h2>
-        <a target='_blank' className='text-sm italic' href={track.link}>Youtube Link</a>
+    <li className='song-container w-full flex flex-row justify-between px-4 py-2 text-white' onClick={()=> {
+      
+    }}>
+      <div className="song-info-div-song flex flex-row justify-center items-center">
+        <img className='h-16 aspect-square' src={track.img} alt="Song Image"/>
+        <div className="song-info flex flex-col pl-2">
+          <h1 className='text-lg'> {track.title} </h1>
+          <h2 className='italic text-sm'> {track.artist} </h2>
+          {/* <a target='_blank' className='text-sm italic' href={track.link}>Youtube Link</a> */}
+        </div>
       </div>
       {/* Song Stats and Numbers */}
       <div className="song-stats flex items-center">
         <h2> {minCalc(track.duration)}:{secCalc(track.duration)}</h2>
       </div>
-    </div>
+    </li>
   )
 }

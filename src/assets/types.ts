@@ -14,6 +14,7 @@ export type Track = {
       uploadedOn: Date;
     };
     isAgeRestricted: boolean;
+    img: string;
   };
   
 export type Tracklist = Track[];

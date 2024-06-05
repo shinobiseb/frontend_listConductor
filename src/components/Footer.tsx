@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <footer className='flex flex-col  w-full mt-10 items-center justify-around'>
+    <footer className='flex flex-col w-full mt-10 items-center justify-around'>
         <div>        
             <p>Ney Sebastian Patin III</p>
         </div>

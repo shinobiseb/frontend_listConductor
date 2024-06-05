@@ -17,6 +17,7 @@ export default function AddSong({ addSongToPlaylist, songs, openBool }: AddSongP
   const viewsInput = useRef(null)
   const uploadedInput = useRef(null)
   const ageInput = useRef(null)
+  const imgInput = useRef(null)
 
   const [age, setAge] = useState("false")
 
@@ -61,6 +62,7 @@ export default function AddSong({ addSongToPlaylist, songs, openBool }: AddSongP
         uploadedOn: isInput(uploadedInput),
       },
       isAgeRestricted: booleanHelper(age),
+      img: isInput(imgInput)
     };
   }
 
@@ -141,13 +143,20 @@ export default function AddSong({ addSongToPlaylist, songs, openBool }: AddSongP
               </select>
             </div>
 
+            <input 
+            className="rounded-lg p-2 mt-1 w-3/4"
+            type="text"  
+            placeholder='Image'
+            ref={imgInput}
+            />
+
             <button 
             className='button rounded-lg bg- p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
             onClick={() => {
               let theNewSong = getNewSong();
               addSongToPlaylist(theNewSong);
-            }}
-            > 
+            }}>
+
             Add New Song
             </button>
         </div>

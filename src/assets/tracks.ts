@@ -16,6 +16,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('April 26, 2011'),
     },
     isAgeRestricted: false,
+    img: 'https://upload.wikimedia.org/wikipedia/en/d/db/Guillotine_DG.jpg'
   },
   {
     artist: 'JID',
@@ -31,6 +32,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('August 9, 2022'),
     },
     isAgeRestricted: false,
+    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
   },
   {
     artist: 'Kendrick Lamar',
@@ -46,6 +48,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('April 18, 2017'),
     },
     isAgeRestricted: false,
+    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
   },
   {
     artist: 'S3RL',
@@ -61,6 +64,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('August 19, 2019'),
     },
     isAgeRestricted: true,
+    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
   },
   {
     artist: 'Bas (ft. J. Cole & Lil Tjay)',
@@ -76,6 +80,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('July 9, 2021'),
     },
     isAgeRestricted: false,
+    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
   },
   {
     artist: 'Kate Bush',
@@ -91,6 +96,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('January 15, 2011'),
     },
     isAgeRestricted: false,
+    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
   },
   {
     artist: "WEEDMANE (feat. WESTBIERTY'S & noCPR)",
@@ -106,6 +112,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('October 22, 2020'),
     },
     isAgeRestricted: true,
+    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
   },
   {
     artist: 'merge! ft yameii',
@@ -121,6 +128,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('October 3, 2020'),
     },
     isAgeRestricted: false,
+    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
   },
   {
     artist: 'Astralproject1on',
@@ -136,6 +144,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('November 30, 2019'),
     },
     isAgeRestricted: false,
+    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
   },
   {
     artist: 'Justice',
@@ -151,5 +160,6 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('January 11, 2013'),
     },
     isAgeRestricted: false,
+    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
   }
 ];

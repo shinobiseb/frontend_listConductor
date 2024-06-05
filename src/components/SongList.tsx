@@ -4,17 +4,17 @@ import { Track } from '../assets/types'
 import Song from './Song'
 
 type PlayListProps = {
-  playList : Track[]
+  tracklist : Track[]
 }
 
 const trackMapper = (playlist: Track[]) => {
   return playlist.map((track, index) => <Song key={index} track={track} />);
 };
 
-export default function SongList({ playList } : PlayListProps) {
+export default function SongList({ tracklist } : PlayListProps) {
   return (
-    <div className='playlist-container flex flex-col items-left w-1/2 max-w-md'>
-      {trackMapper( playList )}
-    </div>
+    <ul className='playlist-container h-full flex flex-col items-left w-full  overflow-y-scroll'>
+      {trackMapper( tracklist )}
+    </ul>
   )
 }

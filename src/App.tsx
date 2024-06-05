@@ -40,28 +40,19 @@ function App() {
   };
 
   return (
-    <div className="App font-sans flex flex-row w-screen h-screen items-center">
+    <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center p-2 sm:items-end">
       <Sidebar userName={user} userPlaylists={playlistCollection}/>
-      {/* <AddPlaylist 
-        setPlaylist={updatePlaylistCollection}
-      />
-      <PlaylistList 
-        setPlaylistCollection={setPlaylistCollection} 
-        playlistCollection={playlistCollection} 
-      /> */}
-      <main className="flex flex-col h-full w-full justify-center items-center">
-        <Header/>
-        <OpenAddSong 
+      <main className='flex flex-col h-full sm:h-1/2 w-full justify-end items-center'>
+        {/* <OpenAddSong 
         setOpen={setOpen}
         openState={open}
-        />
-        <AddSong 
+        /> */}
+        {/* <AddSong 
           addSongToPlaylist={onPlaylistChange} 
           songs={songs}
           openBool={open}
-        />
-        <SongList playList={songs}/>
-        <Footer/>
+        /> */}
+        <SongList tracklist={songs}/>
       </main>
     </div>
   );
