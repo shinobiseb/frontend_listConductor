@@ -1,26 +1,5 @@
-// tracks.ts
-export type Track = {
-  artist: string;
-  title: string;
-  duration: number;
-  link: string;
-  info: {
-    scoreData: {
-      likes: number;
-      dislikes: number;
-    };
-    views: number;
-    uploadedOn: Date;
-  };
-  isAgeRestricted: boolean;
-};
+import { Track, Tracklist } from "./types";
 
-export type Tracklist = Track[];
-
-export type PlaylistType = {
-  name: string;
-  tracks: Tracklist;
-};
 
 export const defaultTracks: Tracklist = [
   {

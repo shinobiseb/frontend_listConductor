@@ -1,12 +1,9 @@
 import React, { useState, useRef, Dispatch, SetStateAction} from 'react'
-import { Track, defaultTracks, Tracklist } from "../assets/tracks"
+import { defaultTracks,  } from "../assets/tracks"
+import { AddSongProps } from '../assets/types'
 
 
-type AddSongProps = {
-  addSongToPlaylist: (newSong: Track) => void;
-  songs: any;
-  openBool : boolean
-};
+
 
 export default function AddSong({ addSongToPlaylist, songs, openBool }: AddSongProps) {
 

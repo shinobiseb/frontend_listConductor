@@ -1,9 +1,7 @@
 import React from 'react'
-import { Track, tracks } from '../assets/tracks'
+import { defaultTracks } from '../assets/tracks'
+import { Track, SongProps } from '../assets/types'
 
-type SongProps = {
-  track : Track;
-}
 
 //Minutes Calculator
 const minCalc= (duration : number) => {

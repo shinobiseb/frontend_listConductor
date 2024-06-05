@@ -1,8 +1,4 @@
-import { PlaylistType, Tracklist } from '../assets/tracks'
-
-type AddPlayProps = {
-    setPlaylist: (newPlaylist: PlaylistType) => void;
-}
+import { PlaylistType, AddPlayProps } from "../assets/types"
 
 export default function AddPlaylist({ setPlaylist }: AddPlayProps) {
 

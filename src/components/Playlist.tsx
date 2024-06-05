@@ -1,5 +1,5 @@
 import React from 'react'
-import { PlaylistType, Tracklist } from '../assets/tracks'
+import { PlaylistType } from '../assets/types'
 
 type playlistProps = {
     playlist : PlaylistType

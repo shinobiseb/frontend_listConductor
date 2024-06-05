@@ -1,9 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
-
-interface useStateFunction {
-    setOpen : Dispatch<SetStateAction<boolean>>
-    openState : boolean
-}
+import { useStateFunction } from '../assets/types'
 
 export default function OpenAddSong( {openState, setOpen} : useStateFunction ) {
   return (

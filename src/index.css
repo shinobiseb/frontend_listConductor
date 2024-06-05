@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
 * {
     box-sizing: border-box;
     margin: 0;
 }
 
 html {
-    background-color: #AFBBF2;
+    background-color: #293241;
 }

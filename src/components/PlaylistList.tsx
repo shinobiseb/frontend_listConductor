@@ -1,11 +1,8 @@
 import React from 'react'
-import { PlaylistType } from "../assets/tracks"
 import Playlist from './Playlist';
+import { PlaylistType, PlaylistCollectionProps } from '../assets/types';
 
-type PlaylistCollectionProps = {
-    playlistCollection: PlaylistType[];
-    setPlaylistCollection: (newPlaylistCollection: PlaylistType[]) => void;
-}
+
 
 const playlistMapper = (playlistCollection: PlaylistType[]) => {
   return playlistCollection.map((playlist, index) => (

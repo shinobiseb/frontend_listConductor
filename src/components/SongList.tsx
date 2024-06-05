@@ -1,5 +1,6 @@
 import React from 'react'
-import { Track, defaultTracks } from '../assets/tracks'
+import { defaultTracks } from '../assets/tracks'
+import { Track } from '../assets/types'
 import Song from './Song'
 
 type PlayListProps = {
@@ -17,6 +18,3 @@ export default function SongList({ playList } : PlayListProps) {
     </div>
   )
 }
-
-
-{/* <Song track={playList[0]}/> */}
