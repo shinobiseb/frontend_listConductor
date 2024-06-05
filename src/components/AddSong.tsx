@@ -151,7 +151,7 @@ export default function AddSong({ addSongToPlaylist, songs, openBool }: AddSongP
             />
 
             <button 
-            className='button rounded-lg bg- p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
+            className='button rounded-lg p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
             onClick={() => {
               let theNewSong = getNewSong();
               addSongToPlaylist(theNewSong);

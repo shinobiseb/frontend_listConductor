@@ -42,7 +42,6 @@ export interface useStateFunction {
 
 export type PlaylistCollectionProps = {
     playlistCollection: PlaylistType[];
-    setPlaylistCollection: (newPlaylistCollection: PlaylistType[]) => void;
 }
 
 export type SongProps = {
@@ -51,5 +50,5 @@ export type SongProps = {
 
 export interface sidebarReq {
     userPlaylists : PlaylistType[];
-    userName : string
+    userName : string;
 }

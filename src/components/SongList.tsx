@@ -8,12 +8,15 @@ type PlayListProps = {
 }
 
 const trackMapper = (playlist: Track[]) => {
-  return playlist.map((track, index) => <Song key={index} track={track} />);
+  return playlist.map((track, index) => (
+        <Song key={index} track={track}/>
+    )
+  );
 };
 
 export default function SongList({ tracklist } : PlayListProps) {
   return (
-    <ul className='playlist-container h-full flex flex-col items-left w-full  overflow-y-scroll'>
+    <ul className='playlist-container h-3/4 flex flex-col items-left w-full  overflow-y-scroll'>
       {trackMapper( tracklist )}
     </ul>
   )

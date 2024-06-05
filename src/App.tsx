@@ -4,13 +4,15 @@ import SongList from './components/SongList';
 import Header from './components/Header';
 import AddSong from './components/AddSong';
 import Footer from './components/Footer';
-import PlaylistList from './components/PlaylistList';
 import AddPlaylist from './components/AddPlaylist';
 import OpenAddSong from './components/OpenAddSong';
 import Sidebar from './components/Sidebar';
 import { defaultTracks } from './assets/tracks';
+import Featured from './components/Featured';
 
 function App() {
+
+  const [current, setCurrent] = useState(  )
 
   // User
   const [user, setUser] = useState('SketchtheConductor')
@@ -40,18 +42,10 @@ function App() {
   };
 
   return (
-    <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center p-2 sm:items-end">
+    <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2">
       <Sidebar userName={user} userPlaylists={playlistCollection}/>
-      <main className='flex flex-col h-full sm:h-1/2 w-full justify-end items-center'>
-        {/* <OpenAddSong 
-        setOpen={setOpen}
-        openState={open}
-        /> */}
-        {/* <AddSong 
-          addSongToPlaylist={onPlaylistChange} 
-          songs={songs}
-          openBool={open}
-        /> */}
+      <main className='flex flex-col h-full w-full justify-end items-center'>
+        <Featured/>
         <SongList tracklist={songs}/>
       </main>
     </div>

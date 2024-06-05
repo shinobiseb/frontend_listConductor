@@ -1,4 +1,4 @@
-import { Track, Tracklist } from "./types";
+import { Tracklist } from "./types";
 
 
 export const defaultTracks: Tracklist = [
@@ -32,7 +32,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('August 9, 2022'),
     },
     isAgeRestricted: false,
-    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
+    img: 'https://i.scdn.co/image/ab67616d0000b273ec7c831cbf5d1d54400792f6'
   },
   {
     artist: 'Kendrick Lamar',
@@ -48,7 +48,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('April 18, 2017'),
     },
     isAgeRestricted: false,
-    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
+    img: 'https://musiccontent.co.uk/wp-content/uploads/2017/10/kenrick.jpg?w=1200'
   },
   {
     artist: 'S3RL',
@@ -64,7 +64,7 @@ export const defaultTracks: Tracklist = [
       uploadedOn: new Date('August 19, 2019'),
     },
     isAgeRestricted: true,
-    img: 'https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png'
+    img: 'https://i1.sndcdn.com/artworks-000138072164-b5yabp-t500x500.jpg'
   },
   {
     artist: 'Bas (ft. J. Cole & Lil Tjay)',

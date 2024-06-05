@@ -22,15 +22,14 @@ const secCalc= (duration : number) => {
 export default function Song({ track } : SongProps){
 
   return (
-    <li className='song-container w-full flex flex-row justify-between px-4 py-2 text-white' onClick={()=> {
-      
+    <li className='song-container w-full flex flex-row justify-between px-4 py-2 text-white hover:cursor-pointer hover:bg-gunmetal' onClick={()=> {
+      console.log('li onlick works')
     }}>
       <div className="song-info-div-song flex flex-row justify-center items-center">
         <img className='h-16 aspect-square' src={track.img} alt="Song Image"/>
         <div className="song-info flex flex-col pl-2">
           <h1 className='text-lg'> {track.title} </h1>
           <h2 className='italic text-sm'> {track.artist} </h2>
-          {/* <a target='_blank' className='text-sm italic' href={track.link}>Youtube Link</a> */}
         </div>
       </div>
       {/* Song Stats and Numbers */}
