@@ -5,7 +5,7 @@ import { AddSongProps } from '../assets/types'
 
 
 
-export default function AddSong({ addSongToPlaylist, songs, openBool }: AddSongProps) {
+export default function AddSong({ addSongToPlaylist, openBool }: AddSongProps) {
 
   //Input Checkers
   const titleInput = useRef(null)
@@ -156,7 +156,6 @@ export default function AddSong({ addSongToPlaylist, songs, openBool }: AddSongP
               let theNewSong = getNewSong();
               addSongToPlaylist(theNewSong);
             }}>
-
             Add New Song
             </button>
         </div>

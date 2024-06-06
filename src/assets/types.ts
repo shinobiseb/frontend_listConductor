@@ -1,22 +1,22 @@
 import { Dispatch, SetStateAction } from "react";
 
 export type Track = {
-    artist: string;
-    title: string;
-    duration: number;
-    link: string;
-    info: {
-      scoreData: {
-        likes: number;
-        dislikes: number;
-      };
-      views: number;
-      uploadedOn: Date;
+  artist: string | null;
+  title: string | null;
+  duration: number | null;
+  link: string | null;
+  info: {
+    scoreData: {
+      likes: number | null;
+      dislikes: number | null;
     };
-    isAgeRestricted: boolean;
-    img: string;
+    views: number | null;
+    uploadedOn: Date;
   };
-  
+  isAgeRestricted: boolean | null;
+  img: string | null;
+};
+
 export type Tracklist = Track[];
 
 export type PlaylistType = {
@@ -25,30 +25,29 @@ export type PlaylistType = {
 };
 
 export type AddPlayProps = {
-    setPlaylist: (newPlaylist: PlaylistType) => void;
-}
+  addPlaylistToCollection: (newPlaylist: PlaylistType) => void;
+};
 
 export type AddSongProps = {
-    addSongToPlaylist: (newSong: Track) => void;
-    songs: any;
-    openBool : boolean
-  };
+  addSongToPlaylist: (newSong: Track) => void;
+  songs: Tracklist;
+  openBool: boolean;
+};
 
-  
 export interface useStateFunction {
-    setOpen : Dispatch<SetStateAction<boolean>>
-    openState : boolean
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  openState: boolean;
 }
 
 export type PlaylistCollectionProps = {
-    playlistCollection: PlaylistType[];
-}
+  playlistCollection: PlaylistType[];
+};
 
 export type SongProps = {
-  track : Track;
-}
+  track: Track;
+};
 
 export interface sidebarReq {
-    userPlaylists : PlaylistType[];
-    userName : string;
+  userPlaylists: PlaylistType[];
+  userName: string;
 }

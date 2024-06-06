@@ -47,6 +47,7 @@ function App() {
       <main className='flex flex-col h-full w-full justify-end items-center'>
         <Featured/>
         <SongList tracklist={songs}/>
+        <AddPlaylist addPlaylistToCollection={updatePlaylistCollection}/>
       </main>
     </div>
   );

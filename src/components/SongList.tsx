@@ -3,6 +3,7 @@ import { defaultTracks } from '../assets/tracks'
 import { Track } from '../assets/types'
 import Song from './Song'
 
+
 type PlayListProps = {
   tracklist : Track[]
 }
@@ -16,8 +17,9 @@ const trackMapper = (playlist: Track[]) => {
 
 export default function SongList({ tracklist } : PlayListProps) {
   return (
-    <ul className='playlist-container h-3/4 flex flex-col items-left w-full  overflow-y-scroll'>
+    <ul className='playlist-container h-3/4 flex flex-col items-left w-full overflow-y-scroll'>
       {trackMapper( tracklist )}
     </ul>
+
   )
 }

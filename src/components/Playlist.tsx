@@ -9,8 +9,8 @@ type playlistProps = {
 export default function Playlist( playlistCollection : playlistProps ) {
   
   return (
-    <li className='text-xl'>
-      <h1>{playlistCollection.playlist.name}</h1>
-    </li>
+    <>
+      <h3 className='text-xl hover:cursor-pointer hover:text-light-blue py-2'>{playlistCollection.playlist.name}</h3>
+    </>
   )
 }

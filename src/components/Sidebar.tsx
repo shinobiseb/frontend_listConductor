@@ -1,6 +1,7 @@
 import PlaylistCollection from './PlaylistList'
 PlaylistCollection
 import { sidebarReq } from '../assets/types'
+import AddPlaylist from './AddPlaylist'
 
 export default function Sidebar({ userPlaylists, userName }: sidebarReq) {
   function propsFun() {
