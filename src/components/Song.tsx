@@ -2,15 +2,16 @@ import React from 'react'
 import { defaultTracks } from '../assets/tracks'
 import { Track, SongProps } from '../assets/types'
 
-// Minutes Calculator
+// 227_000
+
+// Minutes Calculator : 3
 const minCalc = (duration: number) => {
-  const min = Math.floor(duration / 60);
+  const min = Math.floor(duration / 60000);
   return min;
 }
 
-// Seconds Calculator 
 const secCalc = (duration: number) => {
-  const sec = Math.floor(duration % 60);
+  const sec = Math.floor((duration % 60000) / 1000);
   return sec < 10 ? `0${sec}` : sec;
 }
 
@@ -19,7 +20,7 @@ export default function Song({ track }: SongProps) {
     if (typeof track.img === 'string') {
       return track.img;
     }
-    return ''; // Return a default value or an empty string if not a string
+    return 'https://cdn.saleminteractivemedia.com/shared/images/default-cover-art.png';
   }
 
   return (

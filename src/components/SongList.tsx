@@ -2,11 +2,8 @@ import React from 'react'
 import { defaultTracks } from '../assets/tracks'
 import { Track } from '../assets/types'
 import Song from './Song'
+import { PlayListProps } from '../assets/types'
 
-
-type PlayListProps = {
-  tracklist : Track[]
-}
 
 const trackMapper = (playlist: Track[]) => {
   return playlist.map((track, index) => (
