@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
 export type Track = {
   artist: string | null;
@@ -49,9 +49,9 @@ export type SongProps = {
 
 export interface sidebarReq {
   userPlaylists: PlaylistType[];
-  updatePlay : Dispatch<SetStateAction<any>>;
+  updatePlay: Dispatch<SetStateAction<any>>;
 }
 
 export type PlayListProps = {
-  tracklist : Track[]
-}
+  tracklist: Track[];
+};
