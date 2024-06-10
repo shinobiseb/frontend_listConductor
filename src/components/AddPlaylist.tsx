@@ -69,8 +69,8 @@ export default function AddPlaylist({ addPlaylistToCollection }: AddPlayProps) {
           const newPlay = getNewPlaylist();
           addPlaylistToCollection(newPlay);
         }}
-      >
-        +
+        >
+        Add
       </button>
     </div>
   );
