@@ -8,10 +8,14 @@ import Featured from './components/Featured';
 function App() {
   // Default Playlist
   const initialPlaylistCollection: PlaylistType[] = [
-    { name: 'Default', tracks: defaultTracks }
+    { name: 'Playlist', tracks: defaultTracks },
+    { name: 'Playlist 2', tracks: [] }
   ];
 
-  // Current User Playlists
+  // Current Playlist
+  const [currentPlaylist, setCurrentPlaylist] = useState(initialPlaylistCollection[0].tracks)
+
+  // User Playlists
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(initialPlaylistCollection);
 
   // Update playlist Collection
@@ -19,21 +23,18 @@ function App() {
     setPlaylistCollection(current => [...current, newPlaylist]);
   };
 
-  function currentPlaylistTracksFun(playlist: PlaylistType[], index: number) {
-    return playlist[index].tracks ? playlist[index].tracks : [];
-  }
-
 
   return (
     <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2">
       <Sidebar 
         userPlaylists={playlistCollection} 
         updatePlayColl={updatePlaylistCollection}
-
+        setCurrentPlaylist={setCurrentPlaylist}
+        currentPlaylist={currentPlaylist}
       />
       <main className='flex flex-col h-full w-full justify-end items-center'>
         <Featured />
-        <SongList tracklist={currentPlaylistTracksFun(playlistCollection, 0)} />
+        <SongList tracklist={currentPlaylist} />
       </main>
     </div>
   );

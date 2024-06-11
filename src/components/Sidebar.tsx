@@ -3,7 +3,7 @@ PlaylistCollection
 import { sidebarReq } from '../assets/types'
 import AddPlaylist from './AddPlaylist'
 
-export default function Sidebar({ userPlaylists, updatePlayColl }: sidebarReq) {
+export default function Sidebar({ userPlaylists, updatePlayColl, setCurrentPlaylist, currentPlaylist }: sidebarReq) {
 
     return (
       <main className='sm:h-full w-full sm:w-1/3 bg-gray rounded-md p-4 text-white overflow-hidden'>
@@ -14,7 +14,7 @@ export default function Sidebar({ userPlaylists, updatePlayColl }: sidebarReq) {
           <a className='hover:text-gunmetal' href='#'>PLAYLISTS</a>
           <a className='hover:text-gunmetal' href='#'>CONTACT</a>
         </nav>
-          <PlaylistCollection playlistCollection={userPlaylists}/>
+          <PlaylistCollection currentPlaylist={currentPlaylist} setCurrentPlaylist={setCurrentPlaylist} playlistCollection={userPlaylists}/>
           <AddPlaylist addPlaylistToCollection={updatePlayColl}/>
       </main>
     );
