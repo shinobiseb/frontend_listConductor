@@ -1,16 +1,14 @@
 import { SetStateAction, Dispatch} from 'react'
 import { PlaylistType } from '../assets/types'
+import {playlistProps} from '../assets/types'
 
-type playlistProps = {
-    playlist : PlaylistType
-    // setPlay : Dispatch<SetStateAction<any>>
-}
+export default function Playlist( {playlist} : playlistProps ) {
 
-export default function Playlist( playlistCollection : playlistProps ) {
+
   
   return (
     <>
-      <h3 className='text-xl hover:cursor-pointer hover:text-light-blue py-2'>{playlistCollection.playlist.name}</h3>
+      <h3 className='text-xl hover:cursor-pointer hover:text-light-blue py-2'>{playlist.name}</h3>
     </>
   )
 }

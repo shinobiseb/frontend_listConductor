@@ -49,9 +49,13 @@ export type SongProps = {
 
 export interface sidebarReq {
   userPlaylists: PlaylistType[];
-  updatePlay: Dispatch<SetStateAction<any>>;
+  updatePlayColl: Dispatch<SetStateAction<any>>;
 }
 
 export type PlayListProps = {
   tracklist: Track[];
 };
+
+export type playlistProps = {
+  playlist : PlaylistType
+}
