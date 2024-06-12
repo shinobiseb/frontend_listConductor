@@ -17,7 +17,7 @@ function App() {
   // Current Playlist
   const [currentPlaylist, setCurrentPlaylist] = useState(initialPlaylistCollection[0].tracks)
 
-  
+
   const updatePlaylistFun = (newSong : Track) => {
     setCurrentPlaylist(current => [...current, newSong])
   }
@@ -48,7 +48,7 @@ function App() {
           addSongToPlaylist={updatePlaylistFun}
           songs={currentPlaylist}
           openBool={isOpen}
-
+          setOpen={setIsOpen}
         />
         <OpenAddSong
           setOpen={setIsOpen}

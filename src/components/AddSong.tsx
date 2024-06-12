@@ -1,7 +1,7 @@
 import React, { useState, useRef} from 'react'
 import { AddSongProps } from '../assets/types'
 
-export default function AddSong({ addSongToPlaylist, openBool }: AddSongProps) {
+export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSongProps) {
 
   //Input Checkers
   const titleInput = useRef(null)
@@ -65,6 +65,11 @@ export default function AddSong({ addSongToPlaylist, openBool }: AddSongProps) {
   }
       return (
         <div className='flex flex-col w-3/4 justify-center items-center'>
+            <button
+            className='button hover:bg-orange bg-white-blue mb-2 rounded-lg p-2 hover:ease-in duration-250 w-40 bg-white-white'
+            onClick={()=> setOpen(!openBool)}
+            >Close
+            </button>
             <input 
             id="text-box-handle" className="rounded-lg p-2 w-3/4" 
             type="text" 
@@ -145,12 +150,13 @@ export default function AddSong({ addSongToPlaylist, openBool }: AddSongProps) {
             />
 
             <button 
-            className='button rounded-lg p-2 hover:ease-in duration-250 w-1/2 bg-white-white'
+            className='button hover:bg-orange bg-white-blue mt-2 rounded-lg p-2 hover:ease-in duration-250 w-40 bg-white-white'
             onClick={() => {
               let theNewSong = getNewSong();
               addSongToPlaylist(theNewSong);
+              setOpen(!openBool)
             }}>
-            Add New Song
+            Confirm
             </button>
         </div>
       )

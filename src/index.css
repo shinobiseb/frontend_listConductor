@@ -11,3 +11,7 @@
 html {
     background-color: #212529;
 }
+
+button {
+    transition: 100ms;
+}

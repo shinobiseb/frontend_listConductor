@@ -32,6 +32,7 @@ export type AddSongProps = {
   addSongToPlaylist: (newSong: Track) => void;
   songs: Tracklist;
   openBool: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export interface useStateFunction {
