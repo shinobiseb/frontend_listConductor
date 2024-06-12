@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Track, PlaylistType } from './assets/types';
+import { Track, PlaylistType, AddPlayProps, AddSongProps } from './assets/types';
 import SongList from './components/SongList';
 import Sidebar from './components/Sidebar';
 import { defaultTracks } from './assets/tracks';
 import Featured from './components/Featured';
+import AddSong from './components/AddSong';
+import OpenAddSong from './components/OpenAddSong';
 
 function App() {
   // Default Playlist
@@ -15,6 +17,13 @@ function App() {
   // Current Playlist
   const [currentPlaylist, setCurrentPlaylist] = useState(initialPlaylistCollection[0].tracks)
 
+  //Update Current Playlist
+  const [playlist, updateCurrentPlaylist] = useState(currentPlaylist)
+
+  const updatePlaylistFun = (newSong : Track) => {
+    updateCurrentPlaylist(current => [...current, newSong])
+  }
+
   // User Playlists
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(initialPlaylistCollection);
 
@@ -22,6 +31,9 @@ function App() {
   const updatePlaylistCollection = (newPlaylist: PlaylistType) => {
     setPlaylistCollection(current => [...current, newPlaylist]);
   };
+
+  // Display State of Add Song Form
+  const [isOpen, setIsOpen] = useState(false)
 
 
   return (
@@ -34,6 +46,15 @@ function App() {
       />
       <main className='flex flex-col h-full w-full justify-end items-center'>
         <Featured />
+        <AddSong
+          addSongToPlaylist={updatePlaylistFun}
+          songs={playlist}
+          openBool={isOpen}
+        />
+        <OpenAddSong
+          setOpen={setIsOpen}
+          openState={isOpen}
+        />
         <SongList tracklist={currentPlaylist} />
       </main>
     </div>

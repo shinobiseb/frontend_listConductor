@@ -1,9 +1,5 @@
-import React, { useState, useRef, Dispatch, SetStateAction} from 'react'
-import { defaultTracks,  } from "../assets/tracks"
+import React, { useState, useRef} from 'react'
 import { AddSongProps } from '../assets/types'
-
-
-
 
 export default function AddSong({ addSongToPlaylist, openBool }: AddSongProps) {
 
@@ -23,11 +19,9 @@ export default function AddSong({ addSongToPlaylist, openBool }: AddSongProps) {
 
   const booleanHelper = (bool : string) => bool === "false" ? false : true;
 
-
   const handleChange = (event : any) => {
     setAge(event.target.value)
   }
-
 
   //type narrowing => catch html element errors
   const isInput = (ele : any) => {

@@ -25,7 +25,7 @@ export default function AddPlaylist({ addPlaylistToCollection }: AddPlayProps) {
 
   function getNewPlaylist(): PlaylistType {
     const title = isInput(titleInput);
-    if (!title) {
+    if (!title || title === 'Value not given') {
       return {
         name: "Untitled Playlist",
         tracks: [],
