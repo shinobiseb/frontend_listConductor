@@ -57,19 +57,19 @@ export default function AddPlaylist({ addPlaylistToCollection }: AddPlayProps) {
   return (
     <div className='flex flex-row w-full justify-evenly items-center'>
       <input
-        id="text-box-handle" className="rounded-lg p-2 w-3/4 mb-2"
+        id="text-box-handle" className="rounded-lg p-2 w-3/4"
         type="text"
         placeholder='Playlist title'
         ref={titleInput}
       />
-
+    
       <button
         className='button rounded-lg p-2 hover:ease-in duration-250 bg-white text-black'
         onClick={() => {
           const newPlay = getNewPlaylist();
           addPlaylistToCollection(newPlay);
         }}
-        >
+      >
         Add
       </button>
     </div>

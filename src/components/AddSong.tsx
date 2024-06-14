@@ -126,8 +126,8 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSon
             ref={uploadedInput}
             />
 
-            <div className='mt-1 p-2 w-3/4'>
-              <label> Age Restricted?</label>
+            <div className='mt-1 p-1 w-3/4'>
+              <label className='text-white'> Age Restricted?</label>
               <select 
               name="ageRestricted" 
               id="ageRestricted" 
@@ -135,7 +135,7 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSon
               value={age} 
               onChange={handleChange} 
               ref={ageInput}
-              className="rounded-md ml-2"
+              className="rounded-md ml-2 px-2 py-1"
               >
                 <option value="true">Yes</option>
                 <option value="false">No</option>
