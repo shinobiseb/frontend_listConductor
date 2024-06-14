@@ -1,6 +1,8 @@
 import React from 'react'
 import { defaultTracks } from '../assets/tracks'
 import { Track, SongProps } from '../assets/types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 // 227_000
 
@@ -41,6 +43,15 @@ export default function Song({ track }: SongProps) {
             ? `${minCalc(track.duration)}:${secCalc(track.duration)}` 
             : 'Invalid duration'}
         </h2>
+        <button className="delete-icon ml-2 rounded-full"
+        onClick={
+          ()=> {
+
+          }
+        }
+        >
+         X
+        </button>
       </div>
     </li>
   )
