@@ -1,7 +1,4 @@
-import React from 'react'
-import { defaultTracks } from '../assets/tracks'
 import { Track, SongProps } from '../assets/types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 // 227_000
@@ -17,7 +14,7 @@ const secCalc = (duration: number) => {
   return sec < 10 ? `0${sec}` : sec;
 }
 
-export default function Song({ track }: SongProps) {
+export default function Song({ track, removeSong, index }: SongProps) {
   function imgHelper(track: Track) {
     if (typeof track.img === 'string') {
       return track.img;
@@ -26,9 +23,7 @@ export default function Song({ track }: SongProps) {
   }
 
   return (
-    <li className='song-container w-full flex flex-row justify-between px-4 py-2 text-white hover:cursor-pointer hover:bg-gunmetal' onClick={() => {
-      console.log('li onClick works')
-    }}>
+    <li className='song-container w-full flex flex-row justify-between px-4 py-2 text-white hover:cursor-pointer hover:bg-gunmetal'>
       <div className="song-info-div-song flex flex-row justify-center items-center">
         <img className='h-16 aspect-square' src={imgHelper(track)} alt="Song Image" />
         <div className="song-info flex flex-col pl-2">
@@ -45,9 +40,7 @@ export default function Song({ track }: SongProps) {
         </h2>
         <button className="delete-icon ml-2 rounded-full"
         onClick={
-          ()=> {
-
-          }
+          ()=> removeSong(index)
         }
         >
          X

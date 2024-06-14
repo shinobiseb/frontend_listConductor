@@ -20,7 +20,11 @@ export default function Sidebar({ userPlaylists, updatePlayColl, setCurrentPlayl
             <a className='hover:text-gunmetal' href='#'>CONTACT</a>
           </li>
         </ul>
-          <PlaylistCollection currentPlaylist={currentPlaylist} setCurrentPlaylist={setCurrentPlaylist} playlistCollection={userPlaylists}/>
+          <PlaylistCollection 
+          currentPlaylist={currentPlaylist} 
+          setCurrentPlaylist={setCurrentPlaylist} 
+          playlistCollection={userPlaylists}/>
+          
           <AddPlaylist addPlaylistToCollection={updatePlayColl}/>
       </main>
     );

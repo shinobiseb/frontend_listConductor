@@ -48,6 +48,8 @@ export type PlaylistCollectionProps = {
 
 export type SongProps = {
   track: Track;
+  index: number;
+  removeSong: (index: number) => void;
 };
 
 export interface sidebarReq {
@@ -59,6 +61,7 @@ export interface sidebarReq {
 
 export type SongListProps = {
   tracklist: Track[];
+  removeSong: (index: number) => void;
 };
 
 export type playlistProps = {

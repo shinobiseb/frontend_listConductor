@@ -4,9 +4,7 @@ import {PlaylistCollectionProps } from '../assets/types';
 const playlistMapper = ({ playlistCollection, setCurrentPlaylist, currentPlaylist }: PlaylistCollectionProps) => {
   
   function changePlaylist(key : number) {
-    
     setCurrentPlaylist(playlistCollection[key].tracks)
-    console.log(playlistCollection[key])
   }
   
   if (!Array.isArray(playlistCollection)) {

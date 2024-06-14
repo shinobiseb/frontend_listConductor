@@ -1,9 +1,8 @@
-import React from 'react';
 import { Track } from '../assets/types';
 import Song from './Song';
 import { SongListProps } from '../assets/types';
 
-const trackMapper = (playlist: Track[]) => {
+const trackMapper = (playlist: Track[], removeSong : (index: number) => void) => {
 
   if (!Array.isArray(playlist)) {
     console.error('playlist is not an array:', playlist);
@@ -20,15 +19,21 @@ const trackMapper = (playlist: Track[]) => {
   }
 
   return playlist.map((track, index) => (
-    <Song key={index} track={track}/>
+    <Song 
+    key={index} 
+    track={track}
+    index={index}
+    removeSong={removeSong}
+    />
   ));
 };
 
-export default function SongList({ tracklist }: SongListProps) {
+export default function SongList({ tracklist, removeSong }: SongListProps) {
   return (
     <ul className='playlist-container h-3/4 flex flex-col items-left w-full overflow-y-scroll'>
+      <button className='px-2 py-1 hover:bg-orange bg-white w-20 rounded-md self-center'>Shuffle</button>
       {
-        trackMapper(tracklist)
+        trackMapper(tracklist, removeSong)
       }
     </ul>
   );
