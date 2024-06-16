@@ -6,7 +6,6 @@ const trackMapper = (playlist: Tracklist, removeSong : (index: number) => void) 
 
   if (!Array.isArray(playlist)) {
     console.error('playlist is:', playlist);
-    console.log('type of ' + typeof(playlist))
     return [];
   }
 

@@ -20,6 +20,11 @@ const initialPlaylistCollection: PlaylistType[] = [
   { name: 'Playlist 2', tracks: [] }
 ];
 
+function useLocalStoragePlaylists() {
+  const head = 0
+}
+
+useLocalStoragePlaylists()
 // ------------------- STATES ----------------------------
 
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(initialPlaylistCollection);
@@ -30,11 +35,7 @@ const initialPlaylistCollection: PlaylistType[] = [
 //------------------ State Functions ----------------------
 
 const removeSongFun = (index: number) => {
-  setCurrentPlaylist(current => ({
-    ...current,
-    tracks: current.filter((_, i) => i !== index)
-  }));
-  console.log(currentPlaylist); // Assuming you want to log the updated playlist
+  setCurrentPlaylist(current => current.filter((_, i) => i !== index));
 };
 
 const updatePlaylistFun = (newSong : Track) => {
