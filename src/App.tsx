@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Track, PlaylistType, AddPlayProps, AddSongProps } from './assets/types';
+import { useState, useEffect } from 'react';
+import { Track, PlaylistType } from './assets/types';
 import SongList from './components/SongList';
 import Sidebar from './components/Sidebar';
 import { defaultTracks } from './assets/tracks';
 import Featured from './components/Featured';
 import AddSong from './components/AddSong';
 import OpenAddSong from './components/OpenAddSong';
+import { useLocalStorage } from './components/useLocalStorage';
+
+const { setItem, getItem, removeItem, clear } = useLocalStorage('playlistCollection');
 
 function App() {
   
@@ -27,27 +30,56 @@ const initialPlaylistCollection: PlaylistType[] = [
 //------------------ State Functions ----------------------
 
 const removeSongFun = (index: number) => {
-    setCurrentPlaylist(current => current.filter((_, i) => i !== index));
-  };
+  setCurrentPlaylist(current => ({
+    ...current,
+    tracks: current.filter((_, i) => i !== index)
+  }));
+  console.log(currentPlaylist); // Assuming you want to log the updated playlist
+};
 
-  const updatePlaylistFun = (newSong : Track) => {
-    setCurrentPlaylist(current => [...current, newSong])
-  }
+const updatePlaylistFun = (newSong : Track) => {
+  setCurrentPlaylist(current => ({
+    ...current,
+    tracks: [...current, newSong]
+  }));
+};
 
   // Update playlist Collection
-  const updatePlaylistCollection = (newPlaylist: PlaylistType) => {
-    setPlaylistCollection(current => [...current, newPlaylist]);
-  };
+const updatePlaylistCollection = (newPlaylist: PlaylistType) => {
+  setPlaylistCollection(current => [...current, newPlaylist]);
+};
 
+const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
+  //get playlist title to update
+  const targetPlaylist = playlistCollection.find((pl)=> pl.name === playlist.name)
+  //remove, or add song to that playlist
+  if(targetPlaylist && targetPlaylist.tracks){
+    setItem(targetPlaylist.name, 
+      JSON.stringify(targetPlaylist.tracks.push(newSong))
+    )
+  } else {
+    console.warn(targetPlaylist + 'is messed up')
+  }
+}
 
 // ---------------------- UseEffect -----------------------
-
 useEffect(() => {
-    localStorage.setItem('playlistCollection', JSON.stringify(playlistCollection));
-    console.log(playlistCollection)
-}, [playlistCollection]);
+  const AddPlaylistButton = document.getElementById('AddPlaylistButton');
+  const AddSongButton = document.getElementById('AddSongButton');
+  const RemoveSongButton = document.getElementById('RemoveSongButton')
 
+  if (RemoveSongButton !== null && RemoveSongButton.onclick !== null) {
+    RemoveSongButton.onclick = () => {
+      
+    };
+  }
+
+  playlistCollection.map((playlist)=> {
+    localStorage.setItem(playlist.name, JSON.stringify(playlist.tracks))
+  })
+}, [playlistCollection]);
 // -------------------- RETURN -----------------------------
+
 
 return (
     <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2">
@@ -70,8 +102,8 @@ return (
           openState={isOpen}
         />
         <SongList 
-        tracklist={currentPlaylist}
-        removeSong={removeSongFun}
+          tracklist={currentPlaylist}
+          removeSong={removeSongFun}
         />
       </main>
     </div>

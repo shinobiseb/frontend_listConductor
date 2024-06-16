@@ -1,11 +1,12 @@
-import { Track } from '../assets/types';
+import { Track, Tracklist } from '../assets/types';
 import Song from './Song';
 import { SongListProps } from '../assets/types';
 
-const trackMapper = (playlist: Track[], removeSong : (index: number) => void) => {
+const trackMapper = (playlist: Tracklist, removeSong : (index: number) => void) => {
 
   if (!Array.isArray(playlist)) {
-    console.error('playlist is not an array:', playlist);
+    console.error('playlist is:', playlist);
+    console.log('type of ' + typeof(playlist))
     return [];
   }
 
@@ -19,6 +20,7 @@ const trackMapper = (playlist: Track[], removeSong : (index: number) => void) =>
   }
 
   return playlist.map((track, index) => (
+    
     <Song 
     key={index} 
     track={track}
@@ -27,6 +29,8 @@ const trackMapper = (playlist: Track[], removeSong : (index: number) => void) =>
     />
   ));
 };
+
+
 
 export default function SongList({ tracklist, removeSong }: SongListProps) {
   return (

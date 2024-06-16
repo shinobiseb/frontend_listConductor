@@ -38,7 +38,9 @@ export default function Song({ track, removeSong, index }: SongProps) {
             ? `${minCalc(track.duration)}:${secCalc(track.duration)}` 
             : 'Invalid duration'}
         </h2>
-        <button className="delete-icon ml-2 rounded-full"
+        <button
+        id='RemoveSongButton'
+        className="delete-icon ml-2 rounded-full"
         onClick={
           ()=> removeSong(index)
         }
