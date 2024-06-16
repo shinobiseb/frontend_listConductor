@@ -46,14 +46,13 @@ const updatePlaylistFun = (newSong: Track) => {
     ...current,
     tracks: [...current.tracks, newSong]
   }));
+  addSongtoLocalStorage(newSong, currentPlaylist)
 };
 
   // Update playlist Collection
 const updatePlaylistCollection = (newPlaylist: PlaylistType) => {
   setPlaylistCollection(current => [...current, newPlaylist]);
 };
-
-
 
 const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
   //get playlist title to update
@@ -62,7 +61,7 @@ const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
   if(targetPlaylist && targetPlaylist.tracks){
     setItem(targetPlaylist.name, JSON.stringify(targetPlaylist.tracks.push(newSong)))
   } else {
-    console.warn(targetPlaylist + 'is messed up')
+    console.error(targetPlaylist?.name + 'is messed up')
   }
 }
 
