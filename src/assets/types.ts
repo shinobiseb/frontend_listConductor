@@ -44,6 +44,7 @@ export type PlaylistCollectionProps = {
   playlistCollection: PlaylistType[];
   setCurrentPlaylist: Dispatch<SetStateAction<any>>;
   currentPlaylist : Object;
+  removePlaylist : any;
 };
 
 export type SongProps = {
@@ -57,6 +58,7 @@ export interface sidebarReq {
   updatePlayColl: Dispatch<SetStateAction<any>>;
   setCurrentPlaylist : Dispatch<SetStateAction<any>>;
   currentPlaylist : Object;
+  removePlaylist : any;
 }
 
 export type SongListProps = {
@@ -65,5 +67,6 @@ export type SongListProps = {
 };
 
 export type playlistProps = {
-  playlist : PlaylistType
+  playlist : PlaylistType;
+  removePlaylist : any;
 }

@@ -7,6 +7,7 @@ import Featured from './components/Featured';
 import AddSong from './components/AddSong';
 import OpenAddSong from './components/OpenAddSong';
 import { useLocalStorage } from './components/useLocalStorage';
+import { json } from 'stream/consumers';
 
 const { setItem, getItem, removeItem, clear } = useLocalStorage('playlistCollection');
 
@@ -20,25 +21,60 @@ const initialPlaylistCollection: PlaylistType[] = [
   { name: 'Playlist 2', tracks: [] }
 ];
 
-function useLocalStoragePlaylists() {
-  const head = 0
+function getPlaylistCollectionfromLocalStorage() {
+  const playlists = {...localStorage}
+  console.log(playlists)
+
+  if (!playlists) {
+    return initialPlaylistCollection;
+  } else {
+    const localStorageCollection: PlaylistType[] = [];
+    for (const [key, value] of Object.entries(playlists)) {
+      if (key !== 'loglevel') {
+        try {
+          console.log(value)
+          const tracks = JSON.parse(value);
+          localStorageCollection.push({
+            name: key,
+            tracks: Array.isArray(tracks) ? tracks : []
+          });
+        } catch (e) {
+          console.error(`Error parsing JSON for key ${key}:`, e);
+        }
+      } else {
+        console.warn(`${key} may not be a playlist \nkey: ${key} value: ${value}`)
+      }
+    }
+    console.table(localStorageCollection);
+    return localStorageCollection;
+  }
 }
 
-useLocalStoragePlaylists()
+
+
 // ------------------- STATES ----------------------------
 
-  const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(initialPlaylistCollection);
+  const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(getPlaylistCollectionfromLocalStorage());
   const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(initialPlaylistCollection[0])
   //Add Song
   const [isOpen, setIsOpen] = useState(false)
 
 //------------------ State Functions ----------------------
 
+const removePlaylistFun = (index: number) => {
+  setPlaylistCollection(current => {
+    const updatedPlaylists = [...current];
+    updatedPlaylists.splice(index, 1);
+    return updatedPlaylists;
+  });
+};
+
 const removeSongFun = (index: number) => {
   setCurrentPlaylist(current => ({
     ...current,
     tracks: current.tracks.filter((_, i) => i !== index)
   }));
+  // deleteSongtoLocalStorage(currentPlaylist)
 };
 
 const updatePlaylistFun = (newSong: Track) => {
@@ -55,9 +91,7 @@ const updatePlaylistCollection = (newPlaylist: PlaylistType) => {
 };
 
 const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
-  //get playlist title to update
   const targetPlaylist = playlistCollection.find((pl)=> pl.name === playlist.name)
-  //remove, or add song to that playlist
   if(targetPlaylist && targetPlaylist.tracks){
     setItem(targetPlaylist.name, JSON.stringify(targetPlaylist.tracks.push(newSong)))
   } else {
@@ -65,17 +99,19 @@ const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
   }
 }
 
+// const deleteSongtoLocalStorage = (playlist : PlaylistType) => {
+//   const targetPlaylist = playlistCollection.find((pl)=> pl.name === playlist.name)
+//   if(targetPlaylist && targetPlaylist.tracks){
+//   } else {
+//     console.error(targetPlaylist?.name + 'is messed up')
+//   }
+// }
+
 // ---------------------- UseEffect -----------------------
 useEffect(() => {
-  const AddPlaylistButton = document.getElementById('AddPlaylistButton');
-  const AddSongButton = document.getElementById('AddSongButton');
-  const RemoveSongButton = document.getElementById('RemoveSongButton')
-
-  if (RemoveSongButton !== null && RemoveSongButton.onclick !== null) {
-    RemoveSongButton.onclick = () => {
-      
-    };
-  }
+  // const AddPlaylistButton = document.getElementById('AddPlaylistButton');
+  // const AddSongButton = document.getElementById('AddSongButton');
+  // const RemoveSongButton = document.getElementById('RemoveSongButton')
 
   playlistCollection.map((playlist)=> {
     localStorage.setItem(playlist.name, JSON.stringify(playlist.tracks))
@@ -91,6 +127,7 @@ return (
         updatePlayColl={updatePlaylistCollection}
         setCurrentPlaylist={setCurrentPlaylist}
         currentPlaylist={currentPlaylist}
+        removePlaylist={removePlaylistFun}
       />
       <main className='flex flex-col h-full w-full justify-end items-center'>
         <Featured />

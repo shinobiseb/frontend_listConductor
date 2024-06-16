@@ -20,7 +20,7 @@ export const useLocalStorage = (key: string) => {
       }
     };
   
-    const removeItem = (playlist : PlaylistType[], track : Track) => {
+    const removeItem = (playlist : PlaylistType, track : Track) => {
 
         playlist
 
