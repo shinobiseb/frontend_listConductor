@@ -28,20 +28,23 @@ useLocalStoragePlaylists()
 // ------------------- STATES ----------------------------
 
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(initialPlaylistCollection);
-  const [currentPlaylist, setCurrentPlaylist] = useState(initialPlaylistCollection[0].tracks)
+  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(initialPlaylistCollection[0])
   //Add Song
   const [isOpen, setIsOpen] = useState(false)
 
 //------------------ State Functions ----------------------
 
 const removeSongFun = (index: number) => {
-  setCurrentPlaylist(current => current.filter((_, i) => i !== index));
-};
-
-const updatePlaylistFun = (newSong : Track) => {
   setCurrentPlaylist(current => ({
     ...current,
-    tracks: [...current, newSong]
+    tracks: current.tracks.filter((_, i) => i !== index)
+  }));
+};
+
+const updatePlaylistFun = (newSong: Track) => {
+  setCurrentPlaylist(current => ({
+    ...current,
+    tracks: [...current.tracks, newSong]
   }));
 };
 
@@ -50,14 +53,14 @@ const updatePlaylistCollection = (newPlaylist: PlaylistType) => {
   setPlaylistCollection(current => [...current, newPlaylist]);
 };
 
+
+
 const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
   //get playlist title to update
   const targetPlaylist = playlistCollection.find((pl)=> pl.name === playlist.name)
   //remove, or add song to that playlist
   if(targetPlaylist && targetPlaylist.tracks){
-    setItem(targetPlaylist.name, 
-      JSON.stringify(targetPlaylist.tracks.push(newSong))
-    )
+    setItem(targetPlaylist.name, JSON.stringify(targetPlaylist.tracks.push(newSong)))
   } else {
     console.warn(targetPlaylist + 'is messed up')
   }
@@ -94,7 +97,7 @@ return (
         <Featured />
         <AddSong
           addSongToPlaylist={updatePlaylistFun}
-          songs={currentPlaylist}
+          songs={currentPlaylist.tracks}
           openBool={isOpen}
           setOpen={setIsOpen}
         />
@@ -103,7 +106,7 @@ return (
           openState={isOpen}
         />
         <SongList 
-          tracklist={currentPlaylist}
+          tracklist={currentPlaylist.tracks}
           removeSong={removeSongFun}
         />
       </main>

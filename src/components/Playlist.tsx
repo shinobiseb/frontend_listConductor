@@ -3,8 +3,6 @@ import { PlaylistType } from '../assets/types'
 import {playlistProps} from '../assets/types'
 
 export default function Playlist( {playlist} : playlistProps ) {
-
-
   
   return (
     <>
