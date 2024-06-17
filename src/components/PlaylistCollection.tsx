@@ -22,7 +22,7 @@ export default function PlaylistCollection({ playlistCollection, setCurrentPlayl
   return (
     <div className='h-1/3 w-full'>
       <h3 className='font-semibold text-2xl'>My Playlists</h3>
-      <ul className='mt-7 rounded-md h-72'>
+      <ul className='mt-7 rounded-md h-72 overflow-y-auto'>
         {playlistMapper({ playlistCollection, setCurrentPlaylist, currentPlaylist, removePlaylist })}
       </ul>
     </div>

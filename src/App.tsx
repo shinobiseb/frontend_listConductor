@@ -55,7 +55,7 @@ function getPlaylistCollectionfromLocalStorage() {
 // ------------------- STATES ----------------------------
 
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(getPlaylistCollectionfromLocalStorage());
-  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(initialPlaylistCollection[0])
+  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(getPlaylistCollectionfromLocalStorage()[0])
   //Add Song
   const [isOpen, setIsOpen] = useState(false)
 
@@ -98,14 +98,6 @@ const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
     console.error(targetPlaylist?.name + 'is messed up')
   }
 }
-
-// const deleteSongtoLocalStorage = (playlist : PlaylistType) => {
-//   const targetPlaylist = playlistCollection.find((pl)=> pl.name === playlist.name)
-//   if(targetPlaylist && targetPlaylist.tracks){
-//   } else {
-//     console.error(targetPlaylist?.name + 'is messed up')
-//   }
-// }
 
 // ---------------------- UseEffect -----------------------
 useEffect(() => {
