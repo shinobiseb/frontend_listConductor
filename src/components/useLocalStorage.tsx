@@ -3,7 +3,8 @@ import { PlaylistType, Track, playlistProps } from "../assets/types";
 import { parse } from "path/posix";
 
 export const useLocalStorage = (key: string) => {
-    const setItem = (target: string ,value: unknown) => {
+    
+  const setItem = (target: string ,value: unknown) => {
       try {
         localStorage.setItem(target, JSON.stringify(value));
       } catch (error) {
@@ -21,9 +22,6 @@ export const useLocalStorage = (key: string) => {
     };
   
     const removeItem = (playlist : PlaylistType, track : Track) => {
-
-        playlist
-
         try {
         localStorage.removeItem(key);
       } catch (error) {
@@ -37,7 +35,7 @@ export const useLocalStorage = (key: string) => {
         } catch(error) {
             console.warn(error)
         }
-    }
+    };
   
     return { setItem, getItem, removeItem, clear };
   };
