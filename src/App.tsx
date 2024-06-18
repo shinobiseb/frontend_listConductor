@@ -122,6 +122,7 @@ useEffect(() => {
 }, []); // Only run once on mount
 // -------------------- RETURN -----------------------------
 
+setItem(initialPlaylistCollection[0].name, initialPlaylistCollection[0].tracks)
 
 return (
     <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2">
@@ -136,7 +137,7 @@ return (
         <Featured />
         <AddSong
           addSongToPlaylist={updatePlaylistFun}
-          songs={currentPlaylist.tracks}
+          songs={ currentPlaylist ? currentPlaylist.tracks : initialPlaylistCollection[0].tracks}
           openBool={isOpen}
           setOpen={setIsOpen}
         />
@@ -144,10 +145,14 @@ return (
           setOpen={setIsOpen}
           openState={isOpen}
         />
-        <SongList 
-          tracklist={currentPlaylist.tracks}
-          removeSong={removeSongFun}
-        />
+        {currentPlaylist.tracks && currentPlaylist.tracks.length > 0 ? (
+  <SongList 
+    tracklist={currentPlaylist.tracks}
+    removeSong={removeSongFun}
+  />
+) : (
+  <p>No songs available in this playlist.</p>
+)}
       </main>
     </div>
   );
