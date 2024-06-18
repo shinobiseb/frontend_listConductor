@@ -19,7 +19,9 @@ export type Track = {
 
 export type Tracklist = Track[];
 
-export type PlaylistType = {
+
+
+export interface PlaylistType {
   name: string;
   tracks: Tracklist;
 };

@@ -1,19 +1,28 @@
 import { stringify } from "querystring";
-import { PlaylistType, Track, playlistProps } from "../assets/types";
+import { PlaylistType, Track, Tracklist, playlistProps } from "../assets/types";
 import { parse } from "path/posix";
 import Playlist from "./Playlist";
 
 export const useLocalStorage = (key: string) => {
     
-  const setItem = (target: string ,value: unknown) => {
+  const setPlay = (key: string, tracks: Tracklist) => {
+    if(localStorage.getItem(key) === null){
       try {
-        localStorage.setItem(target, JSON.stringify(value));
+          localStorage.setItem(key, JSON.stringify(tracks));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
+    } else {
+      console.error(`${key} already exists as a playlist`)
+      return
     };
+  }
+
+  const addSongtoLocalStorage = () => {
+
+  }
   
-    const getItem = () => {
+    const getPlaylist = () => {
       try {
         const item = localStorage.getItem(key);
         return item ? JSON.parse(item) : undefined;
@@ -38,5 +47,5 @@ export const useLocalStorage = (key: string) => {
         }
     };
   
-    return { setItem, getItem, removePlay, clear };
+    return { setPlay, getPlaylist, removePlay, clear };
   };

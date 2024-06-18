@@ -1,7 +1,7 @@
 import Playlist from './Playlist';
 import {PlaylistCollectionProps } from '../assets/types';
 
-const playlistMapper = ({ playlistCollection, setCurrentPlaylist, currentPlaylist, removePlaylist }: PlaylistCollectionProps) => {
+const playlistMapper = ({ playlistCollection, setCurrentPlaylist, removePlaylist }: PlaylistCollectionProps) => {
   
   function changePlaylist(key : number) {
     setCurrentPlaylist(playlistCollection[key])

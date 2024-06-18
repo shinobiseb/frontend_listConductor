@@ -9,7 +9,7 @@ import OpenAddSong from './components/OpenAddSong';
 import { useLocalStorage } from './components/useLocalStorage';
 import { json } from 'stream/consumers';
 
-const { setItem, getItem, removePlay, clear } = useLocalStorage('playlistCollection');
+const { setPlay, getPlaylist, removePlay, clear } = useLocalStorage('playlistCollection');
 
 function App() {
   
@@ -23,7 +23,6 @@ const initialPlaylistCollection: PlaylistType[] = [
 
 function getPlaylistCollectionfromLocalStorage() {
   const playlists = {...localStorage}
-
   if (!playlists) {
     return initialPlaylistCollection;
   } else {
@@ -84,23 +83,26 @@ const updatePlaylistFun = (newSong: Track) => {
 
   // Update playlist Collection
 const updatePlaylistCollection = (newPlaylist: PlaylistType) => {
-  setPlaylistCollection(current => [...current, newPlaylist]);
-  localStorage.setItem(newPlaylist.name, JSON.stringify(newPlaylist.tracks));
+  const playlist = localStorage.getPlaylist(newPlaylist.name)
+
+  if(playlist === null ) {
+    setPlaylistCollection(current => [...current, newPlaylist]);
+    setPlay(newPlaylist.name, newPlaylist.tracks);
+  } else {
+    console.log(`${newPlaylist} exists already!`)
+  }
 };
 
 const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
   const targetPlaylist = playlistCollection.find((pl)=> pl.name === playlist.name)
 
-  if(targetPlaylist === undefined) {
-    console.log(typeof(targetPlaylist))
-  }
 
-  if(targetPlaylist && targetPlaylist.tracks && newSong){
-    setItem(targetPlaylist.name, JSON.stringify(targetPlaylist.tracks.push(newSong)))
-    console.log(`${newSong} was logged to ${targetPlaylist.name} in local storage`)
-  } else {
-    console.error(targetPlaylist?.name + 'is messed up')
-  }
+  // if(targetPlaylist && targetPlaylist.tracks && newSong){
+  //   setPlay(targetPlaylist.name, JSON.stringify(targetPlaylist.tracks.push(newSong)))
+  //   console.log(`${newSong} was logged to ${targetPlaylist.name} in local storage`)
+  // } else {
+  //   console.error(targetPlaylist?.name + 'is messed up')
+  // }
 }
 
 const removePlaylistFromLocalStorage = (playlist : PlaylistType) => {
@@ -124,7 +126,7 @@ useEffect(() => {
 
 //Giving a playlist if none
 if(!currentPlaylist) {
-  setItem(initialPlaylistCollection[0].name, initialPlaylistCollection[0].tracks)
+  setPlay(initialPlaylistCollection[0].name, initialPlaylistCollection[0].tracks)
 }
 
 return (
