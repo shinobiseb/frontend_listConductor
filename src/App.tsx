@@ -9,7 +9,7 @@ import OpenAddSong from './components/OpenAddSong';
 import { useLocalStorage } from './components/useLocalStorage';
 import { json } from 'stream/consumers';
 
-const { setPlay, getPlaylist, removePlay, clear } = useLocalStorage('playlistCollection');
+const { setPlay, setSong, getPlaylist, removePlay, clear } = useLocalStorage('playlistCollection');
 
 function App() {
   
@@ -46,8 +46,6 @@ function getPlaylistCollectionfromLocalStorage() {
   }
 }
 
-
-
 // ------------------- STATES ----------------------------
 
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(getPlaylistCollectionfromLocalStorage());
@@ -83,32 +81,28 @@ const updatePlaylistFun = (newSong: Track) => {
 
   // Update playlist Collection
 const updatePlaylistCollection = (newPlaylist: PlaylistType) => {
-  const playlist = localStorage.getPlaylist(newPlaylist.name)
-
-  if(playlist === null ) {
+  const playlist = getPlaylist(newPlaylist.name)
+  if(playlist === undefined || playlist === null) {
     setPlaylistCollection(current => [...current, newPlaylist]);
     setPlay(newPlaylist.name, newPlaylist.tracks);
+    return
   } else {
-    console.log(`${newPlaylist} exists already!`)
+    console.log(`${playlist} exists already!`)
   }
 };
 
 const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
   const targetPlaylist = playlistCollection.find((pl)=> pl.name === playlist.name)
-
-
-  // if(targetPlaylist && targetPlaylist.tracks && newSong){
-  //   setPlay(targetPlaylist.name, JSON.stringify(targetPlaylist.tracks.push(newSong)))
-  //   console.log(`${newSong} was logged to ${targetPlaylist.name} in local storage`)
-  // } else {
-  //   console.error(targetPlaylist?.name + 'is messed up')
-  // }
+  if(targetPlaylist && targetPlaylist.tracks && newSong){
+    setSong(newSong, currentPlaylist)
+    // console.log(`${newSong} was logged to ${targetPlaylist.name} in local storage`)
+  } else {
+    console.error(targetPlaylist?.name + 'is messed up')
+  }
 }
 
 const removePlaylistFromLocalStorage = (playlist : PlaylistType) => {
   const targetPlaylist = playlistCollection.find((pl) => pl.name === playlist.name);
-  console.log(`TargetPlaylist is: ${targetPlaylist}`);
-
   if(targetPlaylist && targetPlaylist.tracks) {
     removePlay(targetPlaylist);
     console.log(`${targetPlaylist.name} successfully removed`);
