@@ -13,7 +13,7 @@ const playlistMapper = ({ playlistCollection, setCurrentPlaylist, currentPlaylis
   }
     return playlistCollection.map((playlist, index) => (
       <li className='w-full flex-row justify-between flex' key={index} onClick={() => changePlaylist(index)}>
-        <Playlist removePlaylist={removePlaylist} key={index} playlist={playlist}/>
+        <Playlist removePlaylist={removePlaylist} index={index} playlist={playlist}/>
       </li>
   ));
 };

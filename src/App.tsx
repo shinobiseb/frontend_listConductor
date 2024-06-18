@@ -9,7 +9,7 @@ import OpenAddSong from './components/OpenAddSong';
 import { useLocalStorage } from './components/useLocalStorage';
 import { json } from 'stream/consumers';
 
-const { setItem, getItem, removeItem, clear } = useLocalStorage('playlistCollection');
+const { setItem, getItem, removePlay, clear } = useLocalStorage('playlistCollection');
 
 function App() {
   
@@ -23,7 +23,6 @@ const initialPlaylistCollection: PlaylistType[] = [
 
 function getPlaylistCollectionfromLocalStorage() {
   const playlists = {...localStorage}
-  console.log(playlists)
 
   if (!playlists) {
     return initialPlaylistCollection;
@@ -32,7 +31,6 @@ function getPlaylistCollectionfromLocalStorage() {
     for (const [key, value] of Object.entries(playlists)) {
       if (key !== 'loglevel') {
         try {
-          console.log(value)
           const tracks = JSON.parse(value);
           localStorageCollection.push({
             name: key,
@@ -45,7 +43,6 @@ function getPlaylistCollectionfromLocalStorage() {
         console.warn(`${key} may not be a playlist \nkey: ${key} value: ${value}`)
       }
     }
-    console.table(localStorageCollection);
     return localStorageCollection;
   }
 }
@@ -62,11 +59,12 @@ function getPlaylistCollectionfromLocalStorage() {
 //------------------ State Functions ----------------------
 
 const removePlaylistFun = (index: number) => {
-  setPlaylistCollection(current => {
+  setPlaylistCollection((current) => {
     const updatedPlaylists = [...current];
-    updatedPlaylists.splice(index, 1);
-    return updatedPlaylists;
+    return updatedPlaylists.filter((_, i) => i !== index);
   });
+  const targetPlaylist = playlistCollection[index]
+  removePlaylistFromLocalStorage(targetPlaylist)
 };
 
 const removeSongFun = (index: number) => {
@@ -74,7 +72,6 @@ const removeSongFun = (index: number) => {
     ...current,
     tracks: current.tracks.filter((_, i) => i !== index)
   }));
-  // deleteSongtoLocalStorage(currentPlaylist)
 };
 
 const updatePlaylistFun = (newSong: Track) => {
@@ -88,27 +85,41 @@ const updatePlaylistFun = (newSong: Track) => {
   // Update playlist Collection
 const updatePlaylistCollection = (newPlaylist: PlaylistType) => {
   setPlaylistCollection(current => [...current, newPlaylist]);
+  localStorage.setItem(newPlaylist.name, JSON.stringify(newPlaylist.tracks));
 };
 
 const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
   const targetPlaylist = playlistCollection.find((pl)=> pl.name === playlist.name)
-  if(targetPlaylist && targetPlaylist.tracks){
+
+  if(targetPlaylist === undefined) {
+    console.log(typeof(targetPlaylist))
+  }
+
+  if(targetPlaylist && targetPlaylist.tracks && newSong){
     setItem(targetPlaylist.name, JSON.stringify(targetPlaylist.tracks.push(newSong)))
+    console.log(`${newSong} was logged to ${targetPlaylist.name} in local storage`)
   } else {
     console.error(targetPlaylist?.name + 'is messed up')
   }
 }
 
+const removePlaylistFromLocalStorage = (playlist : PlaylistType) => {
+  const targetPlaylist = playlistCollection.find((pl) => pl.name === playlist.name);
+  console.log(`TargetPlaylist is: ${targetPlaylist}`);
+
+  if(targetPlaylist && targetPlaylist.tracks) {
+    removePlay(targetPlaylist);
+    console.log(`${targetPlaylist.name} successfully removed`);
+  } else {
+    console.warn(`${targetPlaylist?.name} not removed`);
+  }
+}
+
 // ---------------------- UseEffect -----------------------
 useEffect(() => {
-  // const AddPlaylistButton = document.getElementById('AddPlaylistButton');
-  // const AddSongButton = document.getElementById('AddSongButton');
-  // const RemoveSongButton = document.getElementById('RemoveSongButton')
-
-  playlistCollection.map((playlist)=> {
-    localStorage.setItem(playlist.name, JSON.stringify(playlist.tracks))
-  })
-}, [playlistCollection]);
+  const storedCollection = getPlaylistCollectionfromLocalStorage();
+  setPlaylistCollection(storedCollection);
+}, []); // Only run once on mount
 // -------------------- RETURN -----------------------------
 
 

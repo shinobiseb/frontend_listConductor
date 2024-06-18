@@ -69,4 +69,5 @@ export type SongListProps = {
 export type playlistProps = {
   playlist : PlaylistType;
   removePlaylist : any;
+  index: number;
 }

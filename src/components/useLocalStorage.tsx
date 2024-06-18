@@ -1,6 +1,7 @@
 import { stringify } from "querystring";
 import { PlaylistType, Track, playlistProps } from "../assets/types";
 import { parse } from "path/posix";
+import Playlist from "./Playlist";
 
 export const useLocalStorage = (key: string) => {
     
@@ -21,9 +22,9 @@ export const useLocalStorage = (key: string) => {
       }
     };
   
-    const removeItem = (playlist : PlaylistType, track : Track) => {
+    const removePlay = (playlist : PlaylistType) => {
         try {
-        localStorage.removeItem(key);
+        localStorage.removeItem(playlist.name);
       } catch (error) {
         console.warn(error);
       }
@@ -31,11 +32,11 @@ export const useLocalStorage = (key: string) => {
   
     const clear = () => {
         try {
-            localStorage.clear
+            localStorage.clear()
         } catch(error) {
             console.warn(error)
         }
     };
   
-    return { setItem, getItem, removeItem, clear };
+    return { setItem, getItem, removePlay, clear };
   };

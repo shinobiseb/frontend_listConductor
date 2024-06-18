@@ -16,7 +16,7 @@ const secCalc = (duration: number) => {
 
 export default function Song({ track, removeSong, index }: SongProps) {
   function imgHelper(track: Track) {
-    if (typeof track.img === 'string') {
+    if (typeof track.img === 'string' && track.img !== 'Value not given') {
       return track.img;
     }
     return 'https://cdn.saleminteractivemedia.com/shared/images/default-cover-art.png';
