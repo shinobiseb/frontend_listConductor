@@ -40,7 +40,7 @@ export default function SongList({ tracklist, removeSong }: SongListProps) {
 
   return (
     <ul className='playlist-container h-3/4 flex flex-col items-left w-full overflow-y-scroll'>
-      <button className='px-2 py-1 hover:bg-orange bg-white w-20 rounded-md self-center'>Shuffle</button>
+      {/* <button className='px-2 py-1 hover:bg-orange bg-white w-20 rounded-md self-center'>Shuffle</button> */}
       {
         trackMapper(tracklist, removeSong)
       }
