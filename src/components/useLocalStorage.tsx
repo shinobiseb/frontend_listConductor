@@ -47,16 +47,16 @@ export const useLocalStorage = (key: string) => {
       }
     };
 
-    const removeSong = ( index: number, playlist : PlaylistType) => {
+    const removeSong = (index: number, playlist: PlaylistType) => {
       try {
-        playlist.tracks.splice(index)
-        const updatedPlaylists = [...playlist.tracks]
-        localStorage.setItem(playlist.name, JSON.stringify(updatedPlaylists))
-
+        const updatedTracks = [...playlist.tracks];
+        updatedTracks.splice(index, 1);
+        localStorage.setItem(playlist.name, JSON.stringify(updatedTracks));
+        return updatedTracks;
       } catch (error) {
         console.warn(error);
       }
-    }
+    };
   
     const clear = () => {
         try {
