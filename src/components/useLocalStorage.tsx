@@ -41,10 +41,22 @@ export const useLocalStorage = (key: string) => {
     const removePlay = (playlist : PlaylistType) => {
         try {
         localStorage.removeItem(playlist.name);
+        
       } catch (error) {
         console.warn(error);
       }
     };
+
+    const removeSong = ( index: number, playlist : PlaylistType) => {
+      try {
+        playlist.tracks.splice(index)
+        const updatedPlaylists = [...playlist.tracks]
+        localStorage.setItem(playlist.name, JSON.stringify(updatedPlaylists))
+
+      } catch (error) {
+        console.warn(error);
+      }
+    }
   
     const clear = () => {
         try {
@@ -53,5 +65,5 @@ export const useLocalStorage = (key: string) => {
             console.warn(error)
         }
     };
-    return { setPlay, setSong, getPlaylist, removePlay, clear };
+    return { setPlay, setSong, removeSong, getPlaylist, removePlay, clear };
 };

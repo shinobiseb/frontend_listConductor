@@ -7,9 +7,10 @@ import Featured from './components/Featured';
 import AddSong from './components/AddSong';
 import OpenAddSong from './components/OpenAddSong';
 import { useLocalStorage } from './components/useLocalStorage';
+import Gallery from './components/Gallery';
 import { json } from 'stream/consumers';
 
-const { setPlay, setSong, getPlaylist, removePlay, clear } = useLocalStorage('playlistCollection');
+const { setPlay, setSong, getPlaylist, removePlay, removeSong ,clear } = useLocalStorage('playlistCollection');
 
 function App() {
   
@@ -39,7 +40,7 @@ function getPlaylistCollectionfromLocalStorage() {
           console.error(`Error parsing JSON for key ${key}:`, e);
         }
       } else {
-        console.warn(`${key} may not be a playlist \nkey: ${key} value: ${value}`)
+        console.warn(`${key} may not be a playlist`)
       }
     }
     return localStorageCollection;
@@ -69,14 +70,16 @@ const removeSongFun = (index: number) => {
     ...current,
     tracks: current.tracks.filter((_, i) => i !== index)
   }));
+  console.log(index)
+  removeSong(index, currentPlaylist)
 };
 
 const updatePlaylistFun = (newSong: Track) => {
+  addSongtoLocalStorage(newSong, currentPlaylist)
   setCurrentPlaylist(current => ({
     ...current,
     tracks: [...current.tracks, newSong]
   }));
-  addSongtoLocalStorage(newSong, currentPlaylist)
 };
 
   // Update playlist Collection
@@ -95,7 +98,7 @@ const addSongtoLocalStorage = (newSong : Track, playlist: PlaylistType) => {
   const targetPlaylist = playlistCollection.find((pl)=> pl.name === playlist.name)
   if(targetPlaylist && targetPlaylist.tracks && newSong){
     setSong(newSong, currentPlaylist)
-    // console.log(`${newSong} was logged to ${targetPlaylist.name} in local storage`)
+    console.log(`${newSong.title} was logged to ${targetPlaylist.name} in local storage`)
   } else {
     console.error(targetPlaylist?.name + 'is messed up')
   }
@@ -115,13 +118,10 @@ const removePlaylistFromLocalStorage = (playlist : PlaylistType) => {
 useEffect(() => {
   const storedCollection = getPlaylistCollectionfromLocalStorage();
   setPlaylistCollection(storedCollection);
-}, []); // Only run once on mount
+}, []);
 // -------------------- RETURN -----------------------------
 
-//Giving a playlist if none
-if(!currentPlaylist) {
-  setPlay(initialPlaylistCollection[0].name, initialPlaylistCollection[0].tracks)
-}
+
 
 return (
     <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2">
@@ -144,10 +144,12 @@ return (
           setOpen={setIsOpen}
           openState={isOpen}
         />
+        {currentPlaylist ? 
         <SongList 
           tracklist={currentPlaylist.tracks}
           removeSong={removeSongFun}
-        />
+        /> : 
+        <Gallery/>}
       </main>
     </div>
   );

@@ -2,7 +2,6 @@ import Playlist from './Playlist';
 import {PlaylistCollectionProps } from '../assets/types';
 
 const playlistMapper = ({ playlistCollection, setCurrentPlaylist, removePlaylist }: PlaylistCollectionProps) => {
-  
   function changePlaylist(key : number) {
     setCurrentPlaylist(playlistCollection[key])
   }
@@ -10,7 +9,9 @@ const playlistMapper = ({ playlistCollection, setCurrentPlaylist, removePlaylist
   if (!Array.isArray(playlistCollection)) {
     console.error('playlistCollection is not an array:', playlistCollection);
     return [];
-  }
+  } else if (playlistCollection.length === 0) {
+    return <h3>No playlists</h3>
+  } else
     return playlistCollection.map((playlist, index) => (
       <li className='w-full flex-row justify-between flex' key={index} onClick={() => changePlaylist(index)}>
         <Playlist removePlaylist={removePlaylist} index={index} playlist={playlist}/>
