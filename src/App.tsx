@@ -58,8 +58,6 @@ const getAuthToken = async () => {
 
   const url = "https://accounts.spotify.com/api/token";
 
-  console.log(authBytes);
-
   const result = await fetch(url, {
     method: 'POST',
     headers: {
@@ -70,6 +68,7 @@ const getAuthToken = async () => {
   });
 
   const data = await result.json();
+  setToken(data.access_token)
   return data.access_token;
 };
 
@@ -78,7 +77,7 @@ const getAuthToken = async () => {
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(getPlaylistCollectionfromLocalStorage());
   const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(getPlaylistCollectionfromLocalStorage()[0])
   //Add Song
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
   const [token, setToken] = useState("")
 
 //------------------ State Functions ----------------------
@@ -141,15 +140,13 @@ const removePlaylistFromLocalStorage = (playlist : PlaylistType) => {
   }
 }
 
-async function search() {
-  console.log("Searching for ")
-}
+
 
 // ---------------------- UseEffect -----------------------
 useEffect(() => {
   const storedCollection = getPlaylistCollectionfromLocalStorage();
   setPlaylistCollection(storedCollection);
-  // getAuthToken()
+  getAuthToken()
 }, []);
 // -------------------- RETURN -----------------------------
 
@@ -171,7 +168,7 @@ return (
           songs={ currentPlaylist ? currentPlaylist.tracks : initialPlaylistCollection[0].tracks}
           openBool={isOpen}
           setOpen={setIsOpen}
-          search={search}
+          token={token}
         />
         <OpenAddSong
           setOpen={setIsOpen}

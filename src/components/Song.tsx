@@ -24,7 +24,7 @@ export default function Song({ track, removeSong, index }: SongProps) {
   }
 
   return (
-    <li className='song-container w-full flex flex-row justify-between px-4 py-2 text-white hover:cursor-pointer hover:bg-gunmetal'>
+    <li className='song-container transition-all w-full flex flex-row justify-between px-4 py-2 text-white hover:cursor-pointer hover:bg-gunmetal'>
       <div className="song-info-div-song flex flex-row justify-center items-center">
         <img className='h-16 aspect-square' src={imgHelper(track)} alt="Song Image" />
         <div className="song-info flex flex-col pl-2">

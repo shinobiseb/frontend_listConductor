@@ -1,8 +1,9 @@
 import React, { useState, useRef} from 'react'
-import { AddSongProps } from '../assets/types'
+import { AddSongProps, songSearchResults } from '../assets/types'
 import { IoIosAdd } from "react-icons/io";
+import SearchResult from './SearchResult';
 
-export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSongProps) {
+export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }: AddSongProps) {
 
   //Input Checkers
   const titleInput = useRef(null)
@@ -16,12 +17,17 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSon
   const ageInput = useRef(null)
   const imgInput = useRef(null)
 
-  const [age, setAge] = useState("false")
+  const searchInput = useRef(null)
 
   const booleanHelper = (bool : string) => bool === "false" ? false : true;
 
+
+  /*--------------SONG STATES-------------*/
+  const [searchedSong, setSearchedSong] = useState("")
+  const [songs, setSongs] = useState([])
+
   const handleChange = (event : any) => {
-    setAge(event.target.value)
+    setSearchedSong(event.target.value)
   }
 
   //type narrowing => catch html element errors
@@ -41,6 +47,38 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSon
     return ele.current.value
   }
 
+  async function search() {
+    console.log(`Searching for ${searchedSong}`);
+
+    let artistParams = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    };
+
+    try {
+      let response = await fetch(`https://api.spotify.com/v1/search?q=${searchedSong}&type=track`, artistParams);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      let data = await response.json();
+      let searchedSongs = data.tracks.items
+      setSongs(searchedSongs)
+      console.log(searchedSongs);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function mapResults(songs : songSearchResults[]) {
+    return songs.map((result : Object, index: number) => (
+      <li key={index}>
+        <SearchResult name={songs[index].name} artists={songs[index].artists}/>
+      </li>
+    ));
+  }
 
   function getNewSong() {
     return {
@@ -56,7 +94,7 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSon
         views: isInput(viewsInput),
         uploadedOn: isInput(uploadedInput),
       },
-      isAgeRestricted: booleanHelper(age),
+      isAgeRestricted: booleanHelper('age'),
       img: isInput(imgInput)
     };
   }
@@ -65,101 +103,32 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSon
     return null
   }
       return (
-        <div className='flex flex-col w-3/4 justify-center items-center'>
-            <button
-            className='button mb-2'
-            onClick={()=> setOpen(!openBool)}
-            >Close
-            </button>
+        <div className='relative items-center w-3/4'>
+          <div className='w-full flex '>
             <input 
-            id="text-box-handle" className="rounded-lg p-2 w-3/4" 
+            className='rounded-md p-2 w-full'
+            value={searchedSong}
+            onChange={handleChange} 
             type="text" 
-            placeholder='Title'
-            ref={titleInput}
+            placeholder='Search Song'
+            ref={searchInput}
             />
-
-            <input 
-            className="rounded-lg p-2 mt-1 w-3/4"
-            type="text"  
-            placeholder='Artist'
-            ref={artistInput}
-            />
-
-            <input 
-            className="rounded-lg p-2 mt-1 w-3/4"
-            type="number"  
-            placeholder='duration'
-            ref={durationInput}
-            />
-
-            <input 
-            className="rounded-lg p-2 mt-1 w-3/4"
-            type="url"  
-            placeholder="https://youtube.com/example"
-            ref={linkInput}
-            />
-
-            <input 
-            className="rounded-lg p-2 mt-1 w-3/4"
-            type="number"  
-            placeholder='likes'
-            ref={likesInput}
-            />
-
-            <input 
-            className="rounded-lg p-2 mt-1 w-3/4"
-            type="number"  
-            placeholder='dislikes'
-            ref={dislikesInput}
-            />
-
-            <input 
-            className="rounded-lg p-2 mt-1 w-3/4"
-            type="number"  
-            placeholder='views'
-            ref={viewsInput}
-            />
-
-            <input 
-            className="rounded-lg p-2 mt-1 w-3/4"
-            type="date"  
-            placeholder='upload Dated'
-            ref={uploadedInput}
-            />
-
-            <div className='mt-1 p-1 w-3/4'>
-              <label className='text-white'> Age Restricted?</label>
-              <select 
-              name="ageRestricted" 
-              id="ageRestricted" 
-              required 
-              value={age} 
-              onChange={handleChange} 
-              ref={ageInput}
-              className="rounded-md ml-2 px-2 py-1"
-              >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-            </div>
-
-            <input 
-            className="rounded-lg p-2 mt-1 w-3/4"
-            type="text"  
-            placeholder='Image'
-            ref={imgInput}
-            />
-
-            <button 
-            id='AddSongButton'
-            className='button mt-2 hover:ease-in duration-250'
-            onClick={() => {
-              let theNewSong = getNewSong();
-              addSongToPlaylist(theNewSong);
-              setOpen(!openBool)
-            }}>
-            Confirm
+              <button 
+              id='AddSongButton'
+              className='button hover:ease-in duration-250 relative'
+              onClick={() => {
+                // let theNewSong = getNewSong();
+                // addSongToPlaylist(theNewSong);
+                // setOpen(!openBool)
+                search()
+              }}>
+              Confirm
             </button>
+          </div>
+          <ul className='absolute bg-white w-full overflow-y-auto max-h-48 rounded-md mt-[2px] shadow-md overflow-hidden'>
+              {mapResults(songs)}
+          </ul>
+          
         </div>
       )
     }

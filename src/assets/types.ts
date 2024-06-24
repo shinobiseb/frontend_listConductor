@@ -35,7 +35,7 @@ export type AddSongProps = {
   songs: Tracklist;
   openBool: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  search: Function;
+  token: string
 };
 
 export interface useStateFunction {
@@ -73,4 +73,9 @@ export type playlistProps = {
   playlist : PlaylistType;
   removePlaylist : any;
   index: number;
+}
+
+export type songSearchResults = {
+  name: string,
+  artists: Array<{ name: string }>
 }
