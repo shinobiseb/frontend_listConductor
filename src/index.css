@@ -26,4 +26,8 @@ html {
     background-color: #EE6C4D;
 }
 
+ul li {
+    border-radius: 6px;
+}
+
 /* button rounded-lg p-2 hover:ease-in duration-250 bg-white text-black */

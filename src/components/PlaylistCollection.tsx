@@ -13,7 +13,7 @@ const playlistMapper = ({ playlistCollection, setCurrentPlaylist, removePlaylist
     return <h3>No playlists</h3>
   } else
     return playlistCollection.map((playlist, index) => (
-      <li className='w-full flex-row justify-between flex' key={index} onClick={() => changePlaylist(index)}>
+      <li className='hover:cursor-pointer w-full flex-row justify-between flex px-2 hover:bg-gunmetal rounded-md' key={index} onClick={() => changePlaylist(index)}>
         <Playlist removePlaylist={removePlaylist} index={index} playlist={playlist}/>
       </li>
   ));
