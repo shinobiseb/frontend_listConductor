@@ -2,6 +2,10 @@ import PlaylistCollection from './PlaylistCollection'
 PlaylistCollection
 import { sidebarReq } from '../assets/types'
 import AddPlaylist from './AddPlaylist'
+import { AiFillHome } from "react-icons/ai";
+import { RiPlayList2Fill } from "react-icons/ri";
+import { FaPhone } from "react-icons/fa6";
+
 
 export default function Sidebar({ userPlaylists, removePlaylist, updatePlayColl, setCurrentPlaylist, currentPlaylist }: sidebarReq) {
 
@@ -11,14 +15,32 @@ export default function Sidebar({ userPlaylists, removePlaylist, updatePlayColl,
         <h3 className='sm:text-lg font-semibold my-7'>UserName</h3>
         <ul className='flex flex-col sm:h-54 font-semibold mb-10'>
           <li className='sm:py-4'>
-            <a className='hover:text-gunmetal' href='#'>HOME</a>
+            <a className='hover:text-gunmetal items-center' href='#'>
+              <span className='flex-row flex items-center'>
+                <AiFillHome/>
+                <p className='ml-2'>HOME</p>
+              </span>
+            </a>
           </li>
+
           <li className='sm:py-4'>
-            <a className='hover:text-gunmetal' href='#'>PLAYLISTS</a>
+            <a className='hover:text-gunmetal items-center' href='#'>
+              <span className='flex-row flex items-center'>
+                <RiPlayList2Fill/>
+                <p className='ml-2'>PLAYLISTS</p>
+              </span>
+            </a>
           </li>
+
           <li className='sm:py-4'>
-            <a className='hover:text-gunmetal' href='#'>CONTACT</a>
+            <a className='hover:text-gunmetal items-center' href='#'>
+              <span className='flex-row flex items-center'>
+                <FaPhone />
+                <p className='ml-2'>CONTACT</p>
+              </span>
+            </a>
           </li>
+
         </ul>
           <PlaylistCollection 
           currentPlaylist={currentPlaylist} 

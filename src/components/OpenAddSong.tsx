@@ -1,5 +1,6 @@
 import React from 'react'
 import { useStateFunction } from '../assets/types'
+import { IoIosAdd } from "react-icons/io";
 
 interface OpenAddSongProps {
   openState: boolean;
@@ -13,7 +14,7 @@ const OpenAddSong: React.FC<OpenAddSongProps> = ({ openState, setOpen }) => {
         className='button'
         onClick={() => setOpen(!openState)}
       >
-        Add Song
+        <IoIosAdd/>
       </button>
     );
   }

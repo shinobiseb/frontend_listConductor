@@ -1,4 +1,5 @@
 import { Track, SongProps } from '../assets/types'
+import { RiDeleteBin7Line } from "react-icons/ri";
 
 
 // 227_000
@@ -45,7 +46,7 @@ export default function Song({ track, removeSong, index }: SongProps) {
           ()=> removeSong(index)
         }
         >
-         X
+         <RiDeleteBin7Line/>
         </button>
       </div>
     </li>

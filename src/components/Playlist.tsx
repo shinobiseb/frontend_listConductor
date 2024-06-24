@@ -1,6 +1,7 @@
 import { SetStateAction, Dispatch} from 'react'
 import { PlaylistType } from '../assets/types'
 import {playlistProps} from '../assets/types'
+import { RiDeleteBin7Line } from "react-icons/ri";
 
 export default function Playlist( {playlist, removePlaylist, index} : playlistProps ) {
   
@@ -10,7 +11,9 @@ export default function Playlist( {playlist, removePlaylist, index} : playlistPr
       <button 
       className='p-2'
       onClick={()=> removePlaylist(index)}
-      > X </button>
+      > <RiDeleteBin7Line />
+      </button>
+      
     </>
   )
 }

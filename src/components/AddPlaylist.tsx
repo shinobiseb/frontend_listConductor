@@ -1,5 +1,6 @@
 import { PlaylistType, AddPlayProps } from "../assets/types";
 import React, { useRef } from 'react';
+import { IoIosAdd } from "react-icons/io";
 
 export default function AddPlaylist({ addPlaylistToCollection }: AddPlayProps) {
 
@@ -71,7 +72,7 @@ export default function AddPlaylist({ addPlaylistToCollection }: AddPlayProps) {
           addPlaylistToCollection(newPlay);
         }}
       >
-        Add
+        <IoIosAdd/>
       </button>
     </div>
   );

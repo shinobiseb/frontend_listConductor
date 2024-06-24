@@ -1,5 +1,6 @@
 import React, { useState, useRef} from 'react'
 import { AddSongProps } from '../assets/types'
+import { IoIosAdd } from "react-icons/io";
 
 export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSongProps) {
 
