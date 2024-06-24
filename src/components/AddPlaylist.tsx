@@ -65,7 +65,7 @@ export default function AddPlaylist({ addPlaylistToCollection }: AddPlayProps) {
     
       <button
       id="AddPlaylistButton"
-        className='button rounded-lg p-2 hover:ease-in duration-250 bg-white text-black'
+        className='button'
         onClick={() => {
           const newPlay = getNewPlaylist();
           addPlaylistToCollection(newPlay);

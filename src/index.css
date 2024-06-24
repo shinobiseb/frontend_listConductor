@@ -10,8 +10,21 @@
 
 html {
     background-color: #212529;
+    
 }
 
-button {
+.button {
     transition: 100ms;
+    transition-duration: 250ms;
+    border-radius: 10px;
+    padding: .5rem;
+    background-color: white;
+    color: black;
+    width: 6rem;
 }
+
+.button:hover{
+    background-color: #EE6C4D;
+}
+
+/* button rounded-lg p-2 hover:ease-in duration-250 bg-white text-black */

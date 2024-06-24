@@ -66,7 +66,7 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSon
       return (
         <div className='flex flex-col w-3/4 justify-center items-center'>
             <button
-            className='button hover:bg-orange bg-white-blue mb-2 rounded-lg p-2 hover:ease-in duration-250 w-40 bg-white-white'
+            className='button mb-2'
             onClick={()=> setOpen(!openBool)}
             >Close
             </button>
@@ -151,7 +151,7 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen }: AddSon
 
             <button 
             id='AddSongButton'
-            className='button hover:bg-orange bg-white-blue mt-2 rounded-lg p-2 hover:ease-in duration-250 w-40 bg-white-white'
+            className='button mt-2 hover:ease-in duration-250'
             onClick={() => {
               let theNewSong = getNewSong();
               addSongToPlaylist(theNewSong);

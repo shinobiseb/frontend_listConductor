@@ -9,11 +9,20 @@ import OpenAddSong from './components/OpenAddSong';
 import { useLocalStorage } from './components/useLocalStorage';
 import Gallery from './components/Gallery';
 import { json } from 'stream/consumers';
+import { Buffer } from 'buffer';
+import { stringify } from 'querystring';
 
 const { setPlay, setSong, getPlaylist, removePlay, removeSong ,clear } = useLocalStorage('playlistCollection');
 
 function App() {
-  
+
+const secret = import.meta.env.VITE_SECRET
+const clientID = import.meta.env.VITE_CLIENTID
+
+
+
+
+
 // ----------------- Prereq functions -------------------
 
 // Default Playlist
@@ -29,7 +38,7 @@ function getPlaylistCollectionfromLocalStorage() {
   } else {
     const localStorageCollection: PlaylistType[] = [];
     for (const [key, value] of Object.entries(playlists)) {
-      if (key !== 'loglevel') {
+      if (key !== 'loglevel' && key !== 'Spotify Token') {
         try {
           const tracks = JSON.parse(value);
           localStorageCollection.push({
@@ -44,6 +53,36 @@ function getPlaylistCollectionfromLocalStorage() {
       }
     }
     return localStorageCollection;
+  }
+}
+
+//Get Token Function
+const getToken = async () => {
+  const authString = `${clientID}:${secret}`;
+  const authBytes = Buffer.from(authString, 'utf-8').toString('base64');
+
+  const url = "https://accounts.spotify.com/api/token";
+
+  console.log(authBytes);
+
+  const result = await fetch(url, {
+    method: 'POST',
+    headers: {
+      "Authorization": `Basic ${authBytes}`,
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: 'grant_type=client_credentials'
+  });
+
+  const data = await result.json();
+  return data.access_token;
+};
+
+async function getTokenFromLocalStorage() {
+  const token = localStorage.getItem('Spotify Token')
+  if(!token) {
+    localStorage.setItem('Spotify Token', await getToken())
+    console.log("Token Added to localstorage")
   }
 }
 
@@ -118,6 +157,7 @@ const removePlaylistFromLocalStorage = (playlist : PlaylistType) => {
 useEffect(() => {
   const storedCollection = getPlaylistCollectionfromLocalStorage();
   setPlaylistCollection(storedCollection);
+  getTokenFromLocalStorage()
 }, []);
 // -------------------- RETURN -----------------------------
 

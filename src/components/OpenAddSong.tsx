@@ -10,7 +10,7 @@ const OpenAddSong: React.FC<OpenAddSongProps> = ({ openState, setOpen }) => {
   if (!openState) {
     return (
       <button
-        className='hover:bg-orange text-md flex bg-white items-center justify-center px-3 py-2 text-center rounded-md m-2'
+        className='button'
         onClick={() => setOpen(!openState)}
       >
         Add Song

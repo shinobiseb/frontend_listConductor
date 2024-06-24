@@ -8,7 +8,7 @@ export default function Playlist( {playlist, removePlaylist, index} : playlistPr
     <>
       <h3 className='text-xl hover:cursor-pointer hover:text-light-blue py-2'>{playlist.name}</h3>
       <button 
-      className='p-2 bg-white text-black rounded-full'
+      className='p-2'
       onClick={()=> removePlaylist(index)}
       > X </button>
     </>
