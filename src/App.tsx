@@ -57,7 +57,7 @@ function getPlaylistCollectionfromLocalStorage() {
 }
 
 //Get Token Function
-const getToken = async () => {
+const getAuthToken = async () => {
   const authString = `${clientID}:${secret}`;
   const authBytes = Buffer.from(authString, 'utf-8').toString('base64');
 
@@ -81,7 +81,7 @@ const getToken = async () => {
 async function getTokenFromLocalStorage() {
   const token = localStorage.getItem('Spotify Token')
   if(!token) {
-    localStorage.setItem('Spotify Token', await getToken())
+    localStorage.setItem('Spotify Token', await getAuthToken())
     console.log("Token Added to localstorage")
   }
 }
