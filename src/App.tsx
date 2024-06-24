@@ -18,11 +18,6 @@ function App() {
 
 const secret = import.meta.env.VITE_SECRET
 const clientID = import.meta.env.VITE_CLIENTID
-
-
-
-
-
 // ----------------- Prereq functions -------------------
 
 // Default Playlist

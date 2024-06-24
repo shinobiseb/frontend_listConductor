@@ -1,11 +1,12 @@
 import { PlaylistType, AddPlayProps } from "../assets/types";
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { IoIosAdd } from "react-icons/io";
 
 export default function AddPlaylist({ addPlaylistToCollection }: AddPlayProps) {
 
   // Input Checkers
   const titleInput = useRef<HTMLInputElement>(null);
+  const addButtonRef = useRef<HTMLButtonElement>(null);
 
   // Type narrowing => catch HTML element errors
   const isInput = (ele: React.RefObject<HTMLInputElement>): string | null => {
@@ -23,6 +24,22 @@ export default function AddPlaylist({ addPlaylistToCollection }: AddPlayProps) {
     }
     return element.value;
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        addButtonRef.current?.click();
+      }
+    };
+
+    const AddPlaylistText = titleInput.current;
+    AddPlaylistText?.addEventListener('keydown', handleKeyDown);
+
+    // Clean up event listener on unmount
+    return () => {
+      AddPlaylistText?.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   function getNewPlaylist(): PlaylistType {
     const title = isInput(titleInput);
@@ -58,15 +75,17 @@ export default function AddPlaylist({ addPlaylistToCollection }: AddPlayProps) {
   return (
     <div className='flex flex-row w-full justify-evenly items-center'>
       <input
-        id="text-box-handle" className="rounded-lg p-2 w-3/4 text-black"
+        id="AddPlaylistText" 
+        className="rounded-lg p-2 w-3/4 text-black"
         type="text"
         placeholder='Playlist title'
         ref={titleInput}
       />
     
       <button
-      id="AddPlaylistButton"
+        id="AddPlaylistButton"
         className='button'
+        ref={addButtonRef}
         onClick={() => {
           const newPlay = getNewPlaylist();
           addPlaylistToCollection(newPlay);
