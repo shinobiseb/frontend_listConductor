@@ -73,20 +73,13 @@ const getAuthToken = async () => {
   return data.access_token;
 };
 
-async function getTokenFromLocalStorage() {
-  const token = localStorage.getItem('Spotify Token')
-  if(!token) {
-    localStorage.setItem('Spotify Token', await getAuthToken())
-    console.log("Token Added to localstorage")
-  }
-}
-
 // ------------------- STATES ----------------------------
 
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(getPlaylistCollectionfromLocalStorage());
   const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(getPlaylistCollectionfromLocalStorage()[0])
   //Add Song
   const [isOpen, setIsOpen] = useState(false)
+  const [token, setToken] = useState("")
 
 //------------------ State Functions ----------------------
 
@@ -148,11 +141,15 @@ const removePlaylistFromLocalStorage = (playlist : PlaylistType) => {
   }
 }
 
+async function search() {
+  console.log("Searching for ")
+}
+
 // ---------------------- UseEffect -----------------------
 useEffect(() => {
   const storedCollection = getPlaylistCollectionfromLocalStorage();
   setPlaylistCollection(storedCollection);
-  getTokenFromLocalStorage()
+  // getAuthToken()
 }, []);
 // -------------------- RETURN -----------------------------
 
@@ -174,6 +171,7 @@ return (
           songs={ currentPlaylist ? currentPlaylist.tracks : initialPlaylistCollection[0].tracks}
           openBool={isOpen}
           setOpen={setIsOpen}
+          search={search}
         />
         <OpenAddSong
           setOpen={setIsOpen}

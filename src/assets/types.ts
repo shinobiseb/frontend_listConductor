@@ -35,6 +35,7 @@ export type AddSongProps = {
   songs: Tracklist;
   openBool: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  search: Function;
 };
 
 export interface useStateFunction {
