@@ -59,15 +59,6 @@ function App() {
     return data.access_token;
   };
 
-  // Function to handle undefined currentPlaylist
-  const handleUndefinedPlaylist = (playlists: PlaylistType[]) => {
-    if (playlists.length > 0) {
-      return playlists[0];
-    } else {
-      return null;
-    }
-  };
-
   // ------------------- STATES ----------------------------
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(getPlaylistCollectionFromLocalStorage());
   const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(getPlaylistCollectionFromLocalStorage()[0]);

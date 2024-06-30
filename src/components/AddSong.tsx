@@ -97,6 +97,10 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
           onChange={handleChange} 
           type="text" 
           placeholder='Search Song'
+          onKeyDown={(e) => {
+            if (e.key === "Enter")
+                search();
+            }}
           // ref={searchInput}
           />
             <button 
