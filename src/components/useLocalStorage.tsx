@@ -1,5 +1,5 @@
 import { stringify } from "querystring";
-import { PlaylistType, SpotifyTrack, Track, Tracklist, playlistProps } from "../assets/types";
+import { PlaylistType, SpotifyTrack, Track, Tracklist } from "../assets/types";
 import { parse } from "path/posix";
 import Playlist from "./Playlist";
 import PlaylistCollection from "./PlaylistCollection";
