@@ -30,7 +30,6 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
     setSearchedSong(event.target.value)
   }
 
-  //type narrowing => catch html element errors
   const isInput = (ele : any) => {
     if(!ele.current) {
       console.warn(`Missing ${ele} element!`);
@@ -47,7 +46,13 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
     return ele.current.value
   }
 
+  //---- Search Function -----
   async function search() {
+    if(!searchedSong) {
+      console.log('No Searched Song')
+      return
+    }
+
     console.log(`Searching for ${searchedSong}`);
 
     let artistParams = {
@@ -58,6 +63,7 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
       }
     };
 
+    
     try {
       let response = await fetch(`https://api.spotify.com/v1/search?q=${searchedSong}&type=track`, artistParams);
       if (!response.ok) {
@@ -66,7 +72,7 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
       let data = await response.json();
       let searchedSongs = data.tracks.items
       setSongs(searchedSongs)
-      console.log(searchedSongs);
+      console.table(searchedSongs)
     } catch (error) {
       console.log(error);
     }
