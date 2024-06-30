@@ -12,11 +12,11 @@ const SearchResult: React.FC<songSearchResults> = ({ name, artists }) => {
   }
 
   return (
-    <li 
+    <div 
     className='px-2 py-1 flex-row flex justify-between cursor-pointer transition-all hover:bg-gunmetal hover:text-white rounded-none'>
       <h4 className='truncate text-lg w-1/2'>{name}</h4>
       <h4 className='truncate text-lg w-5/12 text-right'>{artistLooper()}</h4>
-    </li>
+    </div>
   );
 };
 

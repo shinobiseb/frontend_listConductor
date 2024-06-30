@@ -2,20 +2,9 @@ import React, { useState, useRef} from 'react'
 import { AddSongProps, songSearchResults } from '../assets/types'
 import { IoIosAdd } from "react-icons/io";
 import SearchResult from './SearchResult';
+import { SpotifyTrack } from '../assets/types';
 
 export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }: AddSongProps) {
-
-  //Input Checkers
-  const titleInput = useRef(null)
-  const artistInput = useRef(null)
-  const durationInput = useRef(null)
-  const linkInput = useRef(null)
-  const likesInput = useRef(null)
-  const dislikesInput = useRef(null)
-  const viewsInput = useRef(null)
-  const uploadedInput = useRef(null)
-  const ageInput = useRef(null)
-  const imgInput = useRef(null)
 
   const searchInput = useRef(null)
 
@@ -25,6 +14,7 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
   /*--------------SONG STATES-------------*/
   const [searchedSong, setSearchedSong] = useState("")
   const [songs, setSongs] = useState([])
+  const [selectedSong, setSelectedSong] = useState<SpotifyTrack | null>()
 
   const handleChange = (event : any) => {
     setSearchedSong(event.target.value)
@@ -63,7 +53,6 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
       }
     };
 
-    
     try {
       let response = await fetch(`https://api.spotify.com/v1/search?q=${searchedSong}&type=track`, artistParams);
       if (!response.ok) {
@@ -73,6 +62,7 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
       let searchedSongs = data.tracks.items
       setSongs(searchedSongs)
       console.table(searchedSongs)
+      console.log(searchedSongs[0])
     } catch (error) {
       console.log(error);
     }
@@ -88,53 +78,53 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
 
   function getNewSong() {
     return {
-      artist: isInput(artistInput),
-      title: isInput(titleInput),
-      duration: isInput(durationInput),
-      link: isInput(linkInput),
-      info: {
-        scoreData: {
-          likes: isInput(likesInput),
-          dislikes: isInput(dislikesInput),
-        },
-        views: isInput(viewsInput),
-        uploadedOn: isInput(uploadedInput),
-      },
-      isAgeRestricted: booleanHelper('age'),
-      img: isInput(imgInput)
+      // artist: isInput(artistInput),
+      // title: isInput(titleInput),
+      // duration: isInput(durationInput),
+      // link: isInput(linkInput),
+      // info: {
+      //   scoreData: {
+      //     likes: isInput(likesInput),
+      //     dislikes: isInput(dislikesInput),
+      //   },
+      //   views: isInput(viewsInput),
+      //   uploadedOn: isInput(uploadedInput),
+      // },
+      // isAgeRestricted: booleanHelper('age'),
+      // img: isInput(imgInput)
     };
   }
 
   if(!openBool) {
     return null
   }
-      return (
-        <div className='relative items-center w-3/4'>
-          <div className='w-full flex '>
-            <input 
-            className='rounded-md p-2 w-full'
-            value={searchedSong}
-            onChange={handleChange} 
-            type="text" 
-            placeholder='Search Song'
-            ref={searchInput}
-            />
-              <button 
-              id='AddSongButton'
-              className='button hover:ease-in duration-250 relative'
-              onClick={() => {
-                // let theNewSong = getNewSong();
-                // addSongToPlaylist(theNewSong);
-                // setOpen(!openBool)
-                search()
-              }}>
-              Confirm
-            </button>
-          </div>
-          <ul className='absolute bg-white w-full overflow-y-auto max-h-48 rounded-md mt-[2px] shadow-md overflow-hidden'>
-              {mapResults(songs)}
-          </ul>
-          
+    return (
+      <div className='relative items-center w-3/4'>
+        <div className='w-full flex '>
+          <input 
+          className='rounded-md p-2 w-full'
+          value={searchedSong}
+          onChange={handleChange} 
+          type="text" 
+          placeholder='Search Song'
+          ref={searchInput}
+          />
+            <button 
+            id='AddSongButton'
+            className='button hover:ease-in duration-250 relative'
+            onClick={() => {
+              // let theNewSong = getNewSong();
+              // addSongToPlaylist(theNewSong);
+              // setOpen(!openBool)
+              search()
+            }}>
+            Confirm
+          </button>
         </div>
-      )
-    }
+        <ul className='absolute bg-white w-full overflow-y-auto max-h-48 rounded-md mt-[2px] shadow-md overflow-hidden'>
+            {mapResults(songs)}
+        </ul>
+        
+      </div>
+    )
+}

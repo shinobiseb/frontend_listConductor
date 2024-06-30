@@ -20,7 +20,6 @@ export type Track = {
 export type Tracklist = Track[];
 
 
-
 export interface PlaylistType {
   name: string;
   tracks: Tracklist;
@@ -79,3 +78,31 @@ export type songSearchResults = {
   name: string,
   artists: Array<{ name: string }>
 }
+
+export type Artist = {
+  name: string;
+  type: string;
+  uri: string;
+};
+
+export type Album = {
+  album_type: string;
+  href: string;
+  id: string;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export type SpotifyTrack = {
+  album: Album;
+  artists: Artist[];
+  duration_ms: number;
+  explicit: boolean;
+  href: string;
+  id: string;
+  name: string;
+  track_number: number;
+  type: string;
+  uri: string;
+};
