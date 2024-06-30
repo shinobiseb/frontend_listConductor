@@ -17,8 +17,20 @@ export type Track = {
   img: string | null;
 };
 
-export type Tracklist = Track[];
+export type SpotifyTrack = {
+  album: Album;
+  artists: Artist[];
+  duration_ms: number;
+  explicit: boolean;
+  href: string;
+  id: string;
+  name: string;
+  track_number: number;
+  type: string;
+  uri: string;
+};
 
+export type Tracklist = SpotifyTrack[];
 
 export interface PlaylistType {
   name: string;
@@ -30,11 +42,11 @@ export type AddPlayProps = {
 };
 
 export type AddSongProps = {
-  addSongToPlaylist: (newSong: Track) => void;
+  addSongToPlaylist: (newSong: SpotifyTrack) => void;
   songs: Tracklist;
   openBool: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  token: string
+  token: string;
 };
 
 export interface useStateFunction {
@@ -44,39 +56,39 @@ export interface useStateFunction {
 
 export type PlaylistCollectionProps = {
   playlistCollection: PlaylistType[];
-  setCurrentPlaylist: Dispatch<SetStateAction<any>>;
-  currentPlaylist : Object;
-  removePlaylist : any;
+  setCurrentPlaylist: Dispatch<SetStateAction<PlaylistType>>;
+  currentPlaylist: PlaylistType;
+  removePlaylist: (index: number) => void;
 };
 
 export type SongProps = {
-  track: Track;
+  track: SpotifyTrack;
   index: number;
   removeSong: (index: number) => void;
 };
 
-export interface sidebarReq {
+export interface SidebarProps {
   userPlaylists: PlaylistType[];
-  updatePlayColl: Dispatch<SetStateAction<any>>;
-  setCurrentPlaylist : Dispatch<SetStateAction<any>>;
-  currentPlaylist : Object;
-  removePlaylist : any;
+  updatePlayColl: (newPlaylist: PlaylistType) => void;
+  setCurrentPlaylist: Dispatch<SetStateAction<PlaylistType>>;
+  currentPlaylist: PlaylistType;
+  removePlaylist: (index: number) => void;
 }
 
 export type SongListProps = {
-  tracklist: Track[];
+  tracklist: SpotifyTrack[];
   removeSong: (index: number) => void;
 };
 
-export type playlistProps = {
-  playlist : PlaylistType;
-  removePlaylist : any;
+export type PlaylistProps = {
+  playlist: PlaylistType;
+  removePlaylist: (index: number) => void;
   index: number;
 }
 
-export type songSearchResults = {
-  name: string,
-  artists: Array<{ name: string }>
+export type SongSearchResults = {
+  name: string;
+  artists: Array<{ name: string }>;
 }
 
 export type Artist = {
@@ -93,16 +105,3 @@ export type Album = {
   type: string;
   uri: string;
 }
-
-export type SpotifyTrack = {
-  album: Album;
-  artists: Artist[];
-  duration_ms: number;
-  explicit: boolean;
-  href: string;
-  id: string;
-  name: string;
-  track_number: number;
-  type: string;
-  uri: string;
-};

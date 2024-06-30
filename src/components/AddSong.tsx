@@ -1,5 +1,5 @@
 import React, { useState, useRef} from 'react'
-import { AddSongProps, songSearchResults } from '../assets/types'
+import { AddSongProps, SongSearchResults } from '../assets/types'
 import { IoIosAdd } from "react-icons/io";
 import SearchResult from './SearchResult';
 import { SpotifyTrack } from '../assets/types';
@@ -14,7 +14,7 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
   /*--------------SONG STATES-------------*/
   const [searchedSong, setSearchedSong] = useState("")
   const [songs, setSongs] = useState([])
-  const [selectedSong, setSelectedSong] = useState<SpotifyTrack | null>()
+  const [selectedSong, setSelectedSong] = useState<SpotifyTrack>()
 
   const handleChange = (event : any) => {
     setSearchedSong(event.target.value)
@@ -68,31 +68,19 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
     }
   }
 
-  function mapResults(songs : songSearchResults[]) {
+  const handleAddSong = (selectedSong: SpotifyTrack) => {
+    addSongToPlaylist(selectedSong);
+    setSongs([])
+  };
+
+  function mapResults(songs : SpotifyTrack[]) {
     return songs.map((result : Object, index: number) => (
-      <li key={index}>
+      <li key={index} onClick={()=>
+        handleAddSong(songs[index])
+      }>
         <SearchResult name={songs[index].name} artists={songs[index].artists}/>
       </li>
     ));
-  }
-
-  function getNewSong() {
-    return {
-      // artist: isInput(artistInput),
-      // title: isInput(titleInput),
-      // duration: isInput(durationInput),
-      // link: isInput(linkInput),
-      // info: {
-      //   scoreData: {
-      //     likes: isInput(likesInput),
-      //     dislikes: isInput(dislikesInput),
-      //   },
-      //   views: isInput(viewsInput),
-      //   uploadedOn: isInput(uploadedInput),
-      // },
-      // isAgeRestricted: booleanHelper('age'),
-      // img: isInput(imgInput)
-    };
   }
 
   if(!openBool) {
@@ -113,15 +101,12 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
             id='AddSongButton'
             className='button hover:ease-in duration-250 relative'
             onClick={() => {
-              // let theNewSong = getNewSong();
-              // addSongToPlaylist(theNewSong);
-              // setOpen(!openBool)
               search()
             }}>
             Confirm
           </button>
         </div>
-        <ul className='absolute bg-white w-full overflow-y-auto max-h-48 rounded-md mt-[2px] shadow-md overflow-hidden'>
+        <ul id='SongResultDiv' className='absolute bg-white w-full overflow-y-auto max-h-48 rounded-md mt-[2px] shadow-md overflow-hidden'>
             {mapResults(songs)}
         </ul>
         

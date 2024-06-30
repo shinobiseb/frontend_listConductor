@@ -8,7 +8,7 @@ const trackMapper = (playlist: Tracklist, removeSong: (index: number) => void) =
     return [];
   }
 
-  if (playlist.length === 0 || (playlist.length === 1 && playlist[0].title === null)) {
+  if (playlist.length === 0) {
     return (
       <div className='flex flex-col justify-center items-center mt-4 w-full'>
         <h3 className='text-white text-4xl font-semibold'>Add Some Songs!</h3>

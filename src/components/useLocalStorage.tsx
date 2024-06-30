@@ -1,5 +1,5 @@
 import { stringify } from "querystring";
-import { PlaylistType, Track, Tracklist, playlistProps } from "../assets/types";
+import { PlaylistType, SpotifyTrack, Track, Tracklist, playlistProps } from "../assets/types";
 import { parse } from "path/posix";
 import Playlist from "./Playlist";
 import PlaylistCollection from "./PlaylistCollection";
@@ -14,7 +14,7 @@ export const useLocalStorage = (key: string) => {
       }
     };
 
-  const setSong = ( newSong : Track, targetPlaylist : PlaylistType) => {
+  const setSong = ( newSong : Track | SpotifyTrack, targetPlaylist : PlaylistType) => {
     try {
       const playlist = localStorage.getItem(targetPlaylist.name)
       if(playlist) {
