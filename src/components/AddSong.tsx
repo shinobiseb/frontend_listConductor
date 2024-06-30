@@ -6,7 +6,8 @@ import { SpotifyTrack } from '../assets/types';
 
 export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }: AddSongProps) {
 
-  const searchInput = useRef(null)
+  // const searchInput = useRef<HTMLButtonElement | null>(null);
+  // const searchButtonInput = useRef<HTMLButtonElement | null>(null);
 
   const booleanHelper = (bool : string) => bool === "false" ? false : true;
 
@@ -14,7 +15,6 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
   /*--------------SONG STATES-------------*/
   const [searchedSong, setSearchedSong] = useState("")
   const [songs, setSongs] = useState([])
-  const [selectedSong, setSelectedSong] = useState<SpotifyTrack>()
 
   const handleChange = (event : any) => {
     setSearchedSong(event.target.value)
@@ -83,6 +83,7 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
     ));
   }
 
+
   if(!openBool) {
     return null
   }
@@ -90,16 +91,18 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
       <div className='relative items-center w-3/4'>
         <div className='w-full flex '>
           <input 
+          id='searchBar'
           className='rounded-md p-2 w-full'
           value={searchedSong}
           onChange={handleChange} 
           type="text" 
           placeholder='Search Song'
-          ref={searchInput}
+          // ref={searchInput}
           />
             <button 
             id='AddSongButton'
-            className='button hover:ease-in duration-250 relative'
+            className='button hover:ease-in ml-2 duration-150 relative'
+            // ref={searchButtonInput}
             onClick={() => {
               search()
             }}>

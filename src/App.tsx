@@ -64,13 +64,13 @@ function App() {
     if (playlists.length > 0) {
       return playlists[0];
     } else {
-      return { name: 'Default Playlist', tracks: [] };
+      return null;
     }
   };
 
   // ------------------- STATES ----------------------------
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(getPlaylistCollectionFromLocalStorage());
-  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(handleUndefinedPlaylist(getPlaylistCollectionFromLocalStorage()));
+  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(getPlaylistCollectionFromLocalStorage()[0]);
   const [isOpen, setIsOpen] = useState(true);
   const [token, setToken] = useState("");
 
@@ -138,8 +138,12 @@ function App() {
   useEffect(() => {
     const storedCollection = getPlaylistCollectionFromLocalStorage();
     setPlaylistCollection(storedCollection);
-    setCurrentPlaylist(handleUndefinedPlaylist(storedCollection));
-    getAuthToken();
+    if(storedCollection) {
+      setCurrentPlaylist(storedCollection[0]);
+    }
+    if (!token) {
+      getAuthToken()
+    }
   }, []);
 
   // -------------------- RETURN -----------------------------
@@ -154,17 +158,21 @@ function App() {
       />
       <main className='flex flex-col h-full w-full justify-end items-center'>
         <Featured />
+
+        {currentPlaylist ? (
         <AddSong
           addSongToPlaylist={updatePlaylistFun}
           songs={currentPlaylist.tracks}
           openBool={isOpen}
           setOpen={setIsOpen}
-          token={token}
-        />
+          token={token}/>
+        ) : null}
+        
         <OpenAddSong
           setOpen={setIsOpen}
           openState={isOpen}
         />
+        
         {currentPlaylist ? (
           <SongList
             tracklist={currentPlaylist.tracks} // Ensure type consistency

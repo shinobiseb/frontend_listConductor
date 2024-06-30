@@ -39,7 +39,7 @@ export default function SongList({ tracklist, removeSong }: SongListProps) {
   }
 
   return (
-    <ul className='playlist-container h-3/4 flex flex-col items-left w-full overflow-y-scroll'>
+    <ul className='playlist-container mt-2 h-3/4 flex flex-col items-left w-full overflow-y-scroll'>
         {trackMapper(tracklist, removeSong)}
     </ul>
   );
