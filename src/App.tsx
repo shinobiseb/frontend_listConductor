@@ -19,23 +19,23 @@ function App() {
 
   function getPlaylistCollectionFromLocalStorage() {
     const playlists = { ...localStorage };
-      const localStorageCollection: PlaylistType[] = [];
-      for (const [key, value] of Object.entries(playlists)) {
-        if (key !== 'loglevel' && key !== 'Spotify Token') {
-          try {
-            const tracks = JSON.parse(value);
-            localStorageCollection.push({
-              name: key,
-              tracks: Array.isArray(tracks) ? tracks : []
-            });
-          } catch (e) {
-            console.error(`Error parsing JSON for key ${key}:`, e);
-          }
-        } else {
-          console.warn(`${key} may not be a playlist`);
+    const localStorageCollection: PlaylistType[] = [];
+    for (const [key, value] of Object.entries(playlists)) {
+      if (key !== 'loglevel' && key !== 'Spotify Token') {
+        try {
+          const tracks = JSON.parse(value);
+          localStorageCollection.push({
+            name: key,
+            tracks: Array.isArray(tracks) ? tracks : []
+          });
+        } catch (e) {
+          console.error(`Error parsing JSON for key ${key}:`, e);
         }
+      } else {
+        console.warn(`${key} may not be a playlist`);
       }
-      return localStorageCollection;
+    }
+    return localStorageCollection;
   }
 
   // Get Token Function
@@ -59,9 +59,18 @@ function App() {
     return data.access_token;
   };
 
+  // Function to handle undefined currentPlaylist
+  const handleUndefinedPlaylist = (playlists: PlaylistType[]) => {
+    if (playlists.length > 0) {
+      return playlists[0];
+    } else {
+      return { name: 'Default Playlist', tracks: [] };
+    }
+  };
+
   // ------------------- STATES ----------------------------
   const [playlistCollection, setPlaylistCollection] = useState<PlaylistType[]>(getPlaylistCollectionFromLocalStorage());
-  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(getPlaylistCollectionFromLocalStorage()[0]);
+  const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(handleUndefinedPlaylist(getPlaylistCollectionFromLocalStorage()));
   const [isOpen, setIsOpen] = useState(true);
   const [token, setToken] = useState("");
 
@@ -129,6 +138,7 @@ function App() {
   useEffect(() => {
     const storedCollection = getPlaylistCollectionFromLocalStorage();
     setPlaylistCollection(storedCollection);
+    setCurrentPlaylist(handleUndefinedPlaylist(storedCollection));
     getAuthToken();
   }, []);
 
@@ -155,12 +165,14 @@ function App() {
           setOpen={setIsOpen}
           openState={isOpen}
         />
-        {currentPlaylist ?
+        {currentPlaylist ? (
           <SongList
             tracklist={currentPlaylist.tracks} // Ensure type consistency
             removeSong={removeSongFun}
-          /> :
-          <Gallery />}
+          />
+        ) : (
+          <Gallery />
+        )}
       </main>
     </div>
   );
