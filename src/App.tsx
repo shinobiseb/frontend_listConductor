@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Track, PlaylistType, SpotifyTrack } from './assets/types';
 import SongList from './components/SongList';
 import Sidebar from './components/Sidebar';
-import { defaultTracks } from './assets/tracks';
 import Featured from './components/Featured';
 import AddSong from './components/AddSong';
 import OpenAddSong from './components/OpenAddSong';
@@ -18,16 +17,8 @@ function App() {
 
   // ----------------- Prereq functions -------------------
 
-  const initialPlaylistCollection: PlaylistType[] = [
-    { name: 'Playlist', tracks: defaultTracks },
-    { name: 'Playlist 2', tracks: [] }
-  ];
-
   function getPlaylistCollectionFromLocalStorage() {
     const playlists = { ...localStorage };
-    if (!playlists) {
-      return initialPlaylistCollection;
-    } else {
       const localStorageCollection: PlaylistType[] = [];
       for (const [key, value] of Object.entries(playlists)) {
         if (key !== 'loglevel' && key !== 'Spotify Token') {
@@ -45,7 +36,6 @@ function App() {
         }
       }
       return localStorageCollection;
-    }
   }
 
   // Get Token Function
@@ -156,7 +146,7 @@ function App() {
         <Featured />
         <AddSong
           addSongToPlaylist={updatePlaylistFun}
-          songs={currentPlaylist ? currentPlaylist.tracks : initialPlaylistCollection[0].tracks}
+          songs={currentPlaylist.tracks}
           openBool={isOpen}
           setOpen={setIsOpen}
           token={token}

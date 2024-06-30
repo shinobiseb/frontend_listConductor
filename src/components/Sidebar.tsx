@@ -1,13 +1,13 @@
 import PlaylistCollection from './PlaylistCollection'
 PlaylistCollection
-import { sidebarReq } from '../assets/types'
+import { SidebarProps } from '../assets/types'
 import AddPlaylist from './AddPlaylist'
 import { AiFillHome } from "react-icons/ai";
 import { RiPlayList2Fill } from "react-icons/ri";
 import { FaPhone } from "react-icons/fa6";
 
 
-export default function Sidebar({ userPlaylists, removePlaylist, updatePlayColl, setCurrentPlaylist, currentPlaylist }: sidebarReq) {
+export default function Sidebar({ userPlaylists, removePlaylist, updatePlayColl, setCurrentPlaylist, currentPlaylist }: SidebarProps) {
 
     return (
       <main className='h-1/4 w-full sm:h-full sm:w-1/2 md:w-1/3 bg-gray rounded-md p-4 text-white overflow-hidden'>
