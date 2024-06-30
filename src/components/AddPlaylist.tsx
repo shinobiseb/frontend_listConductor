@@ -51,24 +51,7 @@ export default function AddPlaylist({ addPlaylistToCollection }: AddPlayProps) {
     }
     return {
       name: title,
-      tracks: [
-        {
-          artist: null,
-          title: null,
-          duration: null,
-          link: null,
-          info: {
-            scoreData: {
-              likes: null,
-              dislikes: null,
-            },
-            views: null,
-            uploadedOn: new Date(),
-          },
-          isAgeRestricted: null,
-          img: null,
-        },
-      ],
+      tracks: [], // Start with an empty track list
     };
   }
 
