@@ -6,7 +6,7 @@ export default function Playlist( {playlist, removePlaylist, index} : PlaylistPr
   
   return (
     <>
-      <h3 className='text-xl py-3'>{playlist.name}</h3>
+      <h3 className='text-xl py-3 truncate'>{playlist.name}</h3>
       <button 
       className='p-2'
       onClick={()=> removePlaylist(index)}

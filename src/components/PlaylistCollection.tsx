@@ -21,9 +21,9 @@ const playlistMapper = ({ playlistCollection, setCurrentPlaylist, removePlaylist
 
 export default function PlaylistCollection({ playlistCollection, setCurrentPlaylist, currentPlaylist, removePlaylist }: PlaylistCollectionProps) {
   return (
-    <div className='h-1/3 w-full'>
+    <div className='w-full'>
       <h3 className='font-semibold text-2xl'>My Playlists</h3>
-      <ul className='mt-7 rounded-md h-72 overflow-y-auto'>
+      <ul className='rounded-md overflow-y-auto min-h-44 max-h-72 my-1'>
         {playlistMapper({ playlistCollection, setCurrentPlaylist, currentPlaylist, removePlaylist })}
       </ul>
     </div>
