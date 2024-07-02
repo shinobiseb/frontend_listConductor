@@ -1,4 +1,4 @@
-import { Track, Tracklist } from '../assets/types';
+import { Tracklist } from '../assets/types';
 import Song from './Song';
 import { SongListProps } from '../assets/types';
 

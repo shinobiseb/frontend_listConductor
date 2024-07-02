@@ -1,6 +1,5 @@
-import React, { useState, useRef} from 'react'
-import { AddSongProps, SongSearchResults } from '../assets/types'
-import { IoIosAdd } from "react-icons/io";
+import { useState} from 'react'
+import { AddSongProps } from '../assets/types'
 import SearchResult from './SearchResult';
 import { SpotifyTrack } from '../assets/types';
 

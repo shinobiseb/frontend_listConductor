@@ -4,7 +4,6 @@ import SongList from './components/SongList';
 import Sidebar from './components/Sidebar';
 import Featured from './components/Featured';
 import AddSong from './components/AddSong';
-import OpenAddSong from './components/OpenAddSong';
 import { useLocalStorage } from './components/useLocalStorage';
 import Gallery from './components/Gallery';
 import { Buffer } from 'buffer';

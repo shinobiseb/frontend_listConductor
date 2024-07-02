@@ -1,5 +1,5 @@
-import { SetStateAction, Dispatch} from 'react'
-import { PlaylistProps, PlaylistType } from '../assets/types'
+
+import { PlaylistProps } from '../assets/types'
 import { RiDeleteBin7Line } from "react-icons/ri";
 
 export default function Playlist( {playlist, removePlaylist, index} : PlaylistProps ) {
