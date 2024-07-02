@@ -154,9 +154,7 @@ function App() {
         </main>
       </div>
     );
-  }
-  
-  return (
+  } else return (
     <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2">
       <Sidebar
         userPlaylists={playlistCollection}

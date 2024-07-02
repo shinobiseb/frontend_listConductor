@@ -121,6 +121,6 @@ export default function Sidebar({ userPlaylists, removePlaylist, updatePlayColl,
       </main>
     );
   } else {
-    console.warn('Uncaught Window size error in Sidebar')
+    return null
   }
 }
