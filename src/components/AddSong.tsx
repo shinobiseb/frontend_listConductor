@@ -61,8 +61,6 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
       let data = await response.json();
       let searchedSongs = data.tracks.items
       setSongs(searchedSongs)
-      console.table(searchedSongs)
-      console.log(searchedSongs[0])
     } catch (error) {
       console.log(error);
     }

@@ -29,7 +29,7 @@ const trackMapper = (playlist: Tracklist, removeSong: (index: number) => void) =
 
 export default function SongList({ tracklist, removeSong }: SongListProps) {
   if (!tracklist) {
-    console.error('tracklist is ' + tracklist);
+    console.error('No Tracklist for' + tracklist);
     return (
       <div className='flex flex-col h-3/4 items-center mt-4 w-full'>
         <h3 className='text-white text-4xl font-semibold'>Add Some Songs!</h3>

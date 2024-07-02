@@ -70,7 +70,8 @@ function App() {
   const removePlaylistFun = (index: number) => {
     setPlaylistCollection((current) => {
       const updatedPlaylists = [...current];
-      return updatedPlaylists.filter((_, i) => i !== index);
+      const finalPlaylist = updatedPlaylists.filter((_, i) => i !== index)
+      return finalPlaylist;
     });
     const targetPlaylist = playlistCollection[index];
     removePlaylistFromLocalStorage(targetPlaylist);
@@ -138,6 +139,24 @@ function App() {
   }, []);
 
   // -------------------- RETURN -----------------------------
+  if(!currentPlaylist || playlistCollection.length === 0) {
+    return (
+      <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2">
+        <Sidebar
+          userPlaylists={playlistCollection}
+          updatePlayColl={updatePlaylistCollection}
+          setCurrentPlaylist={setCurrentPlaylist}
+          currentPlaylist={currentPlaylist}
+          removePlaylist={removePlaylistFun}
+        />
+        <main className='flex flex-col h-full w-full justify-end items-center'>
+          <Featured/>
+          <Gallery/>
+        </main>
+      </div>
+    );
+  }
+  
   return (
     <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2">
       <Sidebar
@@ -148,30 +167,19 @@ function App() {
         removePlaylist={removePlaylistFun}
       />
       <main className='flex flex-col h-full w-full justify-end items-center'>
-        <Featured />
-
-        {currentPlaylist ? (
+        <Featured/>
         <AddSong
           addSongToPlaylist={updatePlaylistFun}
           songs={currentPlaylist.tracks}
           openBool={isOpen}
           setOpen={setIsOpen}
-          token={token}/>
-        ) : null}
-        
-        <OpenAddSong
-          setOpen={setIsOpen}
-          openState={isOpen}
-        />
-        
-        {currentPlaylist ? (
+          token={token}
+          />
+      
           <SongList
-            tracklist={currentPlaylist.tracks} // Ensure type consistency
+            tracklist={currentPlaylist.tracks}
             removeSong={removeSongFun}
           />
-        ) : (
-          <Gallery />
-        )}
       </main>
     </div>
   );
