@@ -141,7 +141,7 @@ function App() {
   // -------------------- RETURN -----------------------------
   if(!currentPlaylist || playlistCollection.length === 0) {
     return (
-      <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2">
+      <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2 overflow-hidden">
         <Sidebar
           userPlaylists={playlistCollection}
           updatePlayColl={updatePlaylistCollection}
@@ -149,7 +149,7 @@ function App() {
           currentPlaylist={currentPlaylist}
           removePlaylist={removePlaylistFun}
         />
-        <main className='flex flex-col h-full w-full justify-end items-center'>
+        <main className='overflow-y-auto flex flex-col h-full w-full justify-end items-center'>
           <Featured/>
           <Gallery/>
         </main>

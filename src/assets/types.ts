@@ -75,6 +75,12 @@ export interface SidebarProps {
   removePlaylist: (index: number) => void;
 }
 
+export interface MusicCardRequirements {
+  img: string,
+  title: string,
+  author: string,
+}
+
 export type SongListProps = {
   tracklist: SpotifyTrack[];
   removeSong: (index: number) => void;
