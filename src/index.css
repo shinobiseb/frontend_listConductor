@@ -30,4 +30,10 @@ ul li {
     border-radius: 6px;
 }
 
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #8f54a0 #ffffff00;
+  }
 /* button rounded-lg p-2 hover:ease-in duration-250 bg-white text-black */
