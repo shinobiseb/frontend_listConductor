@@ -121,6 +121,7 @@ export default function Sidebar({ userPlaylists, removePlaylist, updatePlayColl,
       </main>
     );
   } else {
+    console.warn('Sidebar Null')
     return null
   }
 }
