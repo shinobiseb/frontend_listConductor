@@ -3,13 +3,7 @@ import { AddSongProps } from '../assets/types'
 import SearchResult from './SearchResult';
 import { SpotifyTrack } from '../assets/types';
 
-export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }: AddSongProps) {
-
-  // const searchInput = useRef<HTMLButtonElement | null>(null);
-  // const searchButtonInput = useRef<HTMLButtonElement | null>(null);
-
-  const booleanHelper = (bool : string) => bool === "false" ? false : true;
-
+export default function AddSong({ addSongToPlaylist, openBool, token }: AddSongProps) {
 
   /*--------------SONG STATES-------------*/
   const [searchedSong, setSearchedSong] = useState("")
@@ -18,23 +12,6 @@ export default function AddSong({ addSongToPlaylist, openBool, setOpen, token }:
   const handleChange = (event : any) => {
     setSearchedSong(event.target.value)
   }
-
-  const isInput = (ele : any) => {
-    if(!ele.current) {
-      console.warn(`Missing ${ele} element!`);
-      return;
-    }
-    const Element: any = ele.current
-    if(Element instanceof HTMLInputElement === false) {
-      console.warn(`Got the wrong Element for ${ele}!`)
-      return
-    }
-    if(ele.current.value === "") {
-      return `Value not given`
-    }
-    return ele.current.value
-  }
-
   //---- Search Function -----
   async function search() {
     if(!searchedSong) {

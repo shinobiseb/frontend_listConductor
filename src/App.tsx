@@ -149,8 +149,6 @@ function App() {
           removePlaylist={removePlaylistFun}
         />
         <main className='overflow-y-auto flex flex-col h-full w-full justify-end items-center'>
-          <Featured/>
-          <Gallery/>
         </main>
       </div>
     );
@@ -164,7 +162,6 @@ function App() {
         removePlaylist={removePlaylistFun}
       />
       <main className='flex flex-col h-full w-full justify-end items-center'>
-        <Featured/>
         <AddSong
           addSongToPlaylist={updatePlaylistFun}
           songs={currentPlaylist.tracks}
