@@ -47,6 +47,7 @@ export type AddSongProps = {
   openBool: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   token: string;
+  currentPlaylist: PlaylistType;
 };
 
 export interface useStateFunction {
@@ -111,4 +112,15 @@ export type Album = {
   type: string;
   uri: string;
   images: Array<any>
+  // Update images type
+}
+
+export type CodeVerifierProps = {
+  setIsSpotifyAuth: React.Dispatch<React.SetStateAction<boolean>>
+  setUserId: React.Dispatch<React.SetStateAction<null>>
+}
+
+export type importPlaylistToSpotifyProps = {
+    playlistToImport : PlaylistType;
+    userId: string | null;
 }

@@ -39,7 +39,7 @@ export default function Song({ track, removeSong, index }: SongProps) {
   }
 
   return (
-    <li className='song-container transition-all w-full flex flex-row justify-between sm:px-2 py-2 text-white hover:cursor-pointer hover:bg-gunmetal h-24'>
+    <li className='song-container transition-all w-full flex flex-row justify-between px-2 py-2 text-white hover:cursor-pointer hover:bg-gunmetal h-24'>
       <div className="song-info-div-song flex flex-row justify-center items-center h-full">
         <img
         className='aspect-square object-fit h-full' src={imgHelper(track)} alt="" />

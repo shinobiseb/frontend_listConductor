@@ -5,6 +5,8 @@ import Sidebar from './components/Sidebar';
 import AddSong from './components/AddSong';
 import { useLocalStorage } from './components/useLocalStorage';
 import { Buffer } from 'buffer';
+import PlaylistEditor from './components/PlaylistEditor';
+import CodeVerifier from './components/CodeVerifier';
 
 const { setPlay, setSong, getPlaylist, removePlay, removeSong } = useLocalStorage('playlistCollection');
 
@@ -14,11 +16,12 @@ function App() {
 
   // ----------------- Prereq functions -------------------
 
+  //Refactor for better ignoring of other values
   function getPlaylistCollectionFromLocalStorage() {
     const playlists = { ...localStorage };
     const localStorageCollection: PlaylistType[] = [];
     for (const [key, value] of Object.entries(playlists)) {
-      if (key !== 'loglevel' && key !== 'Spotify Token') {
+      if (key !== 'loglevel' && key !== 'Spotify Token' && key !== 'code_verifier' && key !== 'authCode') {
         try {
           const tracks = JSON.parse(value);
           localStorageCollection.push({
@@ -62,6 +65,8 @@ function App() {
   const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistType>(getPlaylistCollectionFromLocalStorage()[0]);
   const [isOpen, setIsOpen] = useState(true);
   const [token, setToken] = useState("");
+  const [ isSpotifyAuth, setIsSpotifyAuth ] = useState(false)
+  const [ userId, setUserId ] = useState(null)
 
   //------------------ State Functions ----------------------
 
@@ -80,7 +85,6 @@ function App() {
       ...current,
       tracks: current.tracks.filter((_, i) => i !== index)
     }));
-    console.log(index);
     removeSong(index, currentPlaylist);
   };
 
@@ -137,6 +141,17 @@ function App() {
   }, []);
 
   // -------------------- RETURN -----------------------------
+
+  //--------------Spotify Auth Check
+  if(!isSpotifyAuth){
+    return (
+      <CodeVerifier
+        setUserId={setUserId}
+        setIsSpotifyAuth={setIsSpotifyAuth}
+      />
+    )
+  }
+
   if(!currentPlaylist || playlistCollection.length === 0) {
     return (
       <div className="App font-sans flex flex-col sm:flex-row w-screen h-screen items-center sm:items-end p-2 overflow-hidden">
@@ -160,20 +175,18 @@ function App() {
         currentPlaylist={currentPlaylist}
         removePlaylist={removePlaylistFun}
       />
-      <main className='flex flex-col h-full w-full justify-end items-center'>
-        <AddSong
-          addSongToPlaylist={updatePlaylistFun}
-          songs={currentPlaylist.tracks}
-          openBool={isOpen}
-          setOpen={setIsOpen}
-          token={token}
-          />
-      
-          <SongList
-            tracklist={currentPlaylist.tracks}
-            removeSong={removeSongFun}
-          />
-      </main>
+      <PlaylistEditor
+      currentPlaylist={currentPlaylist}
+        addSongToPlaylist={updatePlaylistFun}
+        songs={currentPlaylist.tracks}
+        openBool={isOpen}
+        setOpen={setIsOpen}
+        token={token}
+        tracklist={currentPlaylist.tracks}
+        removeSong={removeSongFun}
+        playlistToImport={currentPlaylist}
+        userId={userId}
+      />
     </div>
   );
 }
