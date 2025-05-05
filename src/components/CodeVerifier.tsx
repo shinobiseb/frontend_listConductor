@@ -1,7 +1,7 @@
 import { Dispatch, useEffect } from 'react';
-import { CodeVerifierProps } from '../assets/types';
+import { accessTokenObject, CodeVerifierProps } from '../assets/types';
 
-function CodeVerifier( { setIsSpotifyAuth }: CodeVerifierProps ) {
+function CodeVerifier( { setIsSpotifyAuth, setToken , setUserId }: CodeVerifierProps ) {
   useEffect(() => {
     const generateRandomString = (length: number) => {
       const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -58,11 +58,60 @@ function CodeVerifier( { setIsSpotifyAuth }: CodeVerifierProps ) {
       runAuthFlow();
     } else {
       localStorage.setItem("authCode", code)
-      if(localStorage.getItem("authCode")) {
-        setIsSpotifyAuth(true)
-      }
+      setIsSpotifyAuth(true)
     }
   }, []);
+
+  useEffect(()=> {
+    const getToken = async (code: string) => {
+      // stored in the previous step
+      const codeVerifier = localStorage.getItem('code_verifier');
+      const clientId = import.meta.env.VITE_CLIENTID;
+
+      const url = "https://accounts.spotify.com/api/token";
+      const redirectUri = 'http://localhost:5173/frontend_listConductor/';  // Make sure this is defined
+
+      const params = new URLSearchParams({
+        client_id: clientId,
+        grant_type: 'authorization_code',
+        code,
+        redirect_uri: redirectUri,
+      });
+    
+      if (codeVerifier) {
+        params.append('code_verifier', codeVerifier);
+      }
+    
+      const payload = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString(),
+      };
+    
+      // Fetch the token with the request
+      try {
+        const response = await fetch(url, payload);
+        const data : accessTokenObject = await response.json();
+        if (response.ok) {
+          console.log('Token data:', data);
+          localStorage.setItem("access_token", data.access_token)
+          let accessToken = localStorage.getItem("access_token")
+          if(!accessToken) return
+          setToken(accessToken)
+        } else {
+          console.error('Error fetching token:', data);
+        }
+      } catch (error) {
+        console.error('Network error:', error);
+      }
+    };    
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if(code) getToken(code)
+  }, [])
 
   return (
     <div>

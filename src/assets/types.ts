@@ -117,10 +117,44 @@ export type Album = {
 
 export type CodeVerifierProps = {
   setIsSpotifyAuth: React.Dispatch<React.SetStateAction<boolean>>
-  setUserId: React.Dispatch<React.SetStateAction<null>>
+  setUserId: React.Dispatch<React.SetStateAction<string>>,
+  token: string,
+  setToken: React.Dispatch<React.SetStateAction<string>>
 }
 
 export type importPlaylistToSpotifyProps = {
     playlistToImport : PlaylistType;
     userId: string | null;
+}
+
+//access_token: string, token_type: string, expires_in: number, refresh_token, Scope:
+export type accessTokenObject = {
+  access_token: string,
+  token_type: string,
+  expires_in: number,
+  refresh_token: string,
+  scope: string,
+}
+
+export type userDataType = {
+  country: string,
+  display_name: string,
+  email: string,
+  explicit_content: {
+    filter_enabled: boolean,
+    filter_locked: boolean,
+  },
+  external_urls: {
+    spotify: string,
+  },
+  followers : {
+    href: null,
+    total: number
+  },
+  href: string,
+  id: string,
+  images: Array<any>
+  product: string,
+  type: string,
+  uri: string
 }

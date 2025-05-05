@@ -31,11 +31,10 @@ export default function Import( {playlistToImport, userId} : importPlaylistToSpo
     }
 
     return (
-      <main className='w-full flex justify-center items-center'>
-          <button className='button w-1/2 justify-center'>
-              Import Playlist to Spotify
-          </button>
-      </main>
-    
+        <main className='w-full flex justify-center items-center'>
+            <button className='button w-1/2 justify-center'>
+                Import Playlist to Spotify
+            </button>
+        </main>
     )
 }

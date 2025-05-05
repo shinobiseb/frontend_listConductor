@@ -40,6 +40,7 @@ export default function AddSong({ addSongToPlaylist, currentPlaylist, openBool, 
       setSongs(searchedSongs)
     } catch (error) {
       console.log(error);
+      console.log(token)
     }
   }
 
@@ -92,7 +93,7 @@ export default function AddSong({ addSongToPlaylist, currentPlaylist, openBool, 
     return null
   }
     return (
-      <div className='relative items-center w-full px-1'>
+      <div className='relative items-center w-full px-1 mt-3 sm:mx-1 sm:mt-0'>
         <div className='w-full flex '>
           { showModal ? 
             <div className='z-10 absolute inset-0 flex items-center justify-center bg-orange p-2'>
