@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import { Track, PlaylistType, SpotifyTrack } from './assets/types';
 import SongList from './components/SongList';
 import Sidebar from './components/Sidebar';
-import Featured from './components/Featured';
 import AddSong from './components/AddSong';
 import { useLocalStorage } from './components/useLocalStorage';
-import Gallery from './components/Gallery';
 import { Buffer } from 'buffer';
 
 const { setPlay, setSong, getPlaylist, removePlay, removeSong } = useLocalStorage('playlistCollection');
@@ -39,6 +37,7 @@ function App() {
 
   // Get Token Function
   const getAuthToken = async () => {
+    console.log("Getting Auth Token")
     const authString = `${clientID}:${secret}`;
     const authBytes = Buffer.from(authString, 'utf-8').toString('base64');
 

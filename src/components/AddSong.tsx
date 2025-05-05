@@ -62,7 +62,7 @@ export default function AddSong({ addSongToPlaylist, openBool, token }: AddSongP
     return null
   }
     return (
-      <div className='relative items-center w-3/4'>
+      <div className='relative items-center w-full px-1'>
         <div className='w-full flex '>
           <input 
           id='searchBar'

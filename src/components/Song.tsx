@@ -1,4 +1,4 @@
-import { Track, SongProps } from '../assets/types';
+import { Track, SongProps, SpotifyTrack } from '../assets/types';
 import { RiDeleteBin7Line } from "react-icons/ri";
 
 // Minutes Calculator
@@ -14,12 +14,17 @@ const secCalc = (duration: number) => {
 
 export default function Song({ track, removeSong, index }: SongProps) {
 
-  function imgHelper(track: Track) {
-    if (typeof track.img === 'string' && track.img !== 'Value not given') {
-      return track.img;
-    }
-    return 'https://cdn.saleminteractivemedia.com/shared/images/default-cover-art.png';
+  function imgHelper(track: SpotifyTrack) {
+  if (
+    track.album &&
+    track.album.images &&
+    track.album.images.length > 0
+  ) {
+    return track.album.images[0].url;
   }
+  return 'https://cdn.saleminteractivemedia.com/shared/images/default-cover-art.png';
+}
+
 
   function artistLooper() {
     // Ensure artists is not undefined or null
@@ -34,8 +39,10 @@ export default function Song({ track, removeSong, index }: SongProps) {
   }
 
   return (
-    <li className='song-container transition-all w-full flex flex-row justify-between px-4 py-2 text-white hover:cursor-pointer hover:bg-gunmetal'>
-      <div className="song-info-div-song flex flex-row justify-center items-center">
+    <li className='song-container transition-all w-full flex flex-row justify-between sm:px-2 py-2 text-white hover:cursor-pointer hover:bg-gunmetal h-24'>
+      <div className="song-info-div-song flex flex-row justify-center items-center h-full">
+        <img
+        className='aspect-square object-fit h-full' src={imgHelper(track)} alt="" />
         <div className="song-info flex flex-col pl-2">
           <h1 className='text-lg'> {track.name} </h1>
           <h2 className='italic text-sm'> {artistLooper()} </h2>

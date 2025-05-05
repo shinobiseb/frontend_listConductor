@@ -110,4 +110,5 @@ export type Album = {
   name: string;
   type: string;
   uri: string;
+  images: Array<any>
 }
