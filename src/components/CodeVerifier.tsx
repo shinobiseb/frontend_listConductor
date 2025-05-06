@@ -2,6 +2,9 @@ import { Dispatch, useEffect } from 'react';
 import { accessTokenObject, CodeVerifierProps } from '../assets/types';
 
 function CodeVerifier( { setIsSpotifyAuth, setToken , setUserId }: CodeVerifierProps ) {
+
+  const redirectURIEnv = import.meta.env.MODE === "dev" ? 'http://localhost:5173/frontend_listConductor/' : "https://shinobiseb.github.io/frontend_listConductor/"
+
   useEffect(() => {
     const generateRandomString = (length: number) => {
       const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -35,7 +38,7 @@ function CodeVerifier( { setIsSpotifyAuth, setToken , setUserId }: CodeVerifierP
       const codeChallenge = base64encode(hashed);
 
       const clientId = import.meta.env.VITE_CLIENTID;
-      const redirectUri = 'http://localhost:5173/frontend_listConductor/';
+      const redirectUri = redirectURIEnv;
       const scope = 'playlist-modify-private playlist-modify-public user-read-private user-read-email';
 
       const authUrl = new URL("https://accounts.spotify.com/authorize");
@@ -69,7 +72,7 @@ function CodeVerifier( { setIsSpotifyAuth, setToken , setUserId }: CodeVerifierP
       const clientId = import.meta.env.VITE_CLIENTID;
 
       const url = "https://accounts.spotify.com/api/token";
-      const redirectUri = 'http://localhost:5173/frontend_listConductor/';  // Make sure this is defined
+      const redirectUri = redirectURIEnv;  // Make sure this is defined
 
       const params = new URLSearchParams({
         client_id: clientId,

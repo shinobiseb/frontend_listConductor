@@ -13,6 +13,7 @@ const { setPlay, setSong, getPlaylist, removePlay, removeSong } = useLocalStorag
 function App() {
   const secret = import.meta.env.VITE_SECRET;
   const clientID = import.meta.env.VITE_CLIENTID;
+  const redirectURIEnv = import.meta.env.MODE === "dev" ? 'http://localhost:5173/frontend_listConductor/' : "https://shinobiseb.github.io/frontend_listConductor/"
 
   // ----------------- Prereq functions -------------------
 
@@ -177,7 +178,7 @@ function App() {
   async function exchangeCodeForToken(authCode: string) {
     const codeVerifier = localStorage.getItem('code_verifier');
     const clientId = import.meta.env.VITE_CLIENTID;
-    const redirectUri = 'http://localhost:5173/frontend_listConductor/';
+    const redirectUri = redirectURIEnv;
 
     const body = new URLSearchParams({
       grant_type: 'authorization_code',
