@@ -13,7 +13,7 @@ const { setPlay, setSong, getPlaylist, removePlay, removeSong } = useLocalStorag
 function App() {
   const secret = import.meta.env.VITE_SECRET;
   const clientID = import.meta.env.VITE_CLIENTID;
-  const redirectURIEnv = import.meta.env.MODE === "dev" ? 'http://localhost:5173/frontend_listConductor/' : "https://shinobiseb.github.io/frontend_listConductor/"
+  const redirectURIEnv = import.meta.env.MODE === "development" ? 'http://localhost:5173/frontend_listConductor/' : "https://shinobiseb.github.io/frontend_listConductor/"
 
   // ----------------- Prereq functions -------------------
 

@@ -4,6 +4,9 @@ import { importPlaylistToSpotifyProps } from '../assets/types'
 
 export default function Import( {playlistToImport, userId} : importPlaylistToSpotifyProps ) {
 
+    const [ showModal, setShowModal ] = useState(false)
+    const [ loading, setLoading ] = useState(false)
+
     async function addTracksToCreatedPlaylist( createdPlaylistID: string){
         if(createdPlaylistID === ""){
             console.error("No Created Playlist")
@@ -27,14 +30,21 @@ export default function Import( {playlistToImport, userId} : importPlaylistToSpo
                 console.error("Response Error in Adding Tracks to Playlist: ", response)
             }
             const data = await response.json()
-            console.log(data)
+            if("snapshot_id" in data){
+                setShowModal(true)
+                setTimeout(()=> setShowModal(false), 2000)
+            } else {
+                console.error("Something Went wrong: ", data)
+            }
         } catch (error) {
             console.error(error)
         }
+        setLoading(false)
     }
 
     async function createPlaylistInSpotify(){
         console.log("Starting Playlist Import Process")
+        setLoading(true)
 
         let playlistParams = {
             "method": "POST",
@@ -78,12 +88,22 @@ export default function Import( {playlistToImport, userId} : importPlaylistToSpo
     }
 
     return (
-        <main className='w-full flex justify-center items-center'>
+        <main className='w-full flex flex-col justify-center items-center'>
             <button 
             onClick={createPlaylistInSpotify} 
             className='button w-1/2 justify-center'>
                 Import Playlist to Spotify
             </button>
+            {
+                loading ? <h1 className='bg-orange px-4 py-2 mt-2 rounded-md'>Importing...</h1> : null
+            }
+            { 
+                showModal ? 
+                <div className='relative bg-green px-4 rounded-md py-2 mt-2'>
+                    Playlist Successfully Imported!
+                </div>
+                :null
+            }
         </main>
     )
 }

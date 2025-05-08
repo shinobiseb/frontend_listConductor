@@ -3,7 +3,7 @@ import { accessTokenObject, CodeVerifierProps } from '../assets/types';
 
 function CodeVerifier( { setIsSpotifyAuth, setToken , setUserId }: CodeVerifierProps ) {
 
-  const redirectURIEnv = import.meta.env.MODE === "dev" ? 'http://localhost:5173/frontend_listConductor/' : "https://shinobiseb.github.io/frontend_listConductor/"
+  const redirectURIEnv = import.meta.env.MODE === "development" ? 'http://localhost:5173/frontend_listConductor/' : "https://shinobiseb.github.io/frontend_listConductor/"
 
   useEffect(() => {
     const generateRandomString = (length: number) => {

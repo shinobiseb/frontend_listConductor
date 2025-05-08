@@ -14,7 +14,8 @@ module.exports = {
       'charcoal': '#3C4552',
       'black': '#212529',
       'gray': '#343a40',
-      'white': '#edf2f4'
+      'white': '#edf2f4',
+      'green': '#06A77D'
     },
     screens: {
       'sm': '640px',
